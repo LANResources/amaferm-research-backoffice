@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: AmafermResearchBackOffice
+  password:
+
+development:
+  <<: *default
+  database: AmafermResearchBackOffice_development
+
+test:
+  <<: *default
+  database: AmafermResearchBackOffice_test
+
+production:
+  <<: *default
+  database: AmafermResearchBackOffice_production
