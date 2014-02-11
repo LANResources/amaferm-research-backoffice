@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title Sign in · BackOffice · Amaferm Research
+
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "external", data: { 'turbolinks-track' => true }
+
+    / The HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      = javascript_include_tag 'simpliq/respond'
+      = stylesheet_link_tag 'ie6-8'
+
+    = csrf_meta_tag
+    = favicon_link_tag
+    %link{href: "apple-touch-icon-iphone.png", rel: "apple-touch-icon"}/
+    %link{href: "apple-touch-icon-ipad.png", rel: "apple-touch-icon", sizes: "72x72"}/
+    %link{href: "apple-touch-icon-iphone4.png", rel: "apple-touch-icon", sizes: "114x114"}/
+    %link{href: "apple-touch-icon-ipad3.png", rel: "apple-touch-icon", sizes: "144x144"}/
+  %body#login{data: {action: params[:action], controller: controller.controller_name}}
+    .container
+      .row
+        .page-header
+          %h1.text-center
+            %span.hidden-xs
+              %strong> AmafermResearch
+              %span BackOffice
+            %span.visible-xs
+              %strong AmafermResearch
+              %span BackOffice
+
+      .row
+        - flash.each do |name, msg|
+          .center-block.flash-container
+            = render_flash name, msg
+        = yield

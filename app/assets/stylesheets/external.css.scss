@@ -1,0 +1,90 @@
+html {
+  min-height: 100%;
+}
+h1 {
+  color: #FFF4E4;
+}
+.flash-container {
+  max-width: 400px;
+}
+.login-box {
+  box-shadow: 0 0 20px rgba(50, 50, 50, 0.75);
+}
+body {
+  background: image_url('sky-colors-1680.jpg') no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+@media (min-width: 1200px) {
+  body {
+    background: image_url('sky-colors-1680.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+@media (min-width: 980px) and (max-width: 1199px){
+  body {
+    background: image_url('sky-colors-1440.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px){
+  body {
+    background: image_url('sky-colors-1024.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+@media (max-width: 767px){
+  body {
+    background: image_url('sky-colors-960.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+@media (max-width: 480px){
+  body {
+    background: image_url('sky-colors-480.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+
+.content {
+  background-color: rgba(255,255,255,0.5);
+  margin-bottom: 25px;
+  .jumbotron {
+    background-color: transparent;
+    h1 {
+      color: #1F3C68;
+      text-align: center;
+    }
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"] {
+    background-color: rgba(255,255,255,0.7);
+  }
+  legend {
+    border-color: rgba(30, 101, 148, 0.5);
+    background-color: transparent;
+  }
+  .form-group hr {
+    border-color: rgba(30, 101, 148, 0.5);
+  }
+}

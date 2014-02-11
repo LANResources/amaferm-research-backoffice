@@ -1,0 +1,10 @@
+#sidebar-left.col-lg-2.col-sm-1
+  -# .row-fluid.actions
+  -#   %input.search.span12{placeholder: "...", type: "text"}/
+  .nav-collapse.sidebar-nav.collapse.navbar-collapse.bs-navbar-collapse
+    %ul.nav.nav-tabs.nav-stacked.main-menu
+      %li{class: ('active' if controller.controller_name == 'users')}
+        = link_to users_path do
+          %i.fa.fa-group.fa-fw
+          %span.hidden-sm Users
+
