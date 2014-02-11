@@ -133,10 +133,6 @@ GEM
     guard-rspec (4.0.1)
       guard (~> 2.0)
       rspec (~> 2.14)
-    guard-spork (1.5.1)
-      childprocess (>= 0.2.3)
-      guard (>= 1.1)
-      spork (>= 0.8.4)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -261,11 +257,9 @@ GEM
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
     slop (3.4.7)
-    spork (1.0.0rc4)
-    spork-rails (4.0.0)
-      rails (>= 3.0.0, < 5)
-      spork (>= 1.0rc0)
     spring (1.1.0)
+    spring-commands-rspec (1.0.1)
+      spring (>= 0.9.1)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -328,7 +322,6 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   figaro!
   guard-rspec (= 4.0.1)
-  guard-spork (= 1.5.1)
   haml-rails
   hirb
   jbuilder (~> 1.2)
@@ -349,8 +342,8 @@ DEPENDENCIES
   sdoc
   select2-rails
   selenium-webdriver (= 2.35.1)
-  spork-rails (= 4.0.0)
   spring
+  spring-commands-rspec
   terminal-notifier-guard
   thin
   turbolinks
