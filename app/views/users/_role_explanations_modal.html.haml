@@ -1,0 +1,11 @@
+.modal.fade#role-explanations-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', data: {dismiss: "modal"}, 'aria-hidden' => "true"} &times;
+        %h4.modal-title Role Explanations
+
+      .modal-body
+        = role_explanations current_user.assignable_roles
+      .modal-footer
+        %button.btn.btn-primary{type: "button", data: {dismiss: "modal"}} OK

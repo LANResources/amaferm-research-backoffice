@@ -1,10 +1,14 @@
 -# - cache [current_user, user, scope_cache_key] do
 %tr
-  %td.photo= link_to image_tag(user.avatar.url(:tiny), alt: "No Photo", class: 'img-rounded img-responsive'), user
-  %td= link_to user.full_name, user
+  %td= user.full_name
+  %td.c= mail_to user.email
+  %td.c= role_label user
   - if policy(current_user).edit?
-    %td.c
+    %td.r
       .btn-group
+        - if user.password_digest.nil? && InvitePolicy.new(current_user, user).create?
+          = link_to invite_user_path(user), title: 'Send Registration Invitation', class: 'btn btn-xs btn-secondary', method: :post, data: { remote: true } do
+            %i.fa.fa-envelope
         - if policy(user).edit?
           = link_to edit_user_path(user), title: "Edit User", class: "btn btn-xs btn-warning" do
             %i.fa.fa-pencil

@@ -9,24 +9,15 @@
       .col-sm-10
         = f.text_field :email, class: 'form-control'
 
-    - if true #show_role_select? @user
+    - if show_role_select? @user
       .form-group
         = f.label :role, class: 'control-label col-sm-2'
         .col-sm-10
           = f.collection_select :role, current_user.assignable_roles.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
           %span.help-block
             %button.btn-link.role-explanation-toggle{type: 'button', data: {toggle: "modal", target: "#role-explanations-modal"}} What do these mean?
-          .modal.fade#role-explanations-modal
-            .modal-dialog
-              .modal-content
-                .modal-header
-                  %button.close{type: 'button', data: {dismiss: "modal"}, 'aria-hidden' => "true"} &times;
-                  %h4.modal-title Role Explanations
+          = render partial: 'role_explanations_modal'
 
-                .modal-body
-                  -# = role_explanations current_user.assignable_roles
-                .modal-footer
-                  %button.btn.btn-primary{type: "button", data: {dismiss: "modal"}} OK
           - if @user.new_record?
             #invitation-warning.bs-callout.bs-callout-warning
               .row
@@ -44,7 +35,7 @@
             %span.help-inline Leave blank if you don't want to change it
 
       .form-group
-        = f.label :password_confirmation, class: 'control-label col-sm-2'
+        = f.label :password_confirmation, 'Confirm Password', class: 'control-label col-sm-2'
         .col-sm-10
           = f.password_field :password_confirmation, class: 'form-control'
 

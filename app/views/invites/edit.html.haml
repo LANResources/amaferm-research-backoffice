@@ -1,0 +1,49 @@
+.jumbotron
+  %h1.text-center Welcome!
+
+= form_for @user, url: register_user_path(@user), html: { class: 'form-horizontal', multipart: true } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @user }
+  = hidden_field_tag :invite_token, params[:invite_token]
+
+  %fieldset
+    %legend Login Information
+
+    .form-group
+      = f.label :email, class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.text_field :email, class: 'form-control'
+
+    .form-group
+      = f.label :password, class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.password_field :password, class: 'form-control'
+
+    .form-group
+      = f.label :password_confirmation, class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.password_field :password_confirmation, class: 'form-control'
+
+  %fieldset
+    %legend Personal Information
+
+    .form-group
+      = f.label :first_name, class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.text_field :first_name, class: 'form-control'
+
+    .form-group
+      = f.label :last_name, class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.text_field :last_name, class: 'form-control'
+
+    .form-group
+      = f.label :avatar, 'Profile Picture', class: 'control-label col-sm-3'
+      .col-sm-9
+        = f.file_field :avatar
+
+    .form-group
+      %hr/
+      .col-md-12
+        = f.submit 'Register', class: 'btn btn-lg btn-primary btn-block'
+
+

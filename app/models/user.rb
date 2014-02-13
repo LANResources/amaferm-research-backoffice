@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include RoleManagement
-  # include Invitable
-  # include PasswordResets
+  include Invitable
+  include PasswordResets
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -29,10 +29,6 @@ class User < ActiveRecord::Base
     else
       false
     end
-  end
-
-  def signing_up
-    false
   end
 
   def password_required?

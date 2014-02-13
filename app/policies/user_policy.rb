@@ -22,17 +22,11 @@ class UserPolicy < ApplicationPolicy
 
   def update?
     user == resource || (create? && !resource.admin? && !(user.manager? && resource.manager?))
-    true
   end
 
   def destroy?
     create? && !resource.admin? && user != resource && !(user.manager? && resource.manager?)
-    true
   end
-
-  # def revoke?
-  #   permitted_attributes.include? :role
-  # end
 
   def permitted_attributes
     attributes = [:first_name, :last_name, :email, :password, :password_confirmation, :avatar]
