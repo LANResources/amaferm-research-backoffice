@@ -11,10 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211162928) do
+ActiveRecord::Schema.define(version: 20140214195059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authors", force: true do |t|
+    t.string   "last_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authors", ["last_name"], name: "index_authors_on_last_name", unique: true, using: :btree
+
+  create_table "papers", id: false, force: true do |t|
+    t.string   "source_id"
+    t.string   "citation"
+    t.integer  "level",           default: 0
+    t.integer  "author_id"
+    t.integer  "dose"
+    t.integer  "year"
+    t.string   "literature_type"
+    t.string   "journal"
+    t.text     "species",         default: [], array: true
+    t.float    "forage"
+    t.float    "concentrate"
+    t.string   "document"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "papers", ["author_id"], name: "index_papers_on_author_id", using: :btree
+  add_index "papers", ["journal"], name: "index_papers_on_journal", using: :btree
+  add_index "papers", ["literature_type"], name: "index_papers_on_literature_type", using: :btree
+  add_index "papers", ["species"], name: "index_papers_on_species", using: :gin
+  add_index "papers", ["year"], name: "index_papers_on_year", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

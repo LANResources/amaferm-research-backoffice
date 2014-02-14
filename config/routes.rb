@@ -7,11 +7,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :papers
   resources :sessions, only: [:new, :create, :destroy]
   resource :password_reset, only: [:new, :create, :edit, :update]
 
   get 'login', to: 'sessions#new', as: :login
   delete 'logout', to: 'sessions#destroy', as: :logout
 
-  root to: 'users#index'
+  root to: 'papers#index'
 end

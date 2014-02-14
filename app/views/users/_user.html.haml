@@ -7,7 +7,7 @@
     %td.r
       .btn-group
         - if user.password_digest.nil? && InvitePolicy.new(current_user, user).create?
-          = link_to invite_user_path(user), title: 'Send Registration Invitation', class: 'btn btn-xs btn-secondary', method: :post, data: { remote: true } do
+          = link_to invite_user_path(user), title: 'Resend Registration Invitation', class: 'btn btn-xs btn-secondary', method: :post, data: { remote: true } do
             %i.fa.fa-envelope
         - if policy(user).edit?
           = link_to edit_user_path(user), title: "Edit User", class: "btn btn-xs btn-warning" do
