@@ -1,6 +1,30 @@
-%p#notice= notice
+- title @paper.source_id, false
 
+- breadcrumbs ['Papers', papers_path], @paper.source_id
 
-= link_to 'Edit', edit_paper_path(@paper)
-\|
-= link_to 'Back', papers_path
+%br/
+
+.row
+  .col-md-12
+    = @paper.formatted_citation.sub('<p>', '<p class="lead">').html_safe
+
+%br/
+
+.row
+  .col-md-12
+    = render partial: 'detail_table', locals: { paper: @paper }
+
+.row
+  .col-md-12
+    = link_to download_paper_path(@paper), title: "Download", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
+      %i.fa.fa-cloud-download
+      = p_space 'Download'
+    - if policy(@paper).edit?
+      = link_to edit_paper_path(@paper), title: "Edit Paper", class: "btn btn-sm btn-warning" do
+        %i.fa.fa-pencil
+        = p_space 'Edit'
+    - if policy(@paper).destroy?
+      = link_to @paper, title: "Remove", class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+        %i.fa.fa-trash-o
+        = p_space 'Remove'
+

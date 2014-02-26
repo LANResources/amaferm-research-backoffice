@@ -1,0 +1,22 @@
+- title 'Advanced Search', false
+
+.row
+  .col-md-12
+    .box.default
+      .box-header
+        %h2
+          %span.i-bg
+            %i.fa.fa-search 
+          = p_space 'Advanced Search'
+        .box-icon
+          %a.btn-minimize{href: "#"}
+            %i.fa.fa-chevron-up
+
+      .box-content
+        = render partial: 'form'
+
+#results
+  = render partial: 'results', locals: { results: policy_scope(@paper_search.results) } if params[:paper_search]
+
+    
+

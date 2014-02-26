@@ -1,10 +1,81 @@
-= form_for @paper do |f|
-  - if @paper.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@paper.errors.count, "error")} prohibited this paper from being saved:"
-      %ul
-        - @paper.errors.full_messages.each do |msg|
-          %li= msg
+= form_for @paper, html: { class: 'form-horizontal', multipart: true } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @paper }
 
-  .actions
-    = f.submit 'Save'
+  %fieldset
+    .form-group
+      = f.label :source_id, 'Source #', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :source_id, class: 'form-control'
+
+    .form-group
+      = f.label :level, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :level, Paper::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :author_name, 'Author', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :author_name, class: 'form-control autocomplete', data: { authors: Author.pluck(:last_name).sort }
+
+    .form-group
+      = f.label :citation, 'Reference', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :citation, class: 'form-control'
+        %span.help-block To italicize text, surround it with asterisks (*).
+
+    .form-group
+      = f.label :year, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :year, class: 'form-control'
+
+    .form-group
+      = f.label :summary, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :summary, class: 'form-control'
+
+    .form-group
+      = f.label :literature_type, 'Literature Type', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :journal, 'Peer Reviewed Journal', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :journal, class: 'form-control autocomplete', data: { journals: Paper.journals }
+
+    .form-group
+      = f.label :species_list, 'Species', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :species_list, class: 'form-control select2', data: { tags: Paper.species }
+        %span.help-block Put each option on it's own line.
+
+    .form-group
+      = f.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :focus_list, class: 'form-control select2', data: { tags: Paper.focuses }
+        %span.help-block Separate with commas
+
+    .form-group
+      = f.label :dose, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :dose, class: 'form-control'
+
+    .form-group
+      = f.label :forage, 'Forage %', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :forage, class: 'form-control'
+
+    .form-group
+      = f.label :concentrate, 'Concentrate %', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :concentrate, class: 'form-control'
+
+    .form-group
+      = f.label :document, class: 'control-label col-sm-2'
+      .col-md-10
+        = f.file_field :document
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit class: 'btn btn-primary'
+        = link_to 'Cancel', papers_path, class: 'btn btn-inverse'

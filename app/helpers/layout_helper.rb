@@ -49,6 +49,7 @@ module LayoutHelper
   end
 
   def sortable(column, title=nil)
+    column = column.to_s
     title ||= column.titleize
     icons = { "asc" => "up", "desc" => "down" }
     icon = column == sort_column ? content_tag(:i, "", class: "fa fa-caret-#{icons[sort_direction]}") : ''

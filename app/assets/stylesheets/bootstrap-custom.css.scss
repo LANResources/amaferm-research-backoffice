@@ -83,3 +83,17 @@ blockquote.pull-right {
 .bs-callout-info h4 {
   color: #2E568A;
 }
+
+.box .box-header h2 span.i-bg {
+  padding: 10px 0px;
+  width: 36px;
+  display: inline-block;
+  margin: -10px 20px -10px -20px;
+  text-align: center;
+
+  i {
+    padding: 0;
+    width: auto;
+    margin: 0;
+  }
+}

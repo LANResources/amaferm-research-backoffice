@@ -1,7 +1,11 @@
-%h1 Editing paper
+- title "Edit Profile"
 
-= render 'form'
-
-= link_to 'Show', @paper
-\|
-= link_to 'Back', papers_path
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h2
+          %i.fa.fa-file-text
+          = @paper.source_id
+      .box-content
+        = render 'form'

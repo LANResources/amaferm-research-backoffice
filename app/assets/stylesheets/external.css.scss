@@ -10,56 +10,45 @@ h1 {
 .login-box {
   box-shadow: 0 0 20px rgba(50, 50, 50, 0.75);
 }
+
+@mixin background-size($size){
+  background-size: $size;
+  -webkit-background-size: $size;
+  -moz-background-size: $size;
+  -o-background-size: $size;
+}
 body {
-  background: image_url('sky-colors-1680.jpg') no-repeat center center fixed;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: image_url('farm-1680.jpg') no-repeat center center fixed;
+  @include background-size(cover);
 }
 @media (min-width: 1200px) {
   body {
-    background: image_url('sky-colors-1680.jpg') no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: image_url('farm-1680.jpg') no-repeat center center fixed;
+    @include background-size(cover);
   }
 }
 @media (min-width: 980px) and (max-width: 1199px){
   body {
-    background: image_url('sky-colors-1440.jpg') no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: image_url('farm-1440.jpg') no-repeat center center fixed;
+    @include background-size(cover);
   }
 }
 @media (min-width: 768px) and (max-width: 979px){
   body {
-    background: image_url('sky-colors-1024.jpg') no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: image_url('farm-1024.jpg') no-repeat center center fixed;
+    @include background-size(cover);
   }
 }
 @media (max-width: 767px){
   body {
-    background: image_url('sky-colors-960.jpg') no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: image_url('farm-960.jpg') no-repeat center center fixed;
+    @include background-size(cover);
   }
 }
 @media (max-width: 480px){
   body {
-    background: image_url('sky-colors-480.jpg') no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: image_url('farm-480v.jpg') no-repeat center center fixed;
+    @include background-size(cover);
   }
 }
 

@@ -15,11 +15,8 @@
 
     = javascript_include_tag "application", data: { 'turbolinks-track' => true }
     = csrf_meta_tag
-    = favicon_link_tag
-    %link{href: "apple-touch-icon-iphone.png", rel: "apple-touch-icon"}/
-    %link{href: "apple-touch-icon-ipad.png", rel: "apple-touch-icon", sizes: "72x72"}/
-    %link{href: "apple-touch-icon-iphone4.png", rel: "apple-touch-icon", sizes: "114x114"}/
-    %link{href: "apple-touch-icon-ipad3.png", rel: "apple-touch-icon", sizes: "144x144"}/
+    = render partial: 'layouts/icons'
+
   %body#login{data: {action: params[:action], controller: controller.controller_name}}
     .container
       .row

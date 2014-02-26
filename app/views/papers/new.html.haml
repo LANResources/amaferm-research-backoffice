@@ -1,5 +1,10 @@
-%h1 New paper
+- title "New Paper"
 
-= render 'form'
-
-= link_to 'Back', papers_path
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h2
+          %i.fa.fa-file-text
+      .box-content
+        = render 'form'

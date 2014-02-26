@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'paper_searches/new'
+
+  get 'paper_searches/create'
+
   resources :users, except: :show do
     member do
       post 'invite', to: 'invites#create', as: :invite
@@ -7,7 +11,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :papers
+  resources :papers do
+    get 'download', on: :member, as: :download
+    collection do
+      get 'search', to: 'paper_searches#search', as: :search
+    end
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
   resource :password_reset, only: [:new, :create, :edit, :update]
 

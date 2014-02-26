@@ -65,7 +65,7 @@ a.navbar-brand span {
 @mixin boxColor($boxColor) {
   .box-header {
     background: $boxColor;
-    h2 i, .box-icon { background: darken($boxColor, 10%); }
+    h2 i, h2 span.i-bg, .box-icon { background: darken($boxColor, 10%); }
   }
   &.full-color {
     .box-header {
@@ -93,6 +93,7 @@ a.navbar-brand span {
   &.yellow { @include boxColor($yellow); }
   &.white { @include boxColor(white); }
   &.grey { @include boxColor($grey); }
+  &.default { @include boxColor($mainColor); }
 }
 
 @mixin backgroundColorTitle {

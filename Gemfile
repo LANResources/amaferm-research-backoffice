@@ -3,7 +3,7 @@ source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
 ruby '2.1.0'
 
-gem 'rails', '4.1.0.beta1'
+gem 'rails', '4.1.0.rc1'
 
 # Database
 gem 'pg'
@@ -40,6 +40,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+
+# Markdown Processing
+gem 'redcarpet'
 
 # Files
 gem 'carrierwave'

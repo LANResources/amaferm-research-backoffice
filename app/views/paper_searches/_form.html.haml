@@ -1,0 +1,54 @@
+= form_for @paper_search, url: search_papers_path, method: :get, remote: true, html: { class: 'form-horizontal' } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @paper_search }
+
+  %fieldset
+    .form-group
+      = f.label :years, 'Select year(s) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - @years.each do |year|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.years.include?(year.to_s))}
+                = check_box_tag 'paper_search[years][]', year, @paper_search.years.include?(year.to_s)
+                = year
+
+    .form-group
+      = f.label :authors, 'Select author(s) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - @authors.each do |author|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.authors.include?(author))}
+                = check_box_tag 'paper_search[authors][]', author, @paper_search.authors.include?(author)
+                = author
+
+    .form-group
+      = f.label :species, 'Select species of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - Paper.species.each do |species|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.species.include?(species))}
+                = check_box_tag 'paper_search[species][]', species, @paper_search.species.include?(species)
+                = species
+    
+    .form-group
+      = f.label :species, 'Select focus(es) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - Paper.focuses.each do |focus|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.focuses.include?(focus))}
+                = check_box_tag 'paper_search[focuses][]', focus, @paper_search.focuses.include?(focus)
+                = focus
+
+    .form-group
+      = f.label :literature_types, 'Select literature type(s) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - Paper::LITERATURE_TYPES.each do |type|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.literature_types.include?(type))}
+                = check_box_tag 'paper_search[literature_types][]', type, @paper_search.literature_types.include?(type)
+                = type
+

@@ -3,4 +3,8 @@ class Author < ActiveRecord::Base
 
   validates :last_name, presence: true,
                         uniqueness: { case_sensitive: false }
+
+  def self.find_or_create_from(name)
+    where('last_name ILIKE ?', name).first || create(last_name: name.try(:capitalize))
+  end
 end

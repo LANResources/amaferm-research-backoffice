@@ -1,17 +1,62 @@
-%h1 Listing papers
+- title 'Papers', false
 
-%table
-  %tr
-    %th
-    %th
-    %th
+.row
+  .col-md-12
+    .box.full-color
+      .box-content
+        = form_tag papers_path, method: :get, id: 'paper_filter' do
+          .row
+            .col-md-3.text-center
+              %h4.white Species
+              = select_tag :species, options_for_select(Paper.species, params[:species]), include_blank: true, class: 'form-control'
 
-  - @papers.each do |paper|
-    %tr
-      %td= link_to 'Show', paper
-      %td= link_to 'Edit', edit_paper_path(paper)
-      %td= link_to 'Destroy', paper, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            .col-md-3.text-center
+              %h4.white Focus
+              = select_tag :focus, options_for_select(Paper.focuses, params[:focus]), include_blank: true, class: 'form-control'
 
-%br
+            .col-md-3.text-center
+              %h4.white Author
+              = select_tag :author, options_from_collection_for_select(Author.order(:last_name).all, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
 
-= link_to 'New Paper', new_paper_path
+            .col-md-3.text-center
+              %h4.white Peer Reviewed
+              = select_tag :journal, options_for_select(Paper.journals, params[:journal]), include_blank: true, class: 'form-control'
+
+.row
+  .col-md-12
+    .table-responsive
+      %table.table.table-condensed.table-bordered
+        %thead
+          - if @papers.any?
+            %tr
+              %th{style: 'width: 20%;'} Reference
+              %th.c= sortable :year
+              %th.c= sortable :literature_type, 'Literature Type'
+              %th.c= sortable :journal, 'Peer Reviewed Journal'
+              %th.c Species
+              %th.c Focus
+              %th.c Dose
+              / %th.c Forage %
+              / %th.c Concentrate %
+              %th.c Summary
+              %th.c
+
+        %tbody
+          - if @papers.any?
+            = render @papers
+          - else
+            %tr.warning
+              %td.c{colspan: 9} 
+                %br/
+                There are no research papers that match the current filters.
+                %br/
+                %br/
+
+      = will_paginate @papers
+
+%br/
+
+- if policy(Paper).create?
+  .row
+    .col-md-12
+      = link_to "Add Paper", new_paper_path, class: 'btn btn-primary'

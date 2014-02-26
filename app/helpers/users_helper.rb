@@ -1,5 +1,4 @@
 module UsersHelper
-
   def role_label(user)
     content_tag :span, user.role.titleize, class: 'label label-info user-status-label'
   end

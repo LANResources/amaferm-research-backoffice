@@ -1,0 +1,41 @@
+- if results.count(:all) > 0
+  %h1.text-center
+    %span{style: 'display: block'} Results
+    %small
+      %i.fa.fa-ellipsis-h
+      = p_space a_space("(#{results.count(:all)})")
+      %i.fa.fa-ellipsis-h
+  %br/
+
+.row
+  .col-md-12
+    .text-right
+      = link_to request.fullpath, class: 'text-muted' do
+        %i.fa.fa-link
+        = p_space 'permalink'
+      %br/
+      %br/
+.row
+  .col-md-12
+    - if results.count(:all) > 0
+      .row
+        - results.each do |result|
+          .col-md-12
+            .panel.panel-info
+              .panel-body
+                = result.formatted_citation.sub('<p>', '<p class="lead">').html_safe
+                
+              = render partial: 'papers/detail_table', locals: { paper: result }
+              .panel-footer
+                %a{class: 'btn-link details-toggle'}
+                  %i.fa.fa-plus-square-o
+                  = p_space 'Details'
+
+                .pull-right
+                  = link_to download_paper_path(result), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
+                    %i.fa.fa-cloud-download
+                    = p_space 'Download'
+
+    - else
+      .alert.alert-warning
+        No papers were found that match your search parameters.

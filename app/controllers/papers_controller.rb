@@ -16,7 +16,8 @@ class PapersController < ApplicationController
   end
 
   def create
-    @paper = Paper.new(paper_attributes)
+    @author = Author.find_or_create_from params[:paper][:author_name]
+    @paper = @author.papers.build paper_attributes
 
     respond_to do |format|
       if @paper.save
@@ -30,6 +31,10 @@ class PapersController < ApplicationController
   end
 
   def update
+    unless @paper.author.last_name == params[:paper][:author_name]
+      @paper.author = Author.find_or_create_from params[:paper][:author_name]
+    end
+
     respond_to do |format|
       if @paper.update(paper_attributes)
         format.html { redirect_to @paper, notice: 'Paper was successfully updated.' }
@@ -47,6 +52,13 @@ class PapersController < ApplicationController
       format.html { redirect_to papers_url }
       format.json { head :no_content }
     end
+  end
+
+  def download
+    send_data @paper.document.file.download,
+      type: @paper.content_type,
+      filename: @paper.filename,
+      disposition: 'attachment'
   end
 
   private
@@ -68,11 +80,15 @@ class PapersController < ApplicationController
     end
 
     def scope_papers
-      @papers = Paper.includes(:author)
-      @papers = policy_scope @papers.order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(15)
+      @papers = Paper.filter(params.slice(:species, :focus, :author, :journal)).includes(:author)
+      @papers = policy_scope @papers.order("#{sort_column} #{sort_direction}").order('year desc', 'authors.last_name asc').page(params[:page]).per_page(15)
     end
-    
+
     def sort_column
-      super(Paper.column_names + ['authors.last_name'], 'source_id')
+      super(Paper.column_names + ['authors.last_name'], 'year')
+    end
+
+    def sort_direction(default = 'desc')
+      super(default)
     end
 end

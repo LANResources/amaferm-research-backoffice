@@ -5,7 +5,7 @@
 // require mustache
 // require dropzone
 //= require best_in_place
-// require select2
-// require typeahead.min
+//= require select2
+//= require typeahead
 //= require lr.simpliq
 //= require_tree .

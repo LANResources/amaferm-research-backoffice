@@ -4,7 +4,7 @@ class PaperPolicy < ApplicationPolicy
       if user >= :biozyme
         scope.all
       else
-        scope.where(level: :basic)
+        scope.where(level: Paper.levels[:basic])
       end
     end
   end
@@ -13,6 +13,10 @@ class PaperPolicy < ApplicationPolicy
     true
   end
 
+  def search?
+    true
+  end
+  
   def show?
     true
   end
@@ -44,7 +48,8 @@ class PaperPolicy < ApplicationPolicy
   def permitted_attributes
     [
       :source_id, :citation, :level, :author_id, :dose, :year, :literature_type, 
-      :journal, :species, :forage, :concentrate, :document
+      :journal, :summary, :species_list, :focus_list, :forage, :concentrate, 
+      :document, :author_name
     ]
   end
 end
