@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'paper_searches/new'
-
-  get 'paper_searches/create'
+  get 'about', to: 'pages#about', as: :about
 
   resources :users, except: :show do
     member do
