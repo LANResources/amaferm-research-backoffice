@@ -15,7 +15,7 @@
     .form-group
       = f.label :author_name, 'Author', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :author_name, class: 'form-control autocomplete', data: { authors: Author.pluck(:last_name).sort }
+        = f.text_field :author_name, class: 'form-control autocomplete', data: { authors: Author.cached_names }
 
     .form-group
       = f.label :citation, 'Reference', class: 'control-label col-sm-2'
@@ -41,18 +41,18 @@
     .form-group
       = f.label :journal, 'Peer Reviewed Journal', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :journal, class: 'form-control autocomplete', data: { journals: Paper.journals }
+        = f.text_field :journal, class: 'form-control autocomplete', data: { journals: Paper.cached_journals }
 
     .form-group
       = f.label :species_list, 'Species', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :species_list, class: 'form-control select2', data: { tags: Paper.species }
+        = f.text_field :species_list, class: 'form-control select2', data: { tags: Paper.cached_species }
         %span.help-block Put each option on it's own line.
 
     .form-group
       = f.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :focus_list, class: 'form-control select2', data: { tags: Paper.focuses }
+        = f.text_field :focus_list, class: 'form-control select2', data: { tags: Paper.cached_focuses }
         %span.help-block Separate with commas
 
     .form-group
@@ -78,4 +78,5 @@
     .form-group
       .col-sm-offset-2.col-sm-10
         = f.submit class: 'btn btn-primary'
+        = f.submit 'Create and Add Another', class: 'btn btn-primary' if @paper.new_record?
         = link_to 'Cancel', papers_path, class: 'btn btn-inverse'

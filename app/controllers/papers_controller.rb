@@ -21,7 +21,13 @@ class PapersController < ApplicationController
 
     respond_to do |format|
       if @paper.save
-        format.html { redirect_to @paper, notice: 'Paper was successfully created.' }
+        format.html { 
+          if params[:commit] == 'Create and Add Another'
+            redirect_to new_paper_path, notice: ['Paper was successfully created.', view_context.link_to('view', @paper)].join('&nbsp;').html_safe
+          else
+            redirect_to @paper, notice: 'Paper was successfully created.' 
+          end
+        }
         format.json { render action: 'show', status: :created, location: @paper }
       else
         format.html { render action: 'new' }

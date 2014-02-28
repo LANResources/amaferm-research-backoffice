@@ -8,19 +8,19 @@
           .row
             .col-md-3.text-center
               %h4.white Species
-              = select_tag :species, options_for_select(Paper.species, params[:species]), include_blank: true, class: 'form-control'
+              = select_tag :species, options_for_select(Paper.cached_species, params[:species]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Focus
-              = select_tag :focus, options_for_select(Paper.focuses, params[:focus]), include_blank: true, class: 'form-control'
+              = select_tag :focus, options_for_select(Paper.cached_focuses, params[:focus]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Author
-              = select_tag :author, options_from_collection_for_select(Author.order(:last_name).all, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
+              = select_tag :author, options_from_collection_for_select(Author.cached_all, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Peer Reviewed
-              = select_tag :journal, options_for_select(Paper.journals, params[:journal]), include_blank: true, class: 'form-control'
+              = select_tag :journal, options_for_select(Paper.cached_journals, params[:journal]), include_blank: true, class: 'form-control'
 
 .row
   .col-md-12
@@ -59,4 +59,6 @@
 - if policy(Paper).create?
   .row
     .col-md-12
-      = link_to "Add Paper", new_paper_path, class: 'btn btn-primary'
+      = link_to new_paper_path, class: 'btn btn-primary' do
+        %i.fa.fa-plus
+        = p_space "Add Paper"

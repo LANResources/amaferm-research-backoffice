@@ -7,10 +7,7 @@ class PaperSearchesController < ApplicationController
                     end
 
     respond_to do |format|
-      format.html {
-        @years = Paper.pluck(:year).uniq.sort
-        @authors = Author.pluck(:last_name).sort
-      }
+      format.html
       format.js
     end
   end

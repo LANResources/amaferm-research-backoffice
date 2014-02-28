@@ -3,8 +3,8 @@
   %td.c= paper.year
   %td.c= paper.literature_type
   %td.c= paper.journal
-  %td.c= paper.species_list.join('<br/>').html_safe
-  %td.c= paper.focus_list.join('<br/>').html_safe
+  %td.c= paper.cached_species_list.join('<br/>').html_safe
+  %td.c= paper.cached_focus_list.join('<br/>').html_safe
   %td.c= paper.dose
   / %td.c= paper.forage
   / %td.c= paper.concentrate

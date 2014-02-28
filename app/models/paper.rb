@@ -28,17 +28,34 @@ class Paper < ActiveRecord::Base
   validates :literature_type, inclusion: { in: LITERATURE_TYPES }
 
   before_save :normalize_values
+  after_commit :flush_cache
 
-  def self.species
-    ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'species').pluck(:name).uniq.sort
+  def self.cached_species
+    Rails.cache.fetch([name, 'species']) do 
+      ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'species').pluck(:name).uniq.sort
+    end
   end
 
-  def self.focuses
-    ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'focus').pluck(:name).uniq.sort
+  def self.cached_focuses
+    Rails.cache.fetch([name, 'focuses']) do
+      ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'focus').pluck(:name).uniq.sort
+    end
   end
 
-  def self.journals
-    pluck(:journal).uniq.compact.sort
+  def self.cached_years
+    Rails.cache.fetch([name, 'years']){ pluck(:year).uniq.sort }
+  end
+
+  def self.cached_journals
+    Rails.cache.fetch([name, 'journals']){ pluck(:journal).uniq.compact.sort }
+  end
+
+  def cached_species_list
+    Rails.cache.fetch([self, 'species-list']){ species_list }
+  end
+
+  def cached_focus_list
+    Rails.cache.fetch([self, 'focus-list']){ focus_list }
   end
 
   scope :for_species,     -> (species) { tagged_with(species, on: :species) }
@@ -64,5 +81,14 @@ class Paper < ActiveRecord::Base
 
   def normalize_values
     self.journal = nil if journal.blank?
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, 'years'])
+    Rails.cache.delete([self.class.name, 'journals'])
+    Rails.cache.delete([self.class.name, 'species'])
+    Rails.cache.delete([self.class.name, 'focuses'])
+    Rails.cache.delete([self, 'species-list'])
+    Rails.cache.delete([self, 'focus-list'])
   end
 end
