@@ -62,6 +62,9 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'memcachier'
 gem 'dalli'
 
+# Heroku
+gem 'rails_12factor', group: :production
+
 # Debugging
 gem 'exception_notification'
 group :development do
