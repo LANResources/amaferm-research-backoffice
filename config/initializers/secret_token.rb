@@ -6,7 +6,7 @@ def secure_token
     # Use the existing token.
     File.read(token_file).chomp
   elsif Rails.env.production?
-    ENV['SECRET_TOKEN'] || SecureRandom.hex(64)
+    ENV['SECRET_TOKEN'] || ENV['SECRET_KEY_BASE'] || SecureRandom.hex(64)
   else
     # Generate a new token and store it in token_file.
     token = SecureRandom.hex(64)
