@@ -1,5 +1,5 @@
 class PapersController < ApplicationController
-  before_action :set_paper, only: [:show, :edit, :update, :destroy]
+  before_action :set_paper, only: [:show, :edit, :update, :destroy, :download]
   before_action :scope_papers, only: :index
 
   def index
