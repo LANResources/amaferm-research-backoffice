@@ -46,7 +46,7 @@ gem 'redcarpet'
 
 # Files
 gem 'carrierwave'
-gem 'carrierwave-dropbox', '~> 1.1.0'
+gem 'carrierwave-dropbox', '1.1.0'
 gem 'mini_magick'
 
 # Mail
