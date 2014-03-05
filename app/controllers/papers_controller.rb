@@ -62,7 +62,7 @@ class PapersController < ApplicationController
 
   def download
     send_data @paper.document.file.download,
-      type: @paper.content_type,
+      type: @paper.document.file.content_type,
       filename: @paper.filename,
       disposition: 'attachment'
   end
