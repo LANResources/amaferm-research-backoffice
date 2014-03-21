@@ -3,7 +3,7 @@ $ ->
    $(document).on 'page:load', initPage
 
 initPage = ->
-  if pageIs 'trials', ['edit', 'update']
+  if pageIs('trials', ['edit', 'update']) or pageIs('papers', 'show')
     initMeasureEditing()
 
 initMeasureEditing = ->

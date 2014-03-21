@@ -1,5 +1,5 @@
-.col-md-3.col-xs-6.col-xxs-12
-  .box.smallchart.measure-box.editable{data: { measure: measure.id, path: edit_performance_measure_path(measure) }}
+.col-md-3.col-xs-6.col-xxs-12.measure-container
+  .box.smallchart.measure-box{class: ('editable' if defined?(editable) && editable), data: { measure: measure.id, path: edit_performance_measure_path(measure) }}
     .title= measure.measure
     .value.pm-control
       .container

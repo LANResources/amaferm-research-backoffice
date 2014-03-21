@@ -8,6 +8,8 @@
     background-color: $mainColor;
   }
   .value {
+    padding: 5px;
+
     &.pm-control {
       background-color: darken($mainColor, 10%);
     }
@@ -18,19 +20,10 @@
       transition: all 1s;
       -webkit-transition: all 1s;
       color: lighten($mainColor, 30%);
+      margin-top: 10px;
     }
     h4 {
       color: lighten($mainColor, 40%);
     }
   }
-  // &.current, &:hover {
-  //   .title {
-  //     background-color: $darkBlue;
-  //   }
-  //   .value {
-  //     h1 {
-  //       color: $darkBlue;
-  //     }
-  //   }
-  // }
 }

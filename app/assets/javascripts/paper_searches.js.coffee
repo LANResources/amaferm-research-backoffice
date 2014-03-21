@@ -17,6 +17,7 @@ initPaperSearchForm = ->
 initDetailsToggle = ->
   $(document.body).on 'click', '.details-toggle', ->
     $(this).parents('.panel').find('.detail-table').toggle()
+    $(this).parents('.panel').find('.performance-measures-container').toggle()
     $icon = $(this).find('i')
     if $icon.hasClass 'fa-plus-square-o'
       $icon.removeClass('fa-plus-square-o').addClass('fa-minus-square-o')

@@ -28,6 +28,11 @@
                   = result.title
                 
               = render partial: 'detail_table', locals: { trial: result }
+              .container.performance-measures-container
+                .row.performance-measures-row
+                  - result.performance_measures.each do |measure|
+                    = render partial: 'measures/measure', locals: { measure: measure }
+
               .panel-footer
                 %a{class: 'btn-link details-toggle'}
                   %i.fa.fa-plus-square-o

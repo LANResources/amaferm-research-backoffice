@@ -1,6 +1,15 @@
 #results .detail-table {
   display: none;
 }
+#results .performance-measures-container {
+  display: none;
+  .measure-container {
+    padding: 0;
+    .box {
+      margin: 0;
+    }
+  }
+}
 .result-panel .panel-body {
   background-color: $mainColor;
   color: white;
