@@ -1,24 +1,25 @@
-- title @paper.source_id, false
+- title @paper.title
 
-- breadcrumbs ['Papers', papers_path], @paper.source_id
-
-%br/
-
-.row
-  .col-md-12
-    = @paper.formatted_citation.sub('<p>', '<p class="lead">').html_safe
+- breadcrumbs ['Literature', papers_path], @paper.source_id
 
 %br/
 
 .row
   .col-md-12
-    = render partial: 'detail_table', locals: { paper: @paper }
+    = render partial: 'papers/detail_table', locals: { paper: @paper }
+
+- @paper.trials.order(:source_sub_id).each do |trial|
+  = render partial: 'papers/trial_box_row', locals: { trial: trial, spotlight: @trial || nil }
 
 .row
   .col-md-12
     = link_to download_paper_path(@paper), title: "Download", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
       %i.fa.fa-cloud-download
       = p_space 'Download'
+    - if policy(Trial).new?
+      = link_to new_paper_trial_path(@paper), title: "Add Trial", remote: true, class: "btn btn-sm btn-primary" do
+        %i.fa.fa-plus
+        = p_space 'Add Trial'
     - if policy(@paper).edit?
       = link_to edit_paper_path(@paper), title: "Edit Paper", class: "btn btn-sm btn-warning" do
         %i.fa.fa-pencil

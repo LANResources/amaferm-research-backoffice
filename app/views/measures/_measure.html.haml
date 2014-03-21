@@ -1,0 +1,15 @@
+.col-md-3.col-xs-6.col-xxs-12
+  .box.smallchart.measure-box.editable{data: { measure: measure.id, path: edit_performance_measure_path(measure) }}
+    .title= measure.measure
+    .value.pm-control
+      .container
+        .row
+          .col-md-12
+            %h1= measure.control
+            %h4 Control
+    .value.pm-amaferm
+      .container
+        .row
+          .col-md-12
+            %h1= measure.amaferm
+            %h4 Amaferm

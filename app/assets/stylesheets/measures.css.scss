@@ -1,0 +1,36 @@
+.measure-box {
+  &.editable {
+    cursor: pointer;
+  }
+  .title {
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    background-color: $mainColor;
+  }
+  .value {
+    &.pm-control {
+      background-color: darken($mainColor, 10%);
+    }
+    &.pm-amaferm {
+      background-color: darken($mainColor, 20%);
+    }
+    h1 {
+      transition: all 1s;
+      -webkit-transition: all 1s;
+      color: lighten($mainColor, 30%);
+    }
+    h4 {
+      color: lighten($mainColor, 40%);
+    }
+  }
+  // &.current, &:hover {
+  //   .title {
+  //     background-color: $darkBlue;
+  //   }
+  //   .value {
+  //     h1 {
+  //       color: $darkBlue;
+  //     }
+  //   }
+  // }
+}

@@ -1,11 +1,7 @@
 class PaperPolicy < ApplicationPolicy
   self::Scope = Struct.new(:user, :scope) do
     def resolve
-      if user >= :biozyme
-        scope.all
-      else
-        scope.where(level: Paper.levels[:basic])
-      end
+      scope.all
     end
   end
 
@@ -47,9 +43,18 @@ class PaperPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
-      :source_id, :citation, :level, :author_id, :dose, :year, :literature_type, 
-      :journal, :summary, :species_list, :focus_list, :forage, :concentrate, 
-      :document, :author_name
+      :source_id, :citation, :title, :location, :author_id, 
+      :author_name, :journal, :literature_type, :document,
+      trials_attributes: permitted_trial_attributes
+    ]
+  end
+
+  private
+
+  def permitted_trial_attributes
+    [
+      :id, :source_sub_id, :level, :year, :summary, :dose, :species, 
+      :focus_list, :forage, :concentrate, :calculations, :calculation_list
     ]
   end
 end

@@ -1,0 +1,27 @@
+%tr
+  %td{style: 'width: 20%;'}
+    = a_space trial.title
+    %a.btn-link.reference-popover{role: 'button', title: 'Reference', data: {content: trial.formatted_citation}}
+      = "..."
+  %td.c= trial.author_name
+  %td.c= trial.year
+  %td.c= trial.literature_type
+  %td.c= trial.journal
+  %td.c= trial.species
+  %td.c= trial.cached_focus_list.join('<br/>').html_safe
+  %td.c= trial.dose
+  %td.c= trial.forage
+  %td.c= trial.concentrate
+  %td.c
+    %a.btn-link.summary-popover{role: 'button', title: 'Summary', data: {content: trial.summary}}
+      %i.fa.fa-ellipsis-h.fa-lg.fa-border
+  %td.c
+    .btn-group.btn-group-vertical<
+      = link_to [trial.paper, trial], title: 'View', class: 'btn btn-xs btn-secondary' do
+        %i.fa.fa-fw.fa-eye
+      - if policy(trial).edit?
+        = link_to edit_paper_trial_path(trial.paper, trial), title: "Edit Trial", class: "btn btn-xs btn-warning" do
+          %i.fa.fa-fw.fa-pencil
+      - if policy(trial).destroy?
+        = link_to [trial.paper, trial], title: "Delete Trial", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+          %i.fa.fa-fw.fa-trash-o

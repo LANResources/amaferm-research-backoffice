@@ -21,21 +21,23 @@
       .row
         - results.each do |result|
           .col-md-12
-            .panel.panel-info
+            .panel.panel-info.result-panel
               .panel-body
-                = result.formatted_citation.sub('<p>', '<p class="lead">').html_safe
+                %span.label.label-outline.label-warning= result.complete_source_id
+                %p.lead
+                  = result.title
                 
-              = render partial: 'papers/detail_table', locals: { paper: result }
+              = render partial: 'detail_table', locals: { trial: result }
               .panel-footer
                 %a{class: 'btn-link details-toggle'}
                   %i.fa.fa-plus-square-o
                   = p_space 'Details'
 
                 .pull-right
-                  = link_to download_paper_path(result), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
+                  = link_to download_paper_path(result.paper), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
                     %i.fa.fa-cloud-download
                     = p_space 'Download'
 
     - else
       .alert.alert-warning
-        No papers were found that match your search parameters.
+        No literature was found that match your search parameters.

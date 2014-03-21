@@ -1,15 +1,12 @@
 class PapersController < ApplicationController
   before_action :set_paper, only: [:show, :edit, :update, :destroy, :download]
-  before_action :scope_papers, only: :index
-
-  def index
-  end
 
   def show
   end
 
   def new
     @paper = Paper.new
+    @paper.trials.build
   end
 
   def edit
@@ -83,18 +80,5 @@ class PapersController < ApplicationController
 
     def paper_attributes
       params.require(:paper).permit *policy(@paper || Paper).permitted_attributes
-    end
-
-    def scope_papers
-      @papers = Paper.filter(params.slice(:species, :focus, :author, :journal)).includes(:author)
-      @papers = policy_scope @papers.order("#{sort_column} #{sort_direction}").order('year desc', 'authors.last_name asc').page(params[:page]).per_page(15)
-    end
-
-    def sort_column
-      super(Paper.column_names + ['authors.last_name'], 'year')
-    end
-
-    def sort_direction(default = 'desc')
-      super(default)
     end
 end

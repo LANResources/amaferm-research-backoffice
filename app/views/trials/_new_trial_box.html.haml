@@ -1,0 +1,9 @@
+.box.new-trial-box
+  .box-header
+    %h2
+      %i.fa.fa-flask
+      New Trial
+
+  .box-content
+    %span.trial-box-edit
+      = render partial: 'trials/form', locals: { trial: trial, remote: true }

@@ -1,0 +1,24 @@
+- title "Edit Trial"
+
+- breadcrumbs ['Literature', papers_path], [@trial.paper.source_id, paper_path(@trial.paper)], ["Trial #{@trial.source_sub_id}", paper_trial_path(@trial.paper, @trial)], 'Edit'
+
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h2
+          %i.fa.fa-flask
+          = @trial.title
+      .box-content
+        = render partial: 'form', locals: { trial: @trial }
+
+%h1 Performance Measures
+
+.row#performance-measures-row
+  - @trial.performance_measures.each do |measure|
+    = render partial: 'measures/measure', locals: { measure: measure }
+
+  .col-md-3.col-xs-6.col-xxs-12#new-performance-measure-btn-container
+    = link_to new_performance_measure_path(trial: @trial.id), remote: true, class: 'quick-button' do
+      %i.fa.fa-plus
+      %p New

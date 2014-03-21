@@ -8,9 +8,9 @@
         = f.text_field :source_id, class: 'form-control'
 
     .form-group
-      = f.label :level, class: 'control-label col-sm-2'
+      = f.label :title, class: 'control-label col-sm-2'
       .col-sm-10
-        = f.collection_select :level, Paper::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+        = f.text_field :title, class: 'form-control'
 
     .form-group
       = f.label :author_name, 'Author', class: 'control-label col-sm-2'
@@ -24,16 +24,6 @@
         %span.help-block To italicize text, surround it with asterisks (*).
 
     .form-group
-      = f.label :year, class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_field :year, class: 'form-control'
-
-    .form-group
-      = f.label :summary, class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_area :summary, class: 'form-control'
-
-    .form-group
       = f.label :literature_type, 'Literature Type', class: 'control-label col-sm-2'
       .col-sm-10
         = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :humanize, {}, class: 'form-control'
@@ -44,37 +34,76 @@
         = f.text_field :journal, class: 'form-control autocomplete', data: { journals: Paper.cached_journals }
 
     .form-group
-      = f.label :species_list, 'Species', class: 'control-label col-sm-2'
+      = f.label :location, class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :species_list, class: 'form-control select2', data: { tags: Paper.cached_species }
-        %span.help-block Put each option on it's own line.
-
-    .form-group
-      = f.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_field :focus_list, class: 'form-control select2', data: { tags: Paper.cached_focuses }
-        %span.help-block Separate with commas
-
-    .form-group
-      = f.label :dose, class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_field :dose, class: 'form-control'
-
-    .form-group
-      = f.label :forage, 'Forage %', class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_field :forage, class: 'form-control'
-
-    .form-group
-      = f.label :concentrate, 'Concentrate %', class: 'control-label col-sm-2'
-      .col-sm-10
-        = f.text_field :concentrate, class: 'form-control'
+        = f.text_field :location, class: 'form-control'
 
     .form-group
       = f.label :document, class: 'control-label col-sm-2'
       .col-md-10
         = f.file_field :document
 
+  = f.fields_for :trials do |tf| 
+    %fieldset
+      %legend= "Trial #{tf.object.source_sub_id || 'A'}"
+    
+      .form-group
+        = tf.label :source_sub_id, 'Trial Letter', class: 'control-label col-sm-2'
+        .col-sm-10
+          .input-group
+            %span.input-group-addon
+              %span.paper-id-addon
+              = "-"
+            = tf.text_field :source_sub_id, disabled: true, class: 'form-control'
+
+      .form-group
+        = tf.label :level, class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.collection_select :level, Trial::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+
+      .form-group
+        = tf.label :year, class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :year, class: 'form-control'
+
+      .form-group
+        = tf.label :summary, class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_area :summary, class: 'form-control'
+
+      .form-group
+        = tf.label :species, 'Species', class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :species, class: 'form-control species-autocomplete', data: { species: Trial.cached_species }
+
+      .form-group
+        = tf.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :focus_list, class: 'form-control focuses-select2', data: { tags: Trial.cached_focuses }
+          %span.help-block Separate with commas
+
+      .form-group
+        = tf.label :calculation_list, 'Included in X Calculations', class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :calculation_list, class: 'form-control calculations-select2', data: { tags: Trial.cached_calculations }
+          %span.help-block Separate with commas
+
+      .form-group
+        = tf.label :dose, class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :dose, class: 'form-control'
+
+      .form-group
+        = tf.label :forage, 'Forage %', class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :forage, class: 'form-control'
+
+      .form-group
+        = tf.label :concentrate, 'Concentrate %', class: 'control-label col-sm-2'
+        .col-sm-10
+          = tf.text_field :concentrate, class: 'form-control'
+
+  %fieldset
     .form-group
       .col-sm-offset-2.col-sm-10
         = f.submit class: 'btn btn-primary'

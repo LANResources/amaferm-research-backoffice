@@ -1,0 +1,83 @@
+= form_for [trial.paper, trial], remote: defined?(remote), html: { class: 'form-horizontal' } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: trial }
+
+  %fieldset
+    .container
+      .row
+        .col-md-6
+          .form-group
+            = f.label :source_sub_id, 'Trial Letter', class: 'control-label col-sm-2 col-md-4'
+            .col-sm-10.col-md-8
+              .input-group
+                %span.input-group-addon= "#{trial.paper_id}-"
+                = f.text_field :source_sub_id, class: 'form-control'
+
+        .col-md-6
+          .form-group
+            = f.label :level, class: 'control-label col-sm-2 col-md-4'
+            .col-sm-10.col-md-8
+              = f.collection_select :level, Trial::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+
+      .row
+        .col-md-12
+          .form-group
+            = f.label :summary, class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_area :summary, class: 'form-control'
+
+      .row
+        .col-md-6
+          .form-group
+            = f.label :year, class: 'control-label col-sm-2 col-md-4'
+            .col-sm-10.col-md-8
+              = f.text_field :year, class: 'form-control'
+
+        .col-md-6
+          .form-group
+            = f.label :species, 'Species', class: 'control-label col-sm-2 col-md-4'
+            .col-sm-10.col-md-8
+              = f.text_field :species, class: 'form-control species-autocomplete', data: { species: Trial.cached_species }
+
+      .row
+        .col-md-12
+          .form-group
+            = f.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :focus_list, class: 'form-control focuses-select2', data: { tags: Trial.cached_focuses }
+              %span.help-block Separate with commas
+
+      .row
+        .col-md-12
+          .form-group
+            = f.label :calculation_list, 'Included in X Calculations', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :calculation_list, class: 'form-control calculations-select2', data: { tags: Trial.cached_calculations }
+              %span.help-block Separate with commas
+
+      .row
+        .col-md-4
+          .form-group
+            = f.label :dose, class: 'control-label col-md-6 col-sm-2'
+            .col-md-5.col-sm-10
+              = f.text_field :dose, class: 'form-control'
+
+        .col-md-4
+          .form-group
+            = f.label :forage, 'Forage %', class: 'control-label col-md-6 col-sm-2'
+            .col-md-6.col-sm-10
+              = f.text_field :forage, class: 'form-control'
+
+        .col-md-4
+          .form-group
+            = f.label :concentrate, 'Concentrate %', class: 'control-label col-md-6 col-sm-2'
+            .col-md-6.col-sm-10
+              = f.text_field :concentrate, class: 'form-control'
+
+      .row
+        .col-md-12
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              %hr/
+              = f.submit class: 'btn btn-primary'
+              = f.submit 'Create and Add Another', class: 'btn btn-primary' if @trial.new_record? && !defined?(remote)
+              = link_to 'Cancel', papers_path, class: 'btn btn-inverse cancel-btn'

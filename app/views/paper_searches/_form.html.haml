@@ -7,7 +7,7 @@
       .col-sm-10
         .checkbox
           .btn-group{data: {toggle: 'buttons'}}
-            - Paper.cached_years.each do |year|
+            - Trial.cached_years.each do |year|
               %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.years.include?(year.to_s))}
                 = check_box_tag 'paper_search[years][]', year, @paper_search.years.include?(year.to_s)
                 = year
@@ -27,7 +27,7 @@
       .col-sm-10
         .checkbox
           .btn-group{data: {toggle: 'buttons'}}
-            - Paper.cached_species.each do |species|
+            - Trial.cached_species.each do |species|
               %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.species.include?(species))}
                 = check_box_tag 'paper_search[species][]', species, @paper_search.species.include?(species)
                 = species
@@ -37,7 +37,7 @@
       .col-sm-10
         .checkbox
           .btn-group{data: {toggle: 'buttons'}}
-            - Paper.cached_focuses.each do |focus|
+            - Trial.cached_focuses.each do |focus|
               %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.focuses.include?(focus))}
                 = check_box_tag 'paper_search[focuses][]', focus, @paper_search.focuses.include?(focus)
                 = focus

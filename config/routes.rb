@@ -9,12 +9,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :papers do
+  resources :papers, except: :index do
+    root to: 'trials#index'
     get 'download', on: :member, as: :download
     collection do
       get 'search', to: 'paper_searches#search', as: :search
     end
+    resources :trials
   end
+
+  resources :trials, only: :index
+  resources :measures, only: [:new, :create, :edit, :update, :destroy], as: :performance_measures
 
   resources :sessions, only: [:new, :create, :destroy]
   resource :password_reset, only: [:new, :create, :edit, :update]
@@ -22,5 +27,5 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
   delete 'logout', to: 'sessions#destroy', as: :logout
 
-  root to: 'papers#index'
+  root to: 'trials#index'
 end

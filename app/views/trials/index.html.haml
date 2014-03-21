@@ -1,18 +1,18 @@
-- title 'Papers', false
+- title 'Trials', false
 
 .row
   .col-md-12
     .box.full-color
       .box-content
-        = form_tag papers_path, method: :get, id: 'paper_filter' do
+        = form_tag trials_path, method: :get, id: 'trial_filter' do
           .row
             .col-md-3.text-center
               %h4.white Species
-              = select_tag :species, options_for_select(Paper.cached_species, params[:species]), include_blank: true, class: 'form-control'
+              = select_tag :species, options_for_select(Trial.cached_species, params[:species]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Focus
-              = select_tag :focus, options_for_select(Paper.cached_focuses, params[:focus]), include_blank: true, class: 'form-control'
+              = select_tag :focus, options_for_select(Trial.cached_focuses, params[:focus]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Author
@@ -27,38 +27,39 @@
     .table-responsive
       %table.table.table-condensed.table-bordered
         %thead
-          - if @papers.any?
+          - if @trials.any?
             %tr
-              %th{style: 'width: 20%;'} Reference
+              %th{style: 'width: 20%;'}= sortable :title, 'Title'
+              %th.c Author
               %th.c= sortable :year
               %th.c= sortable :literature_type, 'Literature Type'
               %th.c= sortable :journal, 'Peer Reviewed Journal'
               %th.c Species
               %th.c Focus
               %th.c Dose
-              / %th.c Forage %
-              / %th.c Concentrate %
+              %th.c Forage %
+              %th.c Concentrate %
               %th.c Summary
               %th.c
 
         %tbody
-          - if @papers.any?
-            = render @papers
+          - if @trials.any?
+            = render @trials
           - else
             %tr.warning
               %td.c{colspan: 9} 
                 %br/
-                There are no research papers that match the current filters.
+                There are no trials that match the current filters.
                 %br/
                 %br/
 
-      = will_paginate @papers
+      = will_paginate @trials
 
 %br/
 
-- if policy(Paper).create?
+- if policy(Trial).create?
   .row
     .col-md-12
       = link_to new_paper_path, class: 'btn btn-primary' do
         %i.fa.fa-plus
-        = p_space "Add Paper"
+        = p_space "Add Literature"

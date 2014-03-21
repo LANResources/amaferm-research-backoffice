@@ -1,0 +1,30 @@
+%table.table.table-condensed.table-no-top-border.detail-table
+  %thead
+  %tbody
+    %tr
+      %th Year
+      %td= trial.year
+
+    %tr
+      %th Summary
+      %td= trial.summary
+
+    %tr
+      %th Dose
+      %td= trial.dose
+
+    %tr
+      %th Species
+      %td= trial.species
+
+    %tr
+      %th Focus(es)
+      %td= trial.focus_list
+
+    %tr
+      %th Forage
+      %td= "#{trial.forage}%"
+
+    %tr
+      %th Concentrate
+      %td= "#{trial.concentrate}%"

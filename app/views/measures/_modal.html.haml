@@ -1,0 +1,33 @@
+- new_or_edit = measure.new_record? ? 'new' : 'edit'
+.modal.fade{id: "#{new_or_edit}-measure-modal", role: 'dialog', aria: {labelledby: "#{new_or_edit}-measure-modal-label", hidden: 'true'}}
+  .modal-dialog
+    .modal-content
+      = form_for measure, remote: true, html: { class: 'form-horizontal' } do |f|
+        .modal-header
+          %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {hidden: 'true'}} &times;
+          %h4.modal-title{id: "#{new_or_edit}-measure-modal-label"}= "#{new_or_edit.titleize} Performance Measure"
+
+        .modal-body
+          = f.hidden_field :trial_id
+
+          .form-group
+            = f.label :measure, class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :measure, class: 'form-control'
+
+          .form-group
+            = f.label :control, class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :control, class: 'form-control'
+
+          .form-group
+            = f.label :amaferm, class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :amaferm, class: 'form-control'
+              
+        .modal-footer
+          - if new_or_edit == 'edit'
+            = link_to measure, method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this performance measure?' } do
+              %i.fa.fa-trash-o
+          %button.btn.btn-default{type: 'button', data: {dismiss: 'modal'}} Close
+          = f.submit class: 'btn btn-primary'

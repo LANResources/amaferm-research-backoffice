@@ -21,7 +21,7 @@ class PaperSearch
   end
 
   def search
-    @results = Paper.all
+    @results = Trial.joins(paper: :author)
 
     match_years
     match_authors
@@ -39,12 +39,12 @@ class PaperSearch
     end
 
     def match_authors
-       @results = @results.joins(:author).where('authors.last_name' => authors) if authors.any?
+       @results = @results.where(authors: { last_name: authors }) if authors.any?
        self
     end
 
     def match_species
-      @results = @results.for_any_species(species) if species.any?
+      @results = @results.for_species(species) if species.any?
       self
     end
 
@@ -54,12 +54,12 @@ class PaperSearch
     end
 
     def match_literature_types
-      @results = @results.where(literature_type: literature_types) if literature_types.any?
+      @results = @results.where(papers: {literature_type: literature_types}) if literature_types.any?
       self
     end
 
     def order_results
-      @results.order('year DESC', 'citation ASC')
+      @results.order('year DESC', 'title ASC')
       self
     end
 end

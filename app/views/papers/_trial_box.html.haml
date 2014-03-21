@@ -1,0 +1,30 @@
+.box.trial-box{data: { trial: trial.id }}
+  .box-header
+    %h2
+      %i.fa.fa-flask
+      = a_space "Trial"
+      %span.trial-id= trial.source_sub_id
+
+    .box-icon
+      - if spotlight && spotlight.id != trial.id
+        %a.btn-maximize{href: '#'}
+          %i.fa.fa-chevron-down
+      - else
+        %a.btn-minimize{href: '#'}
+          %i.fa.fa-chevron-up
+
+    - if policy(trial).destroy?
+      .box-icon
+        = link_to [trial.paper, trial], title: "Delete Trial", data: { confirm: 'Are you sure?' }, method: :delete, remote: true do
+          %i.fa.fa-fw.fa-trash-o
+          
+    - if policy(trial).edit?
+      .box-icon
+        = link_to edit_paper_trial_path(trial.paper, trial), remote: true, title: 'Edit' do
+          %i.fa.fa-pencil
+    
+  .box-content
+    %span.trial-box-show
+      = render partial: 'papers/trial', locals: { trial: trial }
+
+    %span.trial-box-edit

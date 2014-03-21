@@ -3,8 +3,8 @@
   -#   %input.search.span12{placeholder: "...", type: "text"}/
   .nav-collapse.sidebar-nav.collapse.navbar-collapse.bs-navbar-collapse
     %ul.nav.nav-tabs.nav-stacked.main-menu
-      = menu_link_to 'About',   about_path,         icon: :info,    active_if: ['pages', 'about']
-      = menu_link_to 'Papers',  papers_path,        icon: :archive, active_if: ['papers']
-      = menu_link_to 'Search',  search_papers_path, icon: :search,  active_if: ['paper_searches']
-      = menu_link_to 'Users',   users_path,         icon: :group,   active_if: ['users']
+      = menu_link_to 'About',       about_path,         icon: :info,    active_if: ['pages', 'about']
+      = menu_link_to 'Literature',  papers_path,        icon: :archive, active_if: [['papers', 'trials']]
+      = menu_link_to 'Search',      search_papers_path, icon: :search,  active_if: ['paper_searches']
+      = menu_link_to 'Users',       users_path,         icon: :group,   active_if: ['users']
 

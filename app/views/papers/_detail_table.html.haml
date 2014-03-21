@@ -1,4 +1,4 @@
-%table.table.table-condensed.detail-table
+%table.table.table-condensed.table-no-top-border.detail-table
   %thead
   %tbody
     %tr
@@ -6,37 +6,13 @@
       %td= paper.author_name
 
     %tr
-      %th Dose
-      %td= paper.dose
-
-    %tr
-      %th Year
-      %td= paper.year
+      %th Reference
+      %td= paper.formatted_citation.html_safe
 
     %tr
       %th Literature Type
       %td= paper.literature_type
 
     %tr
-      %th Species
-      %td= render_tags paper.species_list
-
-    / %tr
-    /   %th Focus(es)
-    /   %td= @paper.focus_list
-
-    / %tr
-    /   %th Performance Measures
-    /   %td= @paper.measure_list
-
-    %tr
-      %th Summary
-      %td= paper.summary
-
-    %tr
-      %th Forage
-      %td= "#{paper.forage}%"
-
-    %tr
-      %th Concentrate
-      %td= "#{paper.concentrate}%"
+      %th Location
+      %td= paper.location

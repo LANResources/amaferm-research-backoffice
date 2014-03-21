@@ -1,3 +1,7 @@
 #results .detail-table {
   display: none;
 }
+.result-panel .panel-body {
+  background-color: $mainColor;
+  color: white;
+}

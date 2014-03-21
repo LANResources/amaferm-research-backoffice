@@ -97,3 +97,41 @@ blockquote.pull-right {
     margin: 0;
   }
 }
+
+// Remove the top border of the tbody, for cases where there is no thead
+.table.table-no-top-border tbody tr:first-child {
+  td, th {
+    border-top: none;
+  }
+}
+
+// Outline Labels
+.label.label-outline {
+  background-color: transparent;
+  padding: 2px 6px;
+
+  &.label-default {
+    color: #999999;
+    border: 1px solid #999999;
+  }
+  &.label-primary {
+    color: $mainColor;
+    border: 1px solid $mainColor;
+  }
+  &.label-success {
+    color: $darkGreen;
+    border: 1px solid $darkGreen;
+  }
+  &.label-info {
+    color: $lightBlue;
+    border: 1px solid $lightBlue;
+  }
+  &.label-warning {
+    color: $lightOrange;
+    border: 1px solid $lightOrange;
+  }
+  &.label-danger {
+    color: #d9534f;
+    border: 1px solid #d9534f;
+  }
+}

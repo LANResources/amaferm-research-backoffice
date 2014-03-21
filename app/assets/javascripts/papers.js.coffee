@@ -3,32 +3,15 @@ $ ->
    $(document).on 'page:load', initPage
 
 initPage = ->
-  if pageIs 'papers', 'index'
-    initPaperFilter()
-    initSummaryPopovers()
-
   if pageIs 'papers', ['new', 'edit', 'create', 'update']
-    initPaperForm()
+    _initPaperForm()
 
-initPaperFilter = ->
-  $(document.body).on 'change', '#paper_filter select', ->
-    $form = $('#paper_filter')
-    fields = $form.serialize().split('&')
-    fields = (field for field in fields when /^(species|focus|author|journal)=\S+$/i.test(field)).join('&')
-    url = $form.attr 'action'
-    url += "?#{fields}" if fields.length > 0
-    Turbolinks.visit url
-
-initSummaryPopovers = ->
-  $('.summary-popover').each ->
-    $(this).popover
-      placement: 'left'
-      trigger: 'hover'
-
-initPaperForm = ->
+window._initPaperForm = ->
   initAuthorsAutocomplete()
   initJournalsAutocomplete()
+  initSpeciesAutocomplete()
   initTagsInput()
+  initPaperIdHelper()
 
 initAuthorsAutocomplete = ->
   $authorInput = $('#paper_author_name')
@@ -46,9 +29,23 @@ initJournalsAutocomplete = ->
       name: 'journals'
       local: journals
 
+initSpeciesAutocomplete = ->
+  $speciesInput = $('.species-autocomplete')
+  species = $speciesInput.data 'species'
+  if species
+    $speciesInput.typeahead
+      name: 'species'
+      local: species
+
 initTagsInput = ->
-  for $tagsInput in [$('#paper_species_list'), $('#paper_focus_list')]
+  for $tagsInput in [$('.calculations-select2'), $('.focuses-select2')]
     tags = $tagsInput.data 'tags'
     $tagsInput.select2
       tags: tags
       tokenSeparators: [',']
+
+initPaperIdHelper = ->
+  $(document.body).on 'change', '#paper_source_id', ->
+    $('.paper-id-addon').text $(this).val()
+
+  $('#paper_source_id').change()
