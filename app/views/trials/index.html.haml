@@ -16,7 +16,7 @@
 
             .col-md-3.text-center
               %h4.white Author
-              = select_tag :author, options_from_collection_for_select(Author.cached_all, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
+              = select_tag :author, options_from_collection_for_select(Author.cached_having_papers, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Peer Reviewed

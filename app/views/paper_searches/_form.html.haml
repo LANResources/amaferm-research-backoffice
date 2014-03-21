@@ -17,7 +17,7 @@
       .col-sm-10
         .checkbox
           .btn-group{data: {toggle: 'buttons'}}
-            - Author.cached_names.each do |author|
+            - Author.cached_names_having_papers.each do |author|
               %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.authors.include?(author))}
                 = check_box_tag 'paper_search[authors][]', author, @paper_search.authors.include?(author)
                 = author

@@ -63,5 +63,7 @@ class Paper < ActiveRecord::Base
 
   def flush_cache
     Rails.cache.delete([self.class.name, 'journals'])
+    Rails.cache.delete(['Author', 'having-papers'])
+    Rails.cache.delete(['Author', 'names-having-papers'])
   end
 end

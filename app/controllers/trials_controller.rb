@@ -73,7 +73,7 @@ class TrialsController < ApplicationController
       if params[:action] == 'create'
         @current_resource ||= params[:trial] if params[:trial]
       else
-        @current_resource ||= Trial.find(params[:id]) if params[:id]
+        @current_resource ||= @paper.trials.where(source_sub_id: params[:id]).first if params[:id]
       end
     end
 
