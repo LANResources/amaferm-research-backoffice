@@ -11,7 +11,7 @@ class Trial < ActiveRecord::Base
                             uniqueness: { scope: :paper_id, case_sensitive: false },
                             format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :year, presence: true
-  acts_as_taggable_on :focus
+  acts_as_taggable_on :species, :focus
 
   after_initialize :set_default_source_sub_id
   after_commit :flush_cache
@@ -26,7 +26,7 @@ class Trial < ActiveRecord::Base
 
   def self.cached_species
     Rails.cache.fetch([name, 'species']) do 
-      pluck(:species).uniq.sort
+      ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'species').pluck(:name).uniq.sort
     end
   end
 
@@ -44,12 +44,16 @@ class Trial < ActiveRecord::Base
     Rails.cache.fetch([name, 'calculations']){ pluck(:calculations).flatten.uniq.sort }  
   end
 
+  def cached_species_list
+    Rails.cache.fetch([self, 'species-list']){ species_list }
+  end
+
   def cached_focus_list
     Rails.cache.fetch([self, 'focus-list']){ focus_list }
   end
 
   scope :with_paper_and_author, -> { joins(paper: :author) }
-  scope :for_species,     -> (species) { where species: species }
+  scope :for_species,     -> (species) { tagged_with(species, on: :species) }
   scope :for_any_species, -> (species) { tagged_with(species, on: :species, any: true) }
   scope :for_focus,       -> (focus)   { tagged_with(focus, on: :focus) }
   scope :for_any_focus,   -> (focus)   { tagged_with(focus, on: :focus, any: true) }
@@ -79,6 +83,7 @@ class Trial < ActiveRecord::Base
     Rails.cache.delete([self.class.name, 'species'])
     Rails.cache.delete([self.class.name, 'focuses'])
     Rails.cache.delete([self.class.name, 'calculations'])
+    Rails.cache.delete([self, 'species-list'])
     Rails.cache.delete([self, 'focus-list'])
   end
 

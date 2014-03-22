@@ -34,9 +34,10 @@
 
         .col-md-6
           .form-group
-            = f.label :species, 'Species', class: 'control-label col-sm-2 col-md-4'
+            = f.label :species_list, 'Species', class: 'control-label col-sm-2 col-md-4'
             .col-sm-10.col-md-8
-              = f.text_field :species, class: 'form-control species-autocomplete', data: { species: Trial.cached_species }
+              = f.text_field :species_list, class: 'form-control species-select2', data: { tags: Trial.cached_species }
+              %span.help-block Separate with commas
 
       .row
         .col-md-12

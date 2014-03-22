@@ -72,9 +72,10 @@
           = tf.text_area :summary, class: 'form-control'
 
       .form-group
-        = tf.label :species, 'Species', class: 'control-label col-sm-2'
+        = tf.label :species_list, 'Species', class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.text_field :species, class: 'form-control species-autocomplete', data: { species: Trial.cached_species }
+          = tf.text_field :species_list, class: 'form-control species-select2', data: { tags: Trial.cached_species }
+          %span.help-block Separate with commas
 
       .form-group
         = tf.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'

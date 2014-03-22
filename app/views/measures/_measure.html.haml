@@ -1,6 +1,6 @@
 .col-md-3.col-xs-6.col-xxs-12.measure-container
   .box.smallchart.measure-box{class: ('editable' if defined?(editable) && editable), data: { measure: measure.id, path: edit_performance_measure_path(measure) }}
-    .title= measure.measure
+    .title= measure.measure.gsub(/\^(\d+)/, "<sup>\\1</sup>").html_safe
     .value.pm-control
       .container
         .row

@@ -47,7 +47,7 @@ class TrialPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
-      :source_sub_id, :level, :year, :summary, :dose, :species, 
+      :source_sub_id, :level, :year, :summary, :dose, :species_list, 
       :focus_list, :forage, :concentrate, :calculations, :calculation_list,
       performance_measures_attributes: permitted_performance_measure_attributes
     ]

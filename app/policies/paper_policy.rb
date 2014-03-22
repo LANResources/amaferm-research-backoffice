@@ -53,7 +53,7 @@ class PaperPolicy < ApplicationPolicy
 
   def permitted_trial_attributes
     [
-      :id, :source_sub_id, :level, :year, :summary, :dose, :species, 
+      :id, :source_sub_id, :level, :year, :summary, :dose, :species_list, 
       :focus_list, :forage, :concentrate, :calculations, :calculation_list
     ]
   end

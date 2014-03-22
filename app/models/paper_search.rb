@@ -44,7 +44,7 @@ class PaperSearch
     end
 
     def match_species
-      @results = @results.for_species(species) if species.any?
+      @results = @results.for_any_species(species) if species.any?
       self
     end
 

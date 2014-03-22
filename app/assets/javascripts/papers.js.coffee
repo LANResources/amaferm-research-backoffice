@@ -9,7 +9,6 @@ initPage = ->
 window._initPaperForm = ->
   initAuthorsAutocomplete()
   initJournalsAutocomplete()
-  initSpeciesAutocomplete()
   initTagsInput()
   initPaperIdHelper()
 
@@ -29,16 +28,8 @@ initJournalsAutocomplete = ->
       name: 'journals'
       local: journals
 
-initSpeciesAutocomplete = ->
-  $speciesInput = $('.species-autocomplete')
-  species = $speciesInput.data 'species'
-  if species
-    $speciesInput.typeahead
-      name: 'species'
-      local: species
-
 initTagsInput = ->
-  for $tagsInput in [$('.calculations-select2'), $('.focuses-select2')]
+  for $tagsInput in [$('.species-select2'), $('.calculations-select2'), $('.focuses-select2')]
     tags = $tagsInput.data 'tags'
     $tagsInput.select2
       tags: tags
