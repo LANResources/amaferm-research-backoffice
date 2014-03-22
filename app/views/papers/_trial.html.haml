@@ -23,11 +23,11 @@
 
     %tr
       %th Forage
-      %td= "#{trial.forage}%"
+      %td= display_percentage trial.forage
 
     %tr
       %th Concentrate
-      %td= "#{trial.concentrate}%"
+      %td= display_percentage trial.concentrate
 
     - if trial.performance_measures.any?
       %tr
