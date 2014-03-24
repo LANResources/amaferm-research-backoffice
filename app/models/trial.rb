@@ -58,6 +58,7 @@ class Trial < ActiveRecord::Base
   scope :for_focus,       -> (focus)   { tagged_with(focus, on: :focus) }
   scope :for_any_focus,   -> (focus)   { tagged_with(focus, on: :focus, any: true) }
   scope :for_author,      -> (author)  { where authors: { id: author } }
+  scope :for_journal,     -> (journal) { where papers: { journal: journal } }
 
   def to_param
     source_sub_id
