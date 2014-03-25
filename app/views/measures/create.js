@@ -2,7 +2,7 @@ $('#new-measure-modal').on('hidden.bs.modal', function(){ $(this).remove(); }).m
 
 if (pageIs('trials', ['edit', 'update'])){
   $container = $('#performance-measures-row');
-}else if (pageIs('papers', 'show')){
+}else if (pageIs('papers', 'show') || pageIs('trials', 'show')){
   $container = $('.trial-box[data-trial="<%= @measure.trial_id %>"]').find('.performance-measures-row');
 }else{
   $container = false;
