@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: :about
+  get 'welcome', to: 'pages#welcome', as: :welcome
 
   resources :users, except: :show do
     member do

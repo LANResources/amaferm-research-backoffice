@@ -1,0 +1,113 @@
+body[data-controller="pages"][data-action="welcome"] {
+  @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,900,100,700);
+
+  #content {
+    padding: 0px;
+    background-image: image_url('landing-page-bg.jpg');
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+
+  .light-green-header {
+    padding: 25px;
+    background: #b3c586;
+    color: #589f4e;
+    font-size: 2.95em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    letter-spacing: -0.0625em;
+  }
+
+  .green-divider {
+    background: #9fc84f;
+    border-top: 1px solid white;
+    height: 25px;
+  }
+
+  .green-body {
+    background: #589f4e;
+    overflow: hidden;
+    padding: 20px 0px;
+  }
+
+  .green-body li {
+    color: white;
+    padding: 5px 0px;
+    font-size: 1.5em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+  }
+
+  .lead-text {
+    font-size: 1.5em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+
+  .orange-bar {
+    padding: 25px;
+    background: #f47937;
+    margin-bottom: 55px;
+    position: relative;
+    top: -35px;
+    z-index: 1;
+  }
+
+  .orange-bar-text {
+    max-width: 1000px;
+    margin: 0px auto;
+    text-align: center;
+    color: #fff;
+  }
+
+  .hub-icons {
+    background-image: image_url('icon-bg.png');
+    margin: 10px auto;
+  }
+  .hub-icons:hover {
+    background-image: image_url('icon-bg-over.png');
+  }
+
+  .orange-bar-text h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.25em;
+    font-weight: 700;
+    line-height: 1em;
+  }
+  .orange-bar-text p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.55em;
+    font-weight: 100;
+  }
+
+  #landing-page {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 250px;
+    position:relative;
+  }
+
+  .landing-logo {
+    max-width: 459px;
+    margin: 0px auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  p, li { font-family: 'Roboto', sans-serif !important; }
+  h2 {
+    font-size: 1.5em;
+    font-weight: 900 !important;
+    font-family: 'Roboto', sans-serif!important;
+  }
+
+  .orange-text {
+    color: #F47936;
+  }
+}

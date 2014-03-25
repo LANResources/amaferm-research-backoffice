@@ -1,0 +1,31 @@
+!!!
+%html{lang: "en"}
+  %head
+    %title= "#{yield(:title) || "Untitled"} · BackOffice · Amaferm Research"
+
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    = stylesheet_link_tag "application", media: 'all', data: {'turbolinks-track' => true}
+
+    / The HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      = javascript_include_tag 'simpliq/respond'
+      = stylesheet_link_tag 'ie6-8'
+
+    = javascript_include_tag "application", data: {'turbolinks-track' => true}
+    = csrf_meta_tag
+    = render partial: 'layouts/icons'
+
+  %body{data: {action: params[:action], controller: controller.controller_name}}
+    = render partial: 'layouts/navbar'
+
+    .container
+      .row
+        = render partial: 'layouts/menu'
+        #content.col-lg-10.col-sm-11
+          .row
+            .col-md-12
+              = yield
+
+      .clearfix
+      = render partial: 'layouts/footer'

@@ -1,0 +1,32 @@
+#landing-page
+  .col-md-12
+    .row
+      .landing-logo
+        = image_tag 'landing-page-logo.png', class: 'img-responsive'
+
+      .orange-bar
+        .orange-bar-text
+          %h2
+            WELCOME TO THE AMAFERM
+            %sup &#174;
+            ONLINE RESEARCH CENTER
+          %p
+            The hub for the study and application of the natural feed additive, Amaferm
+            %sup> &#174;
+            , and the
+            %br>/
+            impact it can have on digestion, animal performance, energy and profitability.
+    .row.hub-icons-wrapper.text-center
+      .col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0
+        .row
+          .col-md-3.col-sm-6.text-center
+            = link_to search_papers_path do
+              = image_tag 'search-icon.png', class: 'img-responsive hub-icons'
+          .col-md-3.col-sm-6.text-center
+            = link_to papers_path do
+              = image_tag 'literature-icon.png', class: 'img-responsive hub-icons'
+
+          .col-md-3.col-sm-6.text-center
+            = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
+          .col-md-3.col-sm-6.text-center
+            = image_tag 'connect-icon.png', class: 'img-responsive hub-icons last-icon'
