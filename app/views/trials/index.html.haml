@@ -47,7 +47,7 @@
             = render @trials
           - else
             %tr.warning
-              %td.c{colspan: 9} 
+              %td.c{colspan: 9}
                 %br/
                 There are no trials that match the current filters.
                 %br/
@@ -60,6 +60,10 @@
 - if policy(Trial).create?
   .row
     .col-md-12
+      = link_to trials_path(params.slice(:species, :focus, :author, :journal, :sort, :direction).merge(format: :xls)), class: 'btn btn-success' do
+        %i.fa.fa-floppy-o
+        = p_space "Export"
+      &nbsp;
       = link_to new_paper_path, class: 'btn btn-primary' do
         %i.fa.fa-plus
         = p_space "Add Literature"

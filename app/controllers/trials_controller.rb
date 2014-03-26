@@ -4,6 +4,10 @@ class TrialsController < ApplicationController
   before_action :scope_trials, only: :index
 
   def index
+    respond_to do |format|
+      format.html { @trials = @trials.page(params[:page]).per_page(15) }
+      format.xls { headers["Content-Disposition"] = "attachment; filename=\"Amaferm Research Table.xls\"" }
+    end
   end
 
   def show
@@ -85,7 +89,7 @@ class TrialsController < ApplicationController
       redirect_to paper_path(params[:paper_id]) if params[:paper_id]
 
       @trials = Trial.with_paper_and_author.filter(params.slice(:species, :focus, :author, :journal))
-      @trials = policy_scope @trials.order("#{sort_column} #{sort_direction}").order('year asc').page(params[:page]).per_page(15)
+      @trials = policy_scope @trials.order("#{sort_column} #{sort_direction}").order('year asc')
     end
 
     def sort_column

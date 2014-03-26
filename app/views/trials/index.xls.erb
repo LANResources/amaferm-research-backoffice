@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+    <WindowHeight>12220</WindowHeight>
+    <WindowWidth>19220</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>140</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+   </ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+     <Alignment ss:Vertical="Bottom"/>
+     <Borders/>
+     <Interior/>
+     <NumberFormat/>
+     <Protection/>
+    </Style>
+    <Style ss:ID="s62">
+     <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+    </Style>
+    <Style ss:ID="s63">
+     <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+    </Style>
+    <Style ss:ID="s64">
+     <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+    </Style>
+    <Style ss:ID="s65">
+     <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table ss:StyleID="s62" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+      <Column ss:Index="2" ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="290"/>
+      <Row ss:AutoFitHeight="0" ss:Height="72" ss:StyleID="s63">
+        <Cell><Data ss:Type="String">Source #</Data></Cell>
+        <Cell ss:StyleID="s65"><Data ss:Type="String">Title</Data></Cell>
+        <Cell><Data ss:Type="String">Year</Data></Cell>
+        <Cell><Data ss:Type="String">Author</Data></Cell>
+      </Row>
+    <% @trials.each do |trial| %>
+      <Row ss:AutoFitHeight="0" ss:Height="72" ss:StyleID="s63">
+        <Cell><Data ss:Type="String"><%= trial.complete_source_id %></Data></Cell>
+        <Cell ss:StyleID="s65"><Data ss:Type="String"><%= trial.title %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= trial.year %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.author_name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

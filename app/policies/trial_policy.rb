@@ -25,6 +25,10 @@ class TrialPolicy < ApplicationPolicy
     show?
   end
 
+  def export?
+    user >= :manager
+  end
+
   def new?
     user >= :manager
   end
