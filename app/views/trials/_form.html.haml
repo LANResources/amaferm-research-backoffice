@@ -16,7 +16,7 @@
           .form-group
             = f.label :level, class: 'control-label col-sm-2 col-md-4'
             .col-sm-10.col-md-8
-              = f.collection_select :level, Trial::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+              = f.collection_select :level, Trial.levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
 
       .row
         .col-md-12

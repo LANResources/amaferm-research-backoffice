@@ -4,7 +4,7 @@ class Trial < ActiveRecord::Base
 
   include Filterable
 
-  LEVELS = [:basic, :biozyme]
+  LEVELS = {web: 0, shared: 2, biozyme: 1}
   enum level: LEVELS
 
   validates :source_sub_id, presence: true,
@@ -25,7 +25,7 @@ class Trial < ActiveRecord::Base
   end
 
   def self.cached_species
-    Rails.cache.fetch([name, 'species']) do 
+    Rails.cache.fetch([name, 'species']) do
       ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'species').pluck(:name).uniq.sort
     end
   end
@@ -41,7 +41,7 @@ class Trial < ActiveRecord::Base
   end
 
   def self.cached_calculations
-    Rails.cache.fetch([name, 'calculations']){ pluck(:calculations).flatten.uniq.sort }  
+    Rails.cache.fetch([name, 'calculations']){ pluck(:calculations).flatten.uniq.sort }
   end
 
   def cached_species_list
@@ -65,15 +65,15 @@ class Trial < ActiveRecord::Base
   end
 
   def complete_source_id
-    [source_id, source_sub_id].join '-'  
+    [source_id, source_sub_id].join '-'
   end
 
   def calculation_list
-    calculations.join ', '  
+    calculations.join ', '
   end
 
   def calculation_list=(list)
-    list ||= [] 
+    list ||= []
     self.calculations = list.is_a?(String) ? list.split(',').map(&:strip) : list
   end
 

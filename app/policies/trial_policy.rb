@@ -4,7 +4,7 @@ class TrialPolicy < ApplicationPolicy
       if user >= :biozyme
         scope.all
       else
-        scope.where(level: Trial.levels[:basic])
+        scope.where(level: [Trial.levels[:web], Trial.levels[:shared]])
       end
     end
   end
@@ -16,7 +16,7 @@ class TrialPolicy < ApplicationPolicy
   def search?
     true
   end
-  
+
   def show?
     true
   end
@@ -47,7 +47,7 @@ class TrialPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
-      :source_sub_id, :level, :year, :summary, :dose, :species_list, 
+      :source_sub_id, :level, :year, :summary, :dose, :species_list,
       :focus_list, :forage, :concentrate, :calculations, :calculation_list,
       performance_measures_attributes: permitted_performance_measure_attributes
     ]

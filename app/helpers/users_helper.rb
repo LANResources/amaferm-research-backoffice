@@ -13,7 +13,7 @@ module UsersHelper
         dt = content_tag :dt, role.to_s.titleize
         explanation = case role.to_s.titleize
                       when 'Basic'
-                        'Can only view basic-level research papers.'
+                        'Can only view web and shared-level research papers.'
                       when 'Biozyme'
                         ['Can create/invite new users.',
                           'Can view all research papers.'].join('<br/>')

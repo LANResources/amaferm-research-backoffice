@@ -43,10 +43,10 @@
       .col-md-10
         = f.file_field :document
 
-  = f.fields_for :trials do |tf| 
+  = f.fields_for :trials do |tf|
     %fieldset
       %legend= "Trial #{tf.object.source_sub_id || 'A'}"
-    
+
       .form-group
         = tf.label :source_sub_id, 'Trial Letter', class: 'control-label col-sm-2'
         .col-sm-10
@@ -59,7 +59,7 @@
       .form-group
         = tf.label :level, class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.collection_select :level, Trial::LEVELS.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+          = tf.collection_select :level, Trial.levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
 
       .form-group
         = tf.label :year, class: 'control-label col-sm-2'

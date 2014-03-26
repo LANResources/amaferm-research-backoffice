@@ -25,7 +25,7 @@ class Author < ActiveRecord::Base
   end
 
   def self.cached_having_papers
-    Rails.cache.fetch([name, 'having-papers']){ having_papers.order(:last_name).all }  
+    Rails.cache.fetch([name, 'having-papers']){ having_papers.uniq.order(:last_name).all }
   end
 
   private
