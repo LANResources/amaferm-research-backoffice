@@ -65,6 +65,9 @@ gem 'dalli'
 # Heroku
 gem 'rails_12factor', group: :production
 
+# Monitoring
+gem 'newrelic_rpm'
+
 # Debugging
 gem 'exception_notification'
 group :development do
