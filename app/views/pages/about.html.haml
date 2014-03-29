@@ -1,74 +1,75 @@
 - title 'About', false
 
-.row
-  .col-md-6.col-xs-6.col-sm-6
-    .jumbotron
-      %h1 
-        Amaferm
-        %sup> &reg;
-        %br/
-        %small The Key Ingredient
-
-    %p
-      %b 
-        Amaferm
-        %sup> &reg; 
-      is included in every product in the 
-      %b 
-        BioZyme
-        %sup> &reg; 
-      product line.  It is a natural feed additive from the fermentation of 
-      %i Aspergillus oryzae 
-      in a proprietary, multi-step process.
-
-    %p
-      %b 
-        Amaferm
-        %sup> &reg;
-      is compliant with ISO 9000, HACCP and Safe Feed-Safe Food certification.  It 
-      has a large independent database of published research results behind it.
-
-    %h1 
-      What is Amaferm
-      %sup> &reg;
-      ?
-
-    %p
-      %b 
-        Amaferm
-        %sup> &reg; 
-      is a direct fed microbial (prebiotic) of a select strain of 
-      %i Aspergillius oryzae, 
-      which through a proprietary process produces metabolites that stimulate the growth, activity 
-      and function of the beneficial microorganisms in the gut thereby improving digestive efficiency.
-
-  .col-md-6.col-xs-6.col-sm-6
-    = image_tag 'amaferm-ingredients.jpg', class: 'img-responsive'
-
-%br/
-
-.row
+#about-page
   .col-md-12
-    .jumbotron
-      %h3
-        Amaferm
-        %sup> &reg; 
-        = p_space 'Uniquely Stimulates'
-      %h1 Beneficial Microorganisms
-      %h3 in the Gut
+    = image_tag 'amaferm-header.jpg', class: 'img-responsive img-center'
 
-    %h3 Why is it important?
-    %ul
-      %li Research proven
-      %li More microbial activity
-      %li More bacteria numbers, faster
-      %li More digestion
-      %li More energy
-      %li More performance
-      %li Amaferm&reg; unlocks valuable nutrients in pastures, hays and grains, regardless of quality
+    .row
+      .col-md-7.col-xs-7.col-sm-7
+        .row
+          .col-md-2.col-xs-2.col-sm-2
+            = image_tag 'amaferm-logo.png', class: 'img-responsive amaferm-logo'
+          .col-md-10.col-xs-10.col-sm-10
+            %p
+              %strong
+                Amaferm
+                %sup> &#174;
+              is included in every product in the
+              %strong
+                BioZyme
+                %sup> &#174;
+              product line. It is a natural feed additive from the fermentation of Aspergillus oryzae in a proprietary, multi-step process.
+            %p
+              %strong
+                Amaferm
+                %sup> &#174;
+              is compliant with ISO 9000, HACCP and Safe Feed-Safe Food certification. It has a large independent database of published research results behind it.
+      .col-md-5.col-xs-5.col-sm-5
+        = image_tag 'MOREImage.jpg', class: 'img-responsive'
 
-%br/
+    %br/
+    .row
+      .col-md-12
+        .jumbotron
+          %h2
+            What is Amaferm
+            %sup> &#174;
+            ?
+          %p
+            %strong
+              Amaferm
+              %sup> &#174;
+            is a natural feed additive that acts as a prebiotic. It delivers more microbial protein and energy to the animal through increased digestibility by stimulating fungal branching, microbial enzyme activity and bacterial growth.
 
-.row
-  .col-md-12.text-center
-    = image_tag 'howamafermworks-pyramid.png', class: 'img-responsive'
+    .row
+      %h2 Why is it important?
+      .col-md-6.col-xs-6.col-sm-6
+        %ul
+          %li Research proven
+          %li
+            %span.orange-text More
+            microbial activity
+          %li
+            %span.orange-text More
+            bacteria numbers, faster
+          %li
+            %span.orange-text More
+            digestion
+      .col-md-6.col-xs-6.col-sm-6
+        %ul
+          %li
+            %span.orange-text More
+            energy
+          %li
+            %span.orange-text More
+            performance
+          %li
+            %strong
+              Amaferm
+              %sup> &#174;
+            unlocks valuable nutrients in pastures, hays and grains, regardless of quality
+
+    %br/
+    .row
+      .col-md-12
+        = image_tag 'AmafermProcess3.jpg', class: 'img-responsive img-center'

@@ -70,6 +70,7 @@ body[data-controller="pages"][data-action="welcome"] {
     background-image: image_url('icon-bg.png');
     margin: 10px auto;
   }
+
   .hub-icons:hover {
     background-image: image_url('icon-bg-over.png');
   }
@@ -80,6 +81,7 @@ body[data-controller="pages"][data-action="welcome"] {
     font-weight: 700;
     line-height: 1em;
   }
+
   .orange-bar-text p {
     font-family: 'Roboto', sans-serif;
     font-size: 1.55em;
@@ -100,7 +102,10 @@ body[data-controller="pages"][data-action="welcome"] {
     z-index: 2;
   }
 
-  p, li { font-family: 'Roboto', sans-serif !important; }
+  p, li {
+    font-family: 'Roboto', sans-serif !important;
+  }
+
   h2 {
     font-size: 1.5em;
     font-weight: 900 !important;
