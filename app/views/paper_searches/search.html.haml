@@ -6,7 +6,7 @@
       .box-header
         %h2
           %span.i-bg
-            %i.fa.fa-search 
+            %i.fa.fa-search
           = p_space 'Advanced Search'
         .box-icon
           %a.btn-minimize{href: "#"}
@@ -25,6 +25,4 @@
 
 #results
   = render partial: 'results', locals: { results: policy_scope(@paper_search.results) } if params[:paper_search]
-
-    
 

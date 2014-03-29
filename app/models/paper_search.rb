@@ -1,7 +1,7 @@
 class PaperSearch
   include ActiveModel::Model 
 
-  ARRAY_ATTRIBUTES = [:years, :authors, :species, :focuses, :literature_types]
+  ARRAY_ATTRIBUTES = [:years, :authors, :species, :focuses, :literature_types, :levels]
   attr_accessor *ARRAY_ATTRIBUTES
   attr_reader :results
 
@@ -18,6 +18,7 @@ class PaperSearch
     @species ||= []
     @focuses ||= []
     @literature_types ||= []
+    @levels ||= []
   end
 
   def search
@@ -28,6 +29,7 @@ class PaperSearch
     match_species
     match_focuses
     match_literature_types
+    match_levels
     order_results
   end
 
@@ -55,6 +57,11 @@ class PaperSearch
 
     def match_literature_types
       @results = @results.where(papers: {literature_type: literature_types}) if literature_types.any?
+      self
+    end
+
+    def match_levels
+      @results = @results.where(level: levels.map{|level| Trial.levels[level] }) if levels.any?
       self
     end
 
