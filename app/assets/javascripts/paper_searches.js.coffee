@@ -15,6 +15,7 @@ initPaperSearchForm = ->
     $(this).parents('.box').find('h2 i').replaceWith($('<i class="fa fa-spinner fa-spin"></i>'));
 
   $(document.body).on 'change', '#new_paper_search input', ->
+    setPage 1
     $('#new_paper_search').submit()
 
 initDetailsToggle = ->
@@ -30,5 +31,8 @@ initDetailsToggle = ->
 initResultsPaginator = ->
   $(document.body).on 'click', '.pagination-link', (e) ->
     e.preventDefault()
-    $('#paper_search_page').attr 'value', $(this).data('page')
+    setPage $(this).data('page')
     $('#new_paper_search').submit()
+
+setPage = (page) ->
+  $('#paper_search_page').attr 'value', page
