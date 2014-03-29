@@ -77,6 +77,10 @@ class Trial < ActiveRecord::Base
     self.calculations = list.is_a?(String) ? list.split(',').map(&:strip) : list
   end
 
+  def expanded_species_list
+    cached_species_list.to_s.gsub(/ruminant/i, 'Beef, Dairy, Sheep, Goat')
+  end
+
   private
 
   def flush_cache

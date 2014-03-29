@@ -31,11 +31,11 @@
 
     %tr
       %th Species
-      %td= trial.species_list
+      %td= trial.expanded_species_list
 
     %tr
       %th Focus(es)
-      %td= trial.focus_list
+      %td= trial.cached_focus_list
 
     %tr
       %th Forage
@@ -48,4 +48,4 @@
     - if trial.performance_measures.any?
       %tr
         %th{colspan: 2} Performance Measures
-        
+

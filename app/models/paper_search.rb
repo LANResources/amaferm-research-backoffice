@@ -67,7 +67,7 @@ class PaperSearch
     end
 
     def order_results
-      @results = @results.order('year DESC', 'title ASC')
+      @results = @results.order('trials.year DESC')
       self
     end
 end

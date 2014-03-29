@@ -7,7 +7,7 @@
   %td.c= trial.year
   %td.c= trial.literature_type
   %td.c= trial.journal
-  %td.c= trial.cached_species_list.join('<br/>').html_safe
+  %td.c= trial.expanded_species_list.gsub(', ', '<br/>').html_safe
   %td.c= trial.cached_focus_list.join('<br/>').html_safe
   %td.c= trial.dose
   %td.c= trial.forage
