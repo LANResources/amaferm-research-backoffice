@@ -2,7 +2,7 @@
 
 .row
   .col-md-12
-    .box.default
+    .box.default#search-box
       .box-header
         %h2
           %span.i-bg
@@ -11,9 +11,17 @@
         .box-icon
           %a.btn-minimize{href: "#"}
             %i.fa.fa-chevron-up
+        .box-icon.reset-search
+          = link_to search_papers_path, title: 'Reset Search' do
+            %i.fa.fa-refresh
 
       .box-content
         = render partial: 'form'
+
+      #reset-link-container.reset-search
+        = link_to search_papers_path, class: 'text-muted' do
+          %i.fa.fa-refresh
+          = p_space 'Reset'
 
 #results
   = render partial: 'results', locals: { results: policy_scope(@paper_search.results) } if params[:paper_search]

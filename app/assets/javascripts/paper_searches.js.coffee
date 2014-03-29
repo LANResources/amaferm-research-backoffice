@@ -8,6 +8,8 @@ initPage = ->
     initDetailsToggle()
 
 initPaperSearchForm = ->
+  $('.reset-search').hide()
+
   $(document.body).on 'submit', '#new_paper_search', ->
     $(this).parents('.box').find('h2 i').replaceWith($('<i class="fa fa-spinner fa-spin"></i>'));
 
