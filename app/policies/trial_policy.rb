@@ -2,7 +2,7 @@ class TrialPolicy < ApplicationPolicy
   self::Scope = Struct.new(:user, :scope) do
     def resolve
       if user >= :biozyme
-        scope.all
+        scope #.all
       else
         scope.where(level: [Trial.levels[:web], Trial.levels[:shared]])
       end

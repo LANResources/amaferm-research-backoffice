@@ -1,8 +1,8 @@
 class PaperSearch
-  include ActiveModel::Model 
+  include ActiveModel::Model
 
   ARRAY_ATTRIBUTES = [:years, :authors, :species, :focuses, :literature_types, :levels]
-  attr_accessor *ARRAY_ATTRIBUTES
+  attr_accessor :page, *ARRAY_ATTRIBUTES
   attr_reader :results
 
   ARRAY_ATTRIBUTES.each do |attribute|
@@ -19,6 +19,7 @@ class PaperSearch
     @focuses ||= []
     @literature_types ||= []
     @levels ||= []
+    @page = @page ? @page.to_i : 1
   end
 
   def search
@@ -66,7 +67,7 @@ class PaperSearch
     end
 
     def order_results
-      @results.order('year DESC', 'title ASC')
+      @results = @results.order('year DESC', 'title ASC')
       self
     end
 end

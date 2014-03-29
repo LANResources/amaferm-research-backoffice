@@ -6,6 +6,7 @@ initPage = ->
   if pageIs 'paper_searches'
     initPaperSearchForm()
     initDetailsToggle()
+    initResultsPaginator()
 
 initPaperSearchForm = ->
   $('.reset-search').hide()
@@ -25,3 +26,9 @@ initDetailsToggle = ->
       $icon.removeClass('fa-plus-square-o').addClass('fa-minus-square-o')
     else
       $icon.removeClass('fa-minus-square-o').addClass('fa-plus-square-o')
+
+initResultsPaginator = ->
+  $(document.body).on 'click', '.pagination-link', (e) ->
+    e.preventDefault()
+    $('#paper_search_page').attr 'value', $(this).data('page')
+    $('#new_paper_search').submit()

@@ -8,7 +8,9 @@ class PaperSearchesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js
+      format.js {
+        @results = policy_scope(@paper_search.results || Paper.none).page(@paper_search.page).per_page(15)
+      }
     end
   end
 end

@@ -1,9 +1,9 @@
-- if results.count(:all) > 0
+- if results.count > 0
   %h1.text-center
     %span{style: 'display: block'} Results
     %small
       %i.fa.fa-ellipsis-h
-      = p_space a_space("(#{results.count(:all)})")
+      = p_space a_space("(#{results.count})")
       %i.fa.fa-ellipsis-h
   %br/
 
@@ -17,7 +17,7 @@
       %br/
 .row
   .col-md-12
-    - if results.count(:all) > 0
+    - if results.count > 0
       .row
         - results.each do |result|
           .col-md-12
@@ -28,7 +28,7 @@
                 %span.lightOrange= result.author_name
                 %p.lead
                   = result.title
-                
+
               = render partial: 'detail_table', locals: { trial: result }
               .container.performance-measures-container
                 .row.performance-measures-row
@@ -44,6 +44,18 @@
                   = link_to download_paper_path(result.paper), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
                     %i.fa.fa-cloud-download
                     = p_space 'Download'
+
+      - if results.total_pages > 1
+        .row
+          .col-md-12.text-center
+            %ul.pagination
+              %li{class: ('disabled' unless results.previous_page)}
+                %a.pagination-link{href: '#', data: {page: results.previous_page}} &laquo;
+              - results.total_pages.times do |page|
+                %li{class: ('active' if results.current_page.to_i == page + 1)}
+                  %a.pagination-link{href: '#', data: {page: page + 1}}= page + 1
+              %li{class: ('disabled' unless results.next_page)}
+                %a.pagination-link{href: '#', data: {page: results.next_page}} &raquo;
 
     - else
       .alert.alert-warning
