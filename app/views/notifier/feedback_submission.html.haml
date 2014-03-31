@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", http: { equiv: "Content-Type" } }
+
+  %body
+    %h2 Amaferm Research BackOffice - Contact Us
+
+    %strong Name
+    %br/
+    %p= @feedback.user.full_name
+
+    %br/
+
+    %strong Email
+    %br/
+    %p= @feedback.user.email
+
+    %br/
+
+    %strong Phone
+    %br/
+    %p= @feedback.phone
+
+    %br/
+
+    %strong City/State
+    %br/
+    %p= @feedback.city_state
+
+    %br/
+
+    %strong Comments
+    %br/
+    %p= @feedback.comments

@@ -18,8 +18,10 @@
             , and the
             %br>/
             impact it can have on digestion, animal performance, energy and profitability.
+
     .row.hub-icons-wrapper.text-center
       .col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0
+        #flash.row
         .row
           .col-md-3.col-sm-6.text-center
             = link_to search_papers_path do
@@ -33,5 +35,5 @@
             = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
 
           .col-md-3.col-sm-6.text-center
-            = link_to 'http://forms.backofficeapps.com/contact_research.html', target: :blank do
+            = link_to new_feedback_path, remote: true do
               = image_tag 'connect-icon.png', class: 'img-responsive hub-icons last-icon'

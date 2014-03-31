@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: :about
   get 'welcome', to: 'pages#welcome', as: :welcome
 
+  resource :feedback, only: [:new, :create]
+
   resources :users, except: :show do
     member do
       post 'invite', to: 'invites#create', as: :invite

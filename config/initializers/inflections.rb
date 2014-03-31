@@ -11,6 +11,7 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'focus', 'focuses'
+  inflect.irregular 'feedback', 'feedback'
 end
 
 # These inflection rules are supported but not enabled by default:

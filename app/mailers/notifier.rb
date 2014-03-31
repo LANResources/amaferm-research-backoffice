@@ -21,4 +21,12 @@ class Notifier < ActionMailer::Base
           from: 'Amaferm Research <password-resets@amafermresearch.backofficeapps.com>',
           subject: "Password Reset"
   end
+
+  def feedback_submission(feedback)
+    @feedback = feedback
+
+    mail  to: 'ecarrillo@biozymeinc.com',
+          from: 'Amaferm Research <contact-us@amafermresearch.backofficeapps.com>',
+          subject: "Amaferm Research Center Contact Submission"
+  end
 end
