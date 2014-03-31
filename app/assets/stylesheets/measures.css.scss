@@ -11,19 +11,22 @@
     padding: 5px;
 
     &.pm-control {
-      background-color: darken($mainColor, 10%);
+      background-color: #7f7f7f;
+      h4 {
+        color: lighten(#7f7f7f, 40%);
+      }
     }
     &.pm-amaferm {
-      background-color: darken($mainColor, 20%);
+      background-color: #ff6600;
+      h4 {
+        color: lighten(#ff6600, 40%);
+      }
     }
     h1 {
       transition: all 1s;
       -webkit-transition: all 1s;
-      color: lighten($mainColor, 30%);
+      color: #FFFFFF;
       margin-top: 10px;
-    }
-    h4 {
-      color: lighten($mainColor, 40%);
     }
   }
 }
