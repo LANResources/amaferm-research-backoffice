@@ -1,21 +1,21 @@
 %tr
-  %td{style: 'width: 20%;'}
+  %td{style: 'width: 20%;', rowspan: 2}
     = a_space trial.title
     %a.btn-link.reference-popover{role: 'button', title: 'Reference', data: {content: trial.formatted_citation}}
       = "..."
-  %td.c= trial.author_name
-  %td.c= trial.year
-  %td.c= trial.literature_type
-  %td.c= trial.journal
-  %td.c= trial.expanded_species_list.gsub(', ', '<br/>').html_safe
-  %td.c= trial.cached_focus_list.join('<br/>').html_safe
-  %td.c= trial.dose
+  - if current_user >= :manager
+    %td.c{rowspan: 2}= trial.complete_source_id
+  %td.c{rowspan: 2}= trial.author_name
+  %td.c{rowspan: 2}= trial.year
+  %td.c{rowspan: (trial.journal ? 1 : 2)}= trial.literature_type
+  %td.c{rowspan: 2}= trial.expanded_species_list.gsub(', ', '<br/>').html_safe
+  %td.c{rowspan: 2}= trial.cached_focus_list.join('<br/>').html_safe
+  %td.c{rowspan: 2}= trial.dose
   %td.c= trial.forage
-  %td.c= trial.concentrate
-  %td.c
+  %td.c{rowspan: 2}
     %a.btn-link.summary-popover{role: 'button', title: 'Summary', data: {content: trial.summary}}
       %i.fa.fa-ellipsis-h.fa-lg.fa-border
-  %td.c
+  %td.c{rowspan: 2}
     .btn-group.btn-group-vertical<
       = link_to [trial.paper, trial], title: 'View', class: 'btn btn-xs btn-secondary' do
         %i.fa.fa-fw.fa-eye
@@ -25,3 +25,7 @@
       - if policy(trial).destroy?
         = link_to [trial.paper, trial], title: "Delete Trial", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
           %i.fa.fa-fw.fa-trash-o
+%tr
+  - if trial.journal
+    %td.c= trial.journal
+  %td.c= trial.concentrate

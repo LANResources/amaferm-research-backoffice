@@ -88,12 +88,12 @@ class TrialsController < ApplicationController
     def scope_trials
       redirect_to paper_path(params[:paper_id]) if params[:paper_id]
 
-      @trials = Trial.with_paper_and_author.filter(params.slice(:species, :focus, :author, :journal))
+      @trials = Trial.filter(params.slice(:species, :focus, :author, :journal), :with_paper_and_author)
       @trials = policy_scope @trials.order("#{sort_column} #{sort_direction}").order('year asc')
     end
 
     def sort_column
-      super(Trial.column_names + ['papers.title'], 'year')
+      super(Trial.column_names + ['papers.title', 'papers.journal'], 'year')
     end
 
     def sort_direction(default = 'desc')

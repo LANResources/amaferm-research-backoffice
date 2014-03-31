@@ -25,22 +25,25 @@
 .row
   .col-md-12
     .table-responsive
-      %table.table.table-condensed.table-bordered
+      %table.table.table-condensed.table-bordered#trials-table
         %thead
           - if @trials.any?
             %tr
-              %th{style: 'width: 20%;'}= sortable :title, 'Title'
-              %th.c Author
-              %th.c= sortable :year
+              %th{style: 'width: 20%;', rowspan: 2}= sortable 'papers.title', 'Title'
+              - if current_user >= :manager
+                %th.c{rowspan: 2}= sortable :paper_id, 'Source'
+              %th.c{rowspan: 2} Author
+              %th.c{rowspan: 2}= sortable :year
               %th.c= sortable :literature_type, 'Literature Type'
-              %th.c= sortable :journal, 'Peer Reviewed Journal'
-              %th.c Species
-              %th.c Focus
-              %th.c Dose
-              %th.c Forage %
-              %th.c Concentrate %
-              %th.c Summary
-              %th.c
+              %th.c{rowspan: 2} Species
+              %th.c{rowspan: 2} Focus
+              %th.c{rowspan: 2} Dose
+              %th.c Forage
+              %th.c{rowspan: 2} Summary
+              %th.c{rowspan: 2}
+            %tr
+              %th.c= sortable 'papers.journal', 'Journal'
+              %th.c Concentrate
 
         %tbody
           - if @trials.any?
