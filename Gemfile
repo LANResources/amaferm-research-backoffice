@@ -3,7 +3,7 @@ source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
 ruby '2.1.0'
 
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.1.0'
 
 # Database
 gem 'pg'
@@ -13,7 +13,7 @@ gem 'thin',    group: :development
 gem 'unicorn', group: :production
 
 # Asset Compilation
-gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
