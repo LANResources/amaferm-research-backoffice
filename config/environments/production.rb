@@ -61,7 +61,7 @@ Rails.application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w( ie6-8.css external.css simpliq/respond.js )
+  config.assets.precompile += %w( ie6-8.css external.css simpliq/respond.min.js )
   config.assets.precompile << Proc.new { |path|
     if path =~ /\.(eot|svg|ttf|woff)\z/
       true
