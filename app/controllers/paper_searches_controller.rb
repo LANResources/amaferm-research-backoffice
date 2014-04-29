@@ -1,16 +1,17 @@
 class PaperSearchesController < ApplicationController
   def search
-    @paper_search = if params[:paper_search]
-                      PaperSearch.new(params[:paper_search]).search
-                    else
-                      PaperSearch.new
-                    end
+    if params[:paper_search]
+      @paper_search = PaperSearch.new(params[:paper_search]).search
+      @results = policy_scope(@paper_search.results || Paper.none)
+      @result_count = @results.to_a.size
+      @results = @results.page(@paper_search.page).per_page(15)
+    else
+      @paper_search = PaperSearch.new
+    end
 
     respond_to do |format|
       format.html
-      format.js {
-        @results = policy_scope(@paper_search.results || Paper.none).page(@paper_search.page).per_page(15)
-      }
+      format.js
     end
   end
 end
