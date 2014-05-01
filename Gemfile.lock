@@ -171,7 +171,7 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    lr-simpliq (0.1.0)
+    lr-simpliq (0.1.1)
       coffee-rails
       rails (>= 3.1.0)
       sass (~> 3.2)
