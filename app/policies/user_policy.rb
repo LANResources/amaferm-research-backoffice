@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def new?
-    user >= :biozyme
+    user >= :basic_manager
   end
 
   def create?
@@ -30,7 +30,7 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:first_name, :last_name, :email, :password, :password_confirmation, :avatar]
-    attributes += [:role] if user >= :manager && user >= resource
+    attributes += [:role] if user >= :biozyme && user >= resource
     attributes
   end
 end

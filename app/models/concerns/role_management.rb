@@ -3,9 +3,9 @@ module RoleManagement
 
   included do
     STATUSES = %w[registered invited]
-    ROLES = [:basic, :biozyme, :manager, :admin]
+    ROLES = [:basic, :basic_manager, :biozyme, :manager, :admin]
 
-    enum role: ROLES
+    enum role: { basic: 0, biozyme: 1, manager: 2, admin: 3, basic_manager: 4 }
 
     validates :role, presence: true
   end
@@ -27,9 +27,11 @@ module RoleManagement
     when :admin
       ROLES
     when :manager
-      ROLES[0..2]
+      ROLES[0..3]
     when :biozyme
-      ROLES[0..1]
+      ROLES[0..2]
+    when :basic_manager
+      [ROLES[0]]
     else
       []
     end

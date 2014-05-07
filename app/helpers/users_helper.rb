@@ -14,6 +14,8 @@ module UsersHelper
         explanation = case role.to_s.titleize
                       when 'Basic'
                         'Can only view web and shared-level research papers.'
+                      when 'Basic Manager'
+                        'Can create/invite new basic users.'
                       when 'Biozyme'
                         ['Can create/invite new users.',
                           'Can view all research papers.'].join('<br/>')

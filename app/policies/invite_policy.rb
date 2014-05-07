@@ -1,6 +1,6 @@
 class InvitePolicy < ApplicationPolicy
   def create?
-    user >= :biozyme
+    user >= :basic_manager
   end
 
   def edit?
