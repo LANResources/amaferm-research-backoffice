@@ -23,40 +23,10 @@
               = select_tag :journal, options_for_select(Paper.cached_journals, params[:journal]), include_blank: true, class: 'form-control'
 
 .row
-  .col-md-12
-    .table-responsive
-      %table.table.table-condensed.table-bordered#trials-table
-        %thead
-          - if @trials.any?
-            %tr
-              %th{style: 'width: 20%;', rowspan: 2}= sortable 'papers.title', 'Title'
-              - if current_user >= :manager
-                %th.c{rowspan: 2}= sortable :paper_id, 'Source'
-              %th.c{rowspan: 2} Author
-              %th.c{rowspan: 2}= sortable :year
-              %th.c= sortable :literature_type, 'Literature Type'
-              %th.c{rowspan: 2} Species
-              %th.c{rowspan: 2} Focus
-              %th.c{rowspan: 2} Dose
-              %th.c Forage
-              %th.c{rowspan: 2} Summary
-              %th.c{rowspan: 2}
-            %tr
-              %th.c= sortable 'papers.journal', 'Journal'
-              %th.c Concentrate
-
-        %tbody
-          - if @trials.any?
-            = render @trials
-          - else
-            %tr.warning
-              %td.c{colspan: 9}
-                %br/
-                There are no trials that match the current filters.
-                %br/
-                %br/
-
-      = will_paginate @trials
+  .col-md-12#trials-container{data: {url: trials_path(params.slice(:species, :focus, :author, :journal, :sort, :direction))}}
+    %h2.text-center.text-info
+      %i.fa.fa-spinner.fa-spin
+      = p_space 'Loading'
 
 %br/
 

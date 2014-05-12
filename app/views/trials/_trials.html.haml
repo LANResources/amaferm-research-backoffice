@@ -1,0 +1,33 @@
+.table-responsive
+  %table.table.table-condensed.table-bordered#trials-table
+    %thead
+      - if trials.any?
+        %tr
+          %th{style: 'width: 20%;', rowspan: 2}= sortable 'papers.title', 'Title'
+          - if current_user >= :manager
+            %th.c{rowspan: 2}= sortable :paper_id, 'Source'
+          %th.c{rowspan: 2} Author
+          %th.c{rowspan: 2}= sortable :year
+          %th.c= sortable :literature_type, 'Literature Type'
+          %th.c{rowspan: 2} Species
+          %th.c{rowspan: 2} Focus
+          %th.c{rowspan: 2} Dose
+          %th.c Forage
+          %th.c{rowspan: 2} Summary
+          %th.c{rowspan: 2}
+        %tr
+          %th.c= sortable 'papers.journal', 'Journal'
+          %th.c Concentrate
+
+    %tbody
+      - if trials.any?
+        = render trials
+      - else
+        %tr.warning
+          %td.c{colspan: 9}
+            %br/
+            There are no trials that match the current filters.
+            %br/
+            %br/
+
+  = will_paginate trials

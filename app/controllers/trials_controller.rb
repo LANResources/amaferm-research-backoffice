@@ -1,12 +1,20 @@
 class TrialsController < ApplicationController
   before_action :set_paper, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_trial, only: [:show, :edit, :update, :destroy]
-  before_action :scope_trials, only: :index
 
   def index
     respond_to do |format|
-      format.html { @trials = @trials.page(params[:page]).per_page(15) }
-      format.xls { headers["Content-Disposition"] = "attachment; filename=\"Amaferm Research Table.xls\"" }
+      format.html {
+        redirect_to paper_path(params[:paper_id]) if params[:paper_id]
+      }
+      format.js { 
+        scope_trials
+        @trials = @trials.page(params[:page]).per_page(15) 
+      }
+      format.xls { 
+        scope_trials
+        headers["Content-Disposition"] = "attachment; filename=\"Amaferm Research Table.xls\"" 
+      }
     end
   end
 
@@ -86,8 +94,6 @@ class TrialsController < ApplicationController
     end
 
     def scope_trials
-      redirect_to paper_path(params[:paper_id]) if params[:paper_id]
-
       @trials = Trial.filter(params.slice(:species, :focus, :author, :journal), :with_paper_and_author)
       @trials = policy_scope @trials.order("#{sort_column} #{sort_direction}").order('year asc')
     end

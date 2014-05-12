@@ -4,12 +4,20 @@ $ ->
 
 initPage = ->
   if pageIs 'trials', 'index'
+    fetchTrials()
     initTrialFilter()
     initSummaryPopovers()
     initReferencePopovers()
 
   if pageIs 'trials', ['new', 'edit', 'create', 'update']
     initTrialForm()
+
+fetchTrials = ->
+  $container = $('#trials-container')
+  url = $container.data 'url'
+  $.getScript url, ->
+    initSummaryPopovers()
+    initReferencePopovers()
 
 initTrialFilter = ->
   $(document.body).on 'change', '#trial_filter select', ->
