@@ -13,6 +13,11 @@
       = link_to request.fullpath, class: 'text-muted' do
         %i.fa.fa-link
         = p_space 'permalink'
+      - if result_count > 0 && policy(Trial).create?
+        %br/
+        = link_to search_papers_path(paper_search: params[:paper_search], format: :xls), class: 'text-muted' do
+          %i.fa.fa-floppy-o
+          = p_space "export"
       %br/
       %br/
 .row
