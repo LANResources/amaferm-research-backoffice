@@ -23,7 +23,7 @@
               = select_tag :journal, options_for_select(Paper.cached_journals, params[:journal]), include_blank: true, class: 'form-control'
 
 .row
-  .col-md-12#trials-container{data: {url: trials_path(params.slice(:species, :focus, :author, :journal, :sort, :direction))}}
+  .col-md-12#trials-container{data: {url: trials_path(params.slice(:species, :focus, :author, :journal, :sort, :direction, :page))}}
     %h2.text-center.text-info
       %i.fa.fa-spinner.fa-spin
       = p_space 'Loading'
