@@ -54,9 +54,9 @@ class Trial < ActiveRecord::Base
 
   scope :with_paper_and_author, -> { joins(paper: :author) }
   scope :for_species,     -> (species) { tagged_with(species, on: :species) }
-  scope :for_any_species, -> (species) { tagged_with(species, on: :species, any: true) }
+  scope :for_any_species, -> (species) { tagged_with(species, on: :species, any: 'distinct') }
   scope :for_focus,       -> (focus)   { tagged_with(focus, on: :focus) }
-  scope :for_any_focus,   -> (focus)   { tagged_with(focus, on: :focus, any: true) }
+  scope :for_any_focus,   -> (focus)   { tagged_with(focus, on: :focus, any: 'distinct') }
   scope :for_author,      -> (author)  { where authors: { id: author } }
   scope :for_journal,     -> (journal) { where papers: { journal: journal } }
 
