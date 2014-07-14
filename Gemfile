@@ -53,7 +53,7 @@ gem 'mini_magick'
 gem 'letter_opener', group: :development
 
 # Tagging
-gem 'acts-as-taggable-on', git: 'https://github.com/LANResources/acts-as-taggable-on.git', branch: 'distinct-fix'
+gem 'acts-as-taggable-on'
 
 # Encryption
 gem 'bcrypt-ruby', '~> 3.1.2'
