@@ -3,7 +3,7 @@ source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
 ruby '2.1.0'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.4'
 
 # Database
 gem 'pg'
