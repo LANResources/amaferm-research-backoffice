@@ -48,6 +48,8 @@ gem 'redcarpet'
 gem 'carrierwave'
 gem 'carrierwave-dropbox', '~> 1.1.0'
 gem 'mini_magick'
+# gem 'rmagick'
+# gem 'rghost'
 
 # Mail
 gem 'letter_opener', group: :development

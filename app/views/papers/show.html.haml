@@ -8,7 +8,7 @@
   .col-md-12
     = render partial: 'papers/detail_table', locals: { paper: @paper }
 
-- @paper.trials.order(:source_sub_id).each do |trial|
+- policy_scope(@paper.trials).order(:source_sub_id).each do |trial|
   = render partial: 'papers/trial_box_row', locals: { trial: trial, spotlight: @trial || nil }
 
 .row

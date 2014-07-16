@@ -6,7 +6,7 @@ module SessionsHelper
 
   def sign_out
     session[:user_id] = nil
-    current_user = nil
+    current_user = GuestUser.new
   end
 
   def current_user=(user)
@@ -14,11 +14,11 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= session[:user_id] ? User.find(session[:user_id]) : GuestUser.new
   end
 
   def signed_in?
-    !current_user.nil?
+    !(current_user.nil? || current_user.guest?)
   end
 
   def deny_access
@@ -26,7 +26,7 @@ module SessionsHelper
     if signed_in?
       redirect_to root_url, notice: 'You are not authorized to view that page.'
     else
-      redirect_to login_path, notice: 'Please sign in to access this site.'
+      redirect_to login_path, notice: 'Please sign in to access this page.'
     end
   end
 

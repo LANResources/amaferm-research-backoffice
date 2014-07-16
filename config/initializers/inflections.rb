@@ -11,7 +11,7 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'focus', 'focuses'
-  inflect.irregular 'feedback', 'feedback'
+  inflect.uncountable %w(feedback literature)
 end
 
 # These inflection rules are supported but not enabled by default:

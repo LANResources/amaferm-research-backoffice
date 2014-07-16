@@ -1,0 +1,27 @@
+= form_for @sales_aid, html: { class: 'form-horizontal', multipart: true } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @sales_aid }
+
+  %fieldset
+    .form-group
+      = f.label :title, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.label :category, 'Literature Type', class: 'control-label col-sm-2'
+      .col-sm-6
+        = f.collection_select :category, SalesAid::CATEGORIES, :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :access_level, class: 'control-label col-sm-2'
+      .col-sm-6
+        = f.collection_select :access_level, SalesAid.access_levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :document, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.file_field :document
+
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = f.submit 'Save', class: 'btn btn-primary'

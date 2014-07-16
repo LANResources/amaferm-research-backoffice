@@ -2,10 +2,12 @@ module RoleManagement
   extend ActiveSupport::Concern
 
   included do
-    STATUSES = %w[registered invited]
-    ROLES = [:basic, :basic_manager, :biozyme, :manager, :admin]
+    STATUSES ||= %w[registered invited]
+    ROLES ||= [:guest, :public_sales, :basic, :basic_manager, :biozyme, :manager, :admin]
 
-    enum role: { basic: 0, biozyme: 1, manager: 2, admin: 3, basic_manager: 4 }
+    if respond_to? :enum
+      enum role: { basic: 0, biozyme: 1, manager: 2, admin: 3, basic_manager: 4, public_sales: 5 }
+    end
 
     validates :role, presence: true
   end
@@ -22,16 +24,20 @@ module RoleManagement
     status == 'registered'
   end
 
+  def guest?
+    role == 'guest'
+  end
+
   def assignable_roles
     case self.role.to_sym
     when :admin
-      ROLES
+      ROLES[1..6]
     when :manager
-      ROLES[0..3]
+      ROLES[1..5]
     when :biozyme
-      ROLES[0..2]
+      ROLES[1..4]
     when :basic_manager
-      [ROLES[0]]
+      ROLES[1..2]
     else
       []
     end
@@ -67,6 +73,6 @@ module RoleManagement
 
   private
     def comparable?(obj)
-      obj.kind_of?(self.class) || obj.try(:to_sym).in?(ROLES)
+      obj.class.ancestors.include?(RoleManagement) || obj.try(:to_sym).in?(ROLES)
     end
 end

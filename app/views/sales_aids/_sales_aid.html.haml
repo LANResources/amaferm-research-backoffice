@@ -1,0 +1,16 @@
+.col-lg-3.col-md-4
+  .media
+    = link_to download_sales_aid_path(sales_aid), class: 'pull-left', data: { 'no-turbolink' => true } do
+      = file_type_icon sales_aid
+    .media-body
+      %h2.media-heading= sales_aid.title
+      = link_to download_sales_aid_path(sales_aid), class: 'btn btn-success btn-xs', data: { 'no-turbolink' => true } do
+        %i.fa.fa-cloud-download
+        = p_space 'Download'
+      .btn-group<
+        - if policy(sales_aid).edit?
+          = link_to edit_sales_aid_path(sales_aid), title: "Edit Sales Aid", class: "btn btn-xs btn-warning" do
+            %i.fa.fa-fw.fa-pencil
+        - if policy(sales_aid).destroy?
+          = link_to sales_aid, title: "Delete Sales Aid", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+            %i.fa.fa-fw.fa-trash-o

@@ -1,0 +1,34 @@
+- title 'Learn More'
+
+%br/
+
+- if @sales_aids.any?
+  - @sales_aids.each do |category, sales_aids|
+    .row
+      .col-md-12
+        .panel.panel-primary
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-files-o
+              = p_space category.pluralize.titleize
+
+          .panel-body
+            .row
+              - sales_aids.each do |sales_aid|
+                = render sales_aid
+                
+- else
+  .row
+    .col-md-12
+      .alert.alert-info
+        There are no documents available yet. Come back soon!
+
+%br/
+
+- if policy(SalesAid).create?
+  .row
+    .col-md-12
+      = link_to new_sales_aid_path, class: 'btn btn-primary' do
+        %i.fa.fa-plus
+        = p_space "Upload New Sales Aid"
+

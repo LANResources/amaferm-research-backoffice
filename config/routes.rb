@@ -24,11 +24,16 @@ Rails.application.routes.draw do
   resources :trials, only: :index
   resources :measures, only: [:new, :create, :edit, :update, :destroy], as: :performance_measures
 
+  resources :sales_aids, except: :show do
+    get 'download', on: :member, as: :download
+  end
+  get 'learn-more', to: 'sales_aids#index', as: :learn_more
+
   resources :sessions, only: [:new, :create, :destroy]
   resource :password_reset, only: [:new, :create, :edit, :update]
 
   get 'login', to: 'sessions#new', as: :login
   delete 'logout', to: 'sessions#destroy', as: :logout
 
-  root to: 'trials#index'
+  root to: 'pages#welcome'
 end

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  before_filter :verify_authenticated
+  #before_filter :verify_authenticated
 
   private
 

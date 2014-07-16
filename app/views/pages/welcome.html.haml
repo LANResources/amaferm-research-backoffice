@@ -21,7 +21,12 @@
 
     .row.hub-icons-wrapper.text-center
       .col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0
-        #flash.row
+        - flash.each do |name, msg|
+          .row
+            .col-md-12
+              = render_flash name, msg
+        .row
+          #flash.col-md-12
         .row
           .col-md-3.col-sm-6.text-center
             = link_to search_papers_path do
@@ -31,9 +36,15 @@
             = link_to papers_path do
               = image_tag 'literature-icon.png', class: 'img-responsive hub-icons'
 
+          / .col-md-3.col-sm-6.text-center
+          /   = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
+
           .col-md-3.col-sm-6.text-center
-            = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
+            = link_to learn_more_path do
+              = image_tag 'support-materials-icon.png', class: 'img-responsive hub-icons'
 
           .col-md-3.col-sm-6.text-center
             = link_to new_feedback_path, remote: true do
               = image_tag 'connect-icon.png', class: 'img-responsive hub-icons last-icon'
+
+          

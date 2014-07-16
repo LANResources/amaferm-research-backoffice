@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(20)
+    authorize! User
+    @users = policy_scope(User.order("#{sort_column} #{sort_direction}")).page(params[:page]).per_page(20)
   end
 
   def new

@@ -54,6 +54,22 @@ ActiveRecord::Schema.define(version: 20140714174958) do
 
   add_index "performance_measures", ["trial_id"], name: "index_performance_measures_on_trial_id", using: :btree
 
+  create_table "sales_aids", force: true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.string   "category"
+    t.integer  "access_level",          default: 0
+    t.string   "document"
+    t.string   "document_size"
+    t.string   "document_content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sales_aids", ["access_level"], name: "index_sales_aids_on_access_level", using: :btree
+  add_index "sales_aids", ["category"], name: "index_sales_aids_on_category", using: :btree
+  add_index "sales_aids", ["user_id"], name: "index_sales_aids_on_user_id", using: :btree
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"

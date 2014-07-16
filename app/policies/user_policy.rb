@@ -1,11 +1,20 @@
 class UserPolicy < ApplicationPolicy
+  self::Scope = Struct.new(:user, :scope) do
+    def resolve
+      if user.guest?
+        scope.none
+      else
+        scope
+      end
+    end
+  end
 
   def index?
-    true
+    !user.guest?
   end
 
   def show?
-    true
+    !user.guest?
   end
 
   def new?

@@ -14,7 +14,7 @@ class PaperPolicy < ApplicationPolicy
   end
   
   def show?
-    true
+    resource.trials.all.map{|t| TrialPolicy.new(user, t).show? || nil }.compact.any?
   end
 
   def download?

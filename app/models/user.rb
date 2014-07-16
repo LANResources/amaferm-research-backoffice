@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+  has_many :sales_aids
   has_secure_password validations: false
   mount_uploader :avatar, AvatarUploader
 

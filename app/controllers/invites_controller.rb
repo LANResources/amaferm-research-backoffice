@@ -1,5 +1,4 @@
 class InvitesController < ApplicationController
-  skip_before_filter :verify_authenticated, only: [:edit, :update]
   before_filter :verify_invitation, only: [:edit, :update]
   before_filter :authenticate_registration, only: :update
   layout 'registration', only: [:edit, :update]
@@ -42,7 +41,7 @@ class InvitesController < ApplicationController
     raise unless @user.id == params[:id].try(:to_i)
   rescue
     flash[:error] = "The invitation link you're attempting to use is not valid."
-    redirect_to login_path
+    redirect_to root_url
   end
 
   def authenticate_registration

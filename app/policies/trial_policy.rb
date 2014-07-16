@@ -3,8 +3,10 @@ class TrialPolicy < ApplicationPolicy
     def resolve
       if user >= :biozyme
         scope #.all
+      elsif user >= :basic
+        scope.where level: [Trial.levels[:web], Trial.levels[:shared]]
       else
-        scope.where(level: [Trial.levels[:web], Trial.levels[:shared]])
+        scope.where level: Trial.levels[:web]
       end
     end
   end
@@ -18,7 +20,14 @@ class TrialPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    level = resource.level.to_sym
+    if user >= :biozyme
+      true
+    elsif user >= :basic
+      level.in? [:web, :shared]
+    else
+      level == :web
+    end
   end
 
   def download?
