@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
   def invitation(to: nil, from: nil)
     @user = to
     @inviter = from
-    @register_url = rsvp_user_url(@user.id, ERB::Util.url_encode(@user.invite_token))
+    @register_url = rsvp_user_url(@user.id, @user.invite_token)
 
     mail  to: @user.email,
           from: 'Amaferm Research <invitations@amafermresearch.backofficeapps.com>',
