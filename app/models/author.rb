@@ -9,7 +9,7 @@ class Author < ActiveRecord::Base
   after_commit :flush_cache
 
   def self.find_or_create_from(name)
-    where('last_name ILIKE ?', name).first || create(last_name: name.try(:capitalize))
+    where('last_name ILIKE ?', name).first || create(last_name: name.sub(/^(\w)/){|s| s.capitalize})
   end
 
   def self.cached_names
