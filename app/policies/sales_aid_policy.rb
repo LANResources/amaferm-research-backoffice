@@ -39,6 +39,17 @@ class SalesAidPolicy < ApplicationPolicy
     new?
   end
 
+  def download?
+    level = resource.access_level.to_sym
+    if user >= :biozyme
+      true
+    elsif user >= :public_sales
+      level.in? [:guest, :public_sales]
+    else
+      level == :guest
+    end
+  end
+
   def permitted_attributes
     [:title, :user_id, :category, :access_level, :document]
   end
