@@ -1,0 +1,33 @@
+Amaferm Research BackOffice
+= "===================================="
+
+Access Request
+
+Name:
+
+= @access_request.full_name
+
+Title:
+
+= @access_request.title
+
+Company:
+
+= @access_request.company
+
+Email:
+
+= @access_request.email
+
+Phone:
+
+= @access_request.phone
+
+Occupation:
+
+= @access_request.occupation
+
+Species:
+
+- @access_request.species.each do |species|
+  = species

@@ -1,0 +1,49 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", http: { equiv: "Content-Type" } }
+
+  %body
+    %h2 Amaferm Research BackOffice - Access Request
+
+    %strong Name
+    %br/
+    %p= @access_request.full_name
+
+    %br/
+
+    %strong Title
+    %br/
+    %p= @access_request.title
+
+    %br/
+
+    %strong Company
+    %br/
+    %p= @access_request.company
+
+    %br/
+
+    %strong Email
+    %br/
+    %p= @access_request.email
+
+    %br/
+
+    %strong Phone
+    %br/
+    %p= @access_request.phone
+
+    %br/
+
+    %strong Occupation
+    %br/
+    %p= @access_request.occupation
+
+    %br/
+
+    %strong Species
+    %br/
+    %ul
+      - @access_request.species.each do |species|
+        %li= species

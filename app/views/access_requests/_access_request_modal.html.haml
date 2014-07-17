@@ -1,0 +1,60 @@
+.modal.fade{id: "access-request-modal", role: 'dialog', aria: {labelledby: "access-request-modal-label", hidden: 'true'}}
+  .modal-dialog
+    .modal-content
+      = form_for @access_request, remote: true do |f|
+        .modal-header
+          %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {hidden: 'true'}} &times;
+          %h4.modal-title{id: "access-request-modal-label"} Request Site Access
+
+        .modal-body
+          .form-errors
+
+          .form-group
+            .row
+              .col-md-6
+                = f.label :first_name, 'First Name*', class: 'control-label'
+                = f.text_field :first_name, class: 'form-control input-sm'
+              .col-md-6
+                = f.label :last_name, 'Last Name*', class: 'control-label'
+                = f.text_field :last_name, class: 'form-control input-sm'
+
+
+          .form-group
+            = f.label :title, 'Title*', class: 'control-label'
+            = f.text_field :title, class: 'form-control input-sm'
+
+          .form-group
+            = f.label :company, class: 'control-label'
+            = f.text_field :company, class: 'form-control input-sm'
+
+          .form-group
+            .row
+              .col-md-6
+                = f.label :email, 'Email*', class: 'control-label'
+                = f.text_field :email, class: 'form-control input-sm'
+
+              .col-md-6
+                = f.label :phone, 'Phone*', class: 'control-label'
+                = f.text_field :phone, class: 'form-control input-sm'
+
+          .form-group
+            .row
+              .col-md-3
+                = f.label :occupation, 'Occupation*', class: 'control-label'
+              .col-md-9
+                = f.collection_select :occupation, AccessRequest::OCCUPATIONS, :to_s, :humanize, {include_blank: true}, class: 'form-control input-sm'
+
+          .form-group
+            .row
+              .col-md-6
+                = f.label :species, 'Species you work with*', class: 'control-label'
+                %span.help-block= '(check all that apply)'
+              .col-md-6
+                - AccessRequest::SPECIES.each do |species|
+                  %label.checkbox
+                    = check_box_tag 'access_request[species][]', species, @access_request.species.include?(species)
+                    = p_space species
+
+        .modal-footer
+          %button.btn.btn-default{type: 'button', data: {dismiss: 'modal'}} Close
+          = f.submit 'Send', class: 'btn btn-primary'

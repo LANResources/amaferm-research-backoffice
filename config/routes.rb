@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'welcome', to: 'pages#welcome', as: :welcome
 
   resource :feedback, only: [:new, :create]
+  resources :access_requests, only: [:new, :create]
 
   resources :users, except: :show do
     member do

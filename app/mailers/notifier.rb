@@ -29,4 +29,12 @@ class Notifier < ActionMailer::Base
           from: 'Amaferm Research <contact-us@amafermresearch.backofficeapps.com>',
           subject: "Amaferm Research Center Contact Submission"
   end
+
+  def access_request_submission(access_request)
+    @access_request = access_request
+
+    mail  to: 'ecarrillo@biozymeinc.com',
+          from: 'Amaferm Research <access-requests@amafermresearch.backofficeapps.com>',
+          subject: "Amaferm Research Center Access Request"
+  end
 end
