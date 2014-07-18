@@ -1,12 +1,12 @@
 module SessionsHelper
   def sign_in(user)
     session[:user_id] = user.id
-    current_user = user
+    self.current_user = user
   end
 
   def sign_out
     session[:user_id] = nil
-    current_user = GuestUser.new
+    self.current_user = GuestUser.new
   end
 
   def current_user=(user)
