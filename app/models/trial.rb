@@ -1,6 +1,7 @@
 class Trial < ActiveRecord::Base
   belongs_to :paper
   has_many :performance_measures, dependent: :destroy
+  has_many :paper_summaries, dependent: :destroy
 
   include Filterable
 
@@ -42,6 +43,15 @@ class Trial < ActiveRecord::Base
 
   def self.cached_calculations
     Rails.cache.fetch([name, 'calculations']){ pluck(:calculations).flatten.uniq.sort }
+  end
+
+  def self.cached_all_for_select
+    Rails.cache.fetch [self, 'all-for-select'] do
+      Struct.new 'TrialForSelect', :id, :display
+      includes(:paper).order(:paper_id, :source_sub_id).to_a.map do |t|
+        Struct::TrialForSelect.new t.id, [t.complete_source_id, t.paper.title.truncate(80, separator: ' ')].join(' - ')
+      end
+    end
   end
 
   def cached_species_list
@@ -88,6 +98,7 @@ class Trial < ActiveRecord::Base
     Rails.cache.delete([self.class.name, 'species'])
     Rails.cache.delete([self.class.name, 'focuses'])
     Rails.cache.delete([self.class.name, 'calculations'])
+    Rails.cache.delete([self.class.name, 'all-for-select'])
     Rails.cache.delete([self, 'species-list'])
     Rails.cache.delete([self, 'focus-list'])
   end

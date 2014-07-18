@@ -8,6 +8,6 @@ module SalesAidsHelper
       else 'fa-file'
       end
 
-    content_tag :i, nil, class: "media-object fa fa-4x #{icon} fa-4x"
+    content_tag :i, nil, class: "media-object burntOrange fa fa-3x #{icon}"
   end
 end

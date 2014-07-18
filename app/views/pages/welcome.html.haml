@@ -37,7 +37,8 @@
               = image_tag 'literature-icon.png', class: 'img-responsive hub-icons'
 
           .col-lg-2.col-md-4.col-sm-4.col-xs-6.text-center
-            = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
+            = link_to featured_research_path do
+              = image_tag 'research-icon.png', class: 'img-responsive hub-icons'
 
           .col-lg-2.col-md-4.col-sm-4.col-xs-6.text-center
             = link_to learn_more_path do

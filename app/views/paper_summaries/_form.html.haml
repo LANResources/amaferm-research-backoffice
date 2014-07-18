@@ -1,0 +1,38 @@
+= form_for @paper_summary, html: { class: 'form-horizontal', multipart: true } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @paper_summary }
+
+  %fieldset
+    .form-group
+      = f.label :title, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.label :description, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :description, rows: 6, class: 'form-control'
+
+    .form-group
+      = f.label :trial_id, 'Trial', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :trial_id, Trial.cached_all_for_select, :id, :display, {}, class: 'form-control'
+
+    .form-group
+      = f.label :species, 'Species', class: 'control-label col-sm-2'
+      .col-sm-6
+        = f.collection_select :species, PaperSummary::SPECIES, :to_s, :to_s, {}, class: 'form-control'
+
+    .form-group
+      = f.label :featured, 'Featured?', class: 'control-label col-sm-2'
+      .col-sm-6
+        .checkbox
+          = f.check_box :featured, {}, 1, 0
+
+    .form-group
+      = f.label :document, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.file_field :document
+
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = f.submit 'Save', class: 'btn btn-primary'

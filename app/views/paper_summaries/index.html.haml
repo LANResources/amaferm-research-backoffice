@@ -1,0 +1,36 @@
+- title 'Featured Research', false
+
+
+%h1
+  %i.fa.fa-star.lightOrange
+  = p_space "Featured Research"
+
+
+- if @paper_summaries.any?
+  %span#accordion
+    - @paper_summaries.each do |species, summaries|
+      %a{href: "#species-#{species.dasherize}", data: {toggle: "collapse", parent: "#accordion"}}
+        %h3.species-header
+          = species
+
+      .panel-collapse.collapse.in{id: "species-#{species.dasherize}"}
+        - summaries.in_groups_of(2).each do |summary_group|
+          .row
+            - summary_group.compact.each do |summary|
+              = render summary
+             
+- else
+  .row
+    .col-md-12
+      .alert.alert-info
+        There are no featured research documents available yet. Come back soon!
+
+%br/
+
+- if policy(PaperSummary).create?
+  .row
+    .col-md-12
+      = link_to new_paper_summary_path, class: 'btn btn-primary' do
+        %i.fa.fa-plus
+        = p_space "Upload New Summary"
+

@@ -1,0 +1,20 @@
+.col-md-6
+  .media.featured-research-box
+    = link_to download_paper_summary_path(paper_summary), class: 'pull-left', data: { 'no-turbolink' => true } do
+      = file_type_icon paper_summary
+    .media-body
+      %h3.media-heading= paper_summary.title
+      %p.text-muted
+        %i.paper-summary-description= paper_summary.description
+
+      = link_to download_paper_summary_path(paper_summary), class: 'btn btn-warning btn-download btn-xs', data: { 'no-turbolink' => true } do
+        %i.fa.fa-cloud-download
+        = p_space 'Download'
+
+      .btn-group<
+        - if policy(paper_summary).edit?
+          = link_to edit_paper_summary_path(paper_summary), title: "Edit Summary", class: "btn btn-xs btn-warning" do
+            %i.fa.fa-fw.fa-pencil
+        - if policy(paper_summary).destroy?
+          = link_to paper_summary, title: "Delete Summary", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+            %i.fa.fa-fw.fa-trash-o

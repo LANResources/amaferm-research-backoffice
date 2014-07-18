@@ -1,0 +1,39 @@
+.species-header {
+  border-left: 3px solid $darkBlue;
+  color: $darkBlue;
+  font-size: 24px;
+  padding: 15px 20px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0, #DCE6F0),
+    color-stop(1, rgba(255,255,255,0.0))
+  );
+  background-image: -o-linear-gradient(right, #DCE6F0 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -moz-linear-gradient(right, #DCE6F0 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -webkit-linear-gradient(right, #DCE6F0 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -ms-linear-gradient(right, #DCE6F0 50%, rgba(255,255,255,0.0) 100%);
+  background-image: linear-gradient(to right, #DCE6F0 50%, rgba(255,255,255,0.0) 100%);
+}
+.featured-research-box {
+  background-color: #FFF3DF;
+  border: 2px solid darken(#FFF3DF, 40%);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  .media-heading {
+    color: darken(#FFF3DF, 60%);
+    line-height: 1.5em;
+  }
+  .paper-summary-description {
+    font-size: 12px;
+    color: #915a3b;
+  }
+  .btn-download {
+    background-color: $burntOrange;
+    &:hover {
+      background-color: $lightOrange;
+    }
+  }
+}

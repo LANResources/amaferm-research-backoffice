@@ -57,6 +57,9 @@ gem 'letter_opener', group: :development
 # Tagging
 gem 'acts-as-taggable-on'
 
+# Ordering
+gem 'acts_as_list'
+
 # Encryption
 gem 'bcrypt-ruby', '~> 3.1.2'
 

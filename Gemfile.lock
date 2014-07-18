@@ -48,6 +48,8 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.3.0)
       activerecord (>= 3, < 5)
+    acts_as_list (0.4.0)
+      activerecord (>= 3.0)
     addressable (2.3.5)
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
@@ -316,6 +318,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  acts_as_list
   awesome_print
   bcrypt-ruby (~> 3.1.2)
   best_in_place!
