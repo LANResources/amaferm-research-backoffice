@@ -1,0 +1,56 @@
+- title 'Latest Research Management'
+
+- breadcrumbs ['Paper Summaries', latest_research_path], 'Manage'
+
+%br/
+
+.row
+  .col-md-12
+    %table.table.table-condensed.table-striped
+      %thead
+        %tr
+          %td.max-half Title
+          %td.c Description
+          %td.c Trial
+          %td.c Level
+          %td.c Species
+          %td.c Position
+          %td.c Featured?
+          %td 
+
+      %tbody
+        - if @paper_summaries.any?
+          - @paper_summaries.each do |paper_summary|
+            %tr{data: {update_url: paper_summary_path(paper_summary), species: paper_summary.species, position: paper_summary.position}}
+              %td.max-half= paper_summary.title
+              %td.c
+                %a.btn-link.description-popover{role: 'button', title: 'Description', data: {content: paper_summary.description}}
+                  %i.fa.fa-ellipsis-h.fa-lg.fa-border
+              %td.c= paper_summary.trial.complete_source_id
+              %td.c= paper_summary.trial.display_level
+              %td.c= paper_summary.species
+              %td.c.position= paper_summary.position
+              %td.c
+                %i.fa{class: (paper_summary.featured ? 'fa-check text-success' : 'fa-times text-danger')}
+              %td.c
+                .btn-group<
+                  - if policy(paper_summary).edit?
+                    %a.btn.btn-xs.btn-info.inc-position-btn{title: 'Move Up', data: {'no-turbolink' => true}}
+                      %i.fa.fa-fw.fa-chevron-up
+
+                    %a.btn.btn-xs.btn-info.dec-position-btn{title: 'Move Down', data: {'no-turbolink' => true}}
+                      %i.fa.fa-fw.fa-chevron-down
+
+                    = link_to edit_paper_summary_path(paper_summary), title: "Edit Summary", class: "btn btn-xs btn-warning" do
+                      %i.fa.fa-fw.fa-pencil
+                  - if policy(paper_summary).destroy?
+                    = link_to paper_summary, title: "Delete Summary", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+                      %i.fa.fa-fw.fa-trash-o
+
+%br/
+
+.row
+  .col-md-12
+    = link_to new_paper_summary_path, class: 'btn btn-primary' do
+      %i.fa.fa-plus
+      = p_space "Upload New Summary"

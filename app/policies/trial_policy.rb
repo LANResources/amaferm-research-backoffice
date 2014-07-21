@@ -58,6 +58,10 @@ class TrialPolicy < ApplicationPolicy
     update?
   end
 
+  def show_level?
+    user >= :biozyme
+  end
+  
   def permitted_attributes
     [
       :source_sub_id, :level, :year, :summary, :dose, :species_list,

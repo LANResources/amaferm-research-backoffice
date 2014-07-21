@@ -24,8 +24,11 @@ Rails.application.routes.draw do
 
   resources :paper_summaries do
     get 'download', on: :member, as: :download
+    collection do
+      get 'manage', to: 'paper_summaries#manage', as: :manage
+    end
   end
-  get 'featured', to: 'paper_summaries#index', as: :featured_research
+  get 'latest', to: 'paper_summaries#index', as: :latest_research
 
   resources :trials, only: :index
   resources :measures, only: [:new, :create, :edit, :update, :destroy], as: :performance_measures

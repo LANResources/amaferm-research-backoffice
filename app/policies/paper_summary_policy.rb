@@ -28,6 +28,10 @@ class PaperSummaryPolicy < ApplicationPolicy
     new?
   end
 
+  def manage?
+    new?
+  end
+  
   def download?
     # Pundit.policy(user, resource.trial).download?
     user >= :biozyme

@@ -91,6 +91,10 @@ class Trial < ActiveRecord::Base
     cached_species_list.to_s.gsub(/ruminant/i, 'Beef, Dairy, Sheep, Goat')
   end
 
+  def display_level
+    level.sub('web', 'public').titleize.sub('Biozyme', 'BioZyme')
+  end
+
   private
 
   def flush_cache

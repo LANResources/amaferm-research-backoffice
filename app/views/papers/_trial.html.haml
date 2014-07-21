@@ -1,6 +1,11 @@
 %table.table.table-condensed.table-no-top-border.detail-table
   %thead
   %tbody
+    - if policy(Trial).show_level?
+      %tr
+        %th Level
+        %td= trial.display_level
+
     %tr
       %th Year
       %td= trial.year

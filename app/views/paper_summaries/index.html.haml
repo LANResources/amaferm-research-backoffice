@@ -1,9 +1,9 @@
-- title 'Featured Research', false
+- title 'Latest Research', false
 
 
 %h1
   %i.fa.fa-star.lightOrange
-  = p_space "Featured Research"
+  = p_space "Latest Research"
 
 
 - if @paper_summaries.any?
@@ -27,10 +27,16 @@
 
 %br/
 
-- if policy(PaperSummary).create?
+- if policy(PaperSummary).create? || policy(PaperSummary).manage?
   .row
     .col-md-12
-      = link_to new_paper_summary_path, class: 'btn btn-primary' do
-        %i.fa.fa-plus
-        = p_space "Upload New Summary"
+      - if policy(PaperSummary).manage?
+        = link_to manage_paper_summaries_path, class: 'btn btn-primary' do
+          %i.fa.fa-cogs
+          = p_space "Manage"
+      &nbsp;
+      - if policy(PaperSummary).create?
+        = link_to new_paper_summary_path, class: 'btn btn-primary' do
+          %i.fa.fa-plus
+          = p_space "Upload New Summary"
 

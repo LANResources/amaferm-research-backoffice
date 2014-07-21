@@ -2,7 +2,7 @@ class PaperSummariesController < ApplicationController
   before_action :set_paper_summary, only: [:edit, :update, :destroy, :download]
 
   def index
-    @paper_summaries = PaperSummary.where(trial: policy_scope(Trial).pluck(:id)).featured.all.group_by(&:species)
+    @paper_summaries = PaperSummary.where(trial: policy_scope(Trial).pluck(:id)).featured.order(:species, :position).all.group_by(&:species)
   end
 
   def new
@@ -18,23 +18,40 @@ class PaperSummariesController < ApplicationController
     authorize! @paper_summary
 
     if @paper_summary.save
-      redirect_to featured_research_path, notice: 'Paper summary was successfully created.'
+      redirect_to latest_research_path, notice: 'Paper summary was successfully created.'
     else
       render action: 'new'
     end
   end
 
   def update
-    if @paper_summary.update(paper_summary_attributes)
-      redirect_to featured_research_path, notice: 'Paper summary was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      format.html {
+        if @paper_summary.update(paper_summary_attributes)
+          redirect_to latest_research_path, notice: 'Paper summary was successfully updated.'
+        else
+          render action: 'edit'
+        end
+      }
+      format.json {
+        new_position = params[:reposition].try(:to_i)
+        if new_position && @paper_summary.insert_at(new_position)
+          render json: @paper_summary, status: :created, location: @paper_summary
+        else
+          render json: @paper_summary.errors, status: :unprocessable_entity
+        end
+      }
     end
   end
 
   def destroy
     @paper_summary.destroy
-    redirect_to featured_research_url
+    redirect_to :back
+  end
+
+  def manage
+    @paper_summaries = PaperSummary.includes(trial: :paper).order(:species, :position)
+    authorize! @paper_summaries  
   end
 
   def download
