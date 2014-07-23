@@ -13,9 +13,10 @@
               = p_space category.pluralize.titleize
 
           .panel-body
-            .row
-              - sales_aids.each do |sales_aid|
-                = render sales_aid
+            - sales_aids.in_groups_of(3).each do |grouped_sales_aids|
+              .row.sales-aid-row
+                - grouped_sales_aids.compact.each do |sales_aid|
+                  = render sales_aid
                 
 - else
   .row
