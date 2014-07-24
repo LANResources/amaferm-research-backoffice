@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :trials, only: :index
   resources :measures, only: [:new, :create, :edit, :update, :destroy], as: :performance_measures
 
-  resources :sales_aids, except: :show do
+  resources :sales_aids do
     get 'download', on: :member, as: :download
     collection do
       get 'manage', to: 'sales_aids#manage', as: :manage

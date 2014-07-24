@@ -1,16 +1,17 @@
-.col-md-4
-  .media.sales-aid
-    = link_to download_sales_aid_path(sales_aid), class: 'pull-left', data: { 'no-turbolink' => true } do
-      = file_type_icon sales_aid
-    .media-body
-      %h2.media-heading= sales_aid.title
-      = link_to download_sales_aid_path(sales_aid), class: 'btn btn-success btn-xs', data: { 'no-turbolink' => true } do
-        %i.fa.fa-cloud-download
-        = p_space 'Download'
-      .btn-group<
-        - if policy(sales_aid).edit?
-          = link_to edit_sales_aid_path(sales_aid), title: "Edit Sales Aid", class: "btn btn-xs btn-warning" do
-            %i.fa.fa-fw.fa-pencil
-        - if policy(sales_aid).destroy?
-          = link_to sales_aid, title: "Delete Sales Aid", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
-            %i.fa.fa-fw.fa-trash-o
+- if sales_aid.video?
+  .col-md-3.col-sm-6
+    = link_to sales_aid, remote: true, class: 'thumbnail sales-aid-thumbnail' do
+      = image_tag sales_aid.large_thumbnail_url, class: 'img-responsive'
+      .caption
+        %h2= sales_aid.title
+
+- else
+  .col-md-4
+    .media.sales-aid
+      = link_to download_sales_aid_path(sales_aid), class: 'pull-left', data: { 'no-turbolink' => true } do
+        = file_type_icon sales_aid
+      .media-body
+        %h2.media-heading= sales_aid.title
+        = link_to download_sales_aid_path(sales_aid), class: 'btn btn-info btn-xs', data: { 'no-turbolink' => true } do
+          %i.fa.fa-cloud-download
+          = p_space 'Download'

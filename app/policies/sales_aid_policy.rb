@@ -55,6 +55,6 @@ class SalesAidPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:title, :user_id, :category, :access_level, :document, :position]
+    [:title, :user_id, :category, :access_level, :document, :position, :video_id]
   end
 end

@@ -10,17 +10,24 @@
     .form-group
       = f.label :category, 'Literature Type', class: 'control-label col-sm-2'
       .col-sm-6
-        = f.collection_select :category, SalesAid::CATEGORIES, :to_s, :humanize, {}, class: 'form-control'
+        = f.collection_select :category, SalesAid::CATEGORIES, :to_s, :humanize, {}, class: 'form-control category-select'
 
     .form-group
       = f.label :access_level, class: 'control-label col-sm-2'
       .col-sm-6
         = f.collection_select :access_level, SalesAid.access_levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
 
-    .form-group
+    .form-group.document-type
       = f.label :document, class: 'control-label col-sm-2'
       .col-sm-10
         = f.file_field :document
+
+    .form-group.video-type
+      = f.label :video_id, 'YouTube ID', class: 'control-label col-sm-2'
+      .col-sm-10
+        .input-group
+          %span.input-group-addon= 'http://youtube.com/watch?v='
+          = f.text_field :video_id, class: 'form-control'
 
     .form-group
       .col-sm-10.col-sm-offset-2

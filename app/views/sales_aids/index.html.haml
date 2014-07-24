@@ -9,11 +9,11 @@
         .panel.panel-primary
           .panel-heading
             %h3.panel-title
-              %i.fa.fa-files-o
+              = sales_aid_category_icon category
               = p_space category.pluralize.titleize
 
           .panel-body
-            - sales_aids.in_groups_of(3).each do |grouped_sales_aids|
+            - sales_aids.in_groups_of(category == 'video' ? 4 : 3).each do |grouped_sales_aids|
               .row.sales-aid-row
                 - grouped_sales_aids.compact.each do |sales_aid|
                   = render sales_aid

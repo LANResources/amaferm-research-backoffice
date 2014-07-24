@@ -8,6 +8,7 @@ $pink: #e84c8a;
 $orange: #fa603d;
 $lightOrange: #fabb3d;
 $burntOrange: #da5f2f;
+$amafermOrange: #f57939;
 $red: #ff5454;
 $darkRed: #C9402E;
 $yellow: #eae874;
@@ -36,6 +37,7 @@ a.navbar-brand span {
 .orange { color: $orange; }
 .lightOrange { color: $lightOrange; }
 .burntOrange { color: $burntOrange; }
+.amafermOrange { color: $amafermOrange; }
 .red { color: $red; }
 .darkRed { color: $darkRed; }
 .yellow { color: $yellow; }
@@ -54,6 +56,7 @@ a.navbar-brand span {
   &.orange { background: $orange; }
   &.lightOrange { background: $lightOrange; }
   &.burntOrange { background: $burntOrange; }
+  &.amafermOrange { background: $amafermOrange; }
   &.red { background: $red; }
   &.darkRed { background: $darkRed; }
   &.yellow { background: $yellow; }
@@ -88,6 +91,7 @@ a.navbar-brand span {
   &.orange { @include boxColor($orange); }
   &.lightOrange { @include boxColor($lightOrange); }
   &.burntOrange { @include boxColor($burntOrange); }
+  &.amafermOrange { @include boxColor($amafermOrange); }
   &.red { @include boxColor($red); }
   &.darkRed { @include boxColor($darkRed); }
   &.yellow { @include boxColor($yellow); }
@@ -128,6 +132,9 @@ a.navbar-brand span {
   &.burntOrange {
     .title { background: $burntOrange; }
   }
+  &.amafermOrange {
+    .title { background: $amafermOrange; }
+  }
   &.red {
     .title { background: $red; }
   }
@@ -143,5 +150,4 @@ a.navbar-brand span {
   &.grey {
     .title { background: $grey; }
   }
-
 }

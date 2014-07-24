@@ -1,8 +1,18 @@
 class SalesAidsController < ApplicationController
-  before_action :set_sales_aid, only: [:edit, :update, :destroy, :download]
+  before_action :set_sales_aid, only: [:show, :edit, :update, :destroy, :download]
 
   def index
     @sales_aids = SalesAid.order(:category, :position).all.group_by(&:category)
+  end
+
+  def show
+    respond_to do |format|
+      format.js {
+        unless @sales_aid.video?
+          render :nothing
+        end
+      }
+    end
   end
 
   def new

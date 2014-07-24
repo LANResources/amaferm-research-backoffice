@@ -1,3 +1,34 @@
 .media.sales-aid {
   padding-bottom: 20px;
 }
+.thumbnail.sales-aid-thumbnail {
+  background-color: lighten($lightBlue, 20%);
+  img {
+    width: 100%;
+  }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: darken($lightBlue, 40%);
+  }
+}
+#sales-aid-video-modal {
+  .modal-content {
+    background-color: $lightGrey;
+    .modal-header {
+      background-color: $amafermOrange;
+      color: white;
+    }
+    .close {
+      color: white;
+    }
+    .modal-body {
+      &.video {
+        padding: 0px;
+      }
+      .alert {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

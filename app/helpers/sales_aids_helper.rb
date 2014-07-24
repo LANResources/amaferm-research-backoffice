@@ -10,4 +10,14 @@ module SalesAidsHelper
 
     content_tag :i, nil, class: "media-object burntOrange fa fa-3x #{icon}"
   end
+
+  def sales_aid_category_icon(category)
+    icon = case category.to_sym
+      when :calculator then 'fa-sliders'
+      when :video then 'fa-youtube-play'
+      else 'fa-files-o'
+      end
+      
+    content_tag :i, nil, class: "fa #{icon}"
+  end
 end

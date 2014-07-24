@@ -67,6 +67,9 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'memcachier'
 gem 'dalli'
 
+# Videos
+gem 'youtube_it', git: 'https://github.com/kylejginavan/youtube_it.git'
+
 # Heroku
 gem 'rails_12factor', group: :production
 
