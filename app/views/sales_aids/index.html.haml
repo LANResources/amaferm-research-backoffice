@@ -26,10 +26,15 @@
 
 %br/
 
-- if policy(SalesAid).create?
+- if policy(SalesAid).create? || policy(SalesAid).manage?
   .row
     .col-md-12
-      = link_to new_sales_aid_path, class: 'btn btn-primary' do
-        %i.fa.fa-plus
-        = p_space "Upload New Sales Aid"
-
+      - if policy(SalesAid).manage?
+        = link_to manage_sales_aids_path, class: 'btn btn-primary' do
+          %i.fa.fa-cogs
+          = p_space "Manage"
+      &nbsp;
+      - if policy(SalesAid).create?
+        = link_to new_sales_aid_path, class: 'btn btn-primary' do
+          %i.fa.fa-plus
+          = p_space "Upload New Sales Aid"

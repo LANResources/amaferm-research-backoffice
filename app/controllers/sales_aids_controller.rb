@@ -2,7 +2,7 @@ class SalesAidsController < ApplicationController
   before_action :set_sales_aid, only: [:edit, :update, :destroy, :download]
 
   def index
-    @sales_aids = SalesAid.all.group_by(&:category)
+    @sales_aids = SalesAid.order(:category, :position).all.group_by(&:category)
   end
 
   def new
@@ -25,16 +25,33 @@ class SalesAidsController < ApplicationController
   end
 
   def update
-    if @sales_aid.update(sales_aid_attributes)
-      redirect_to learn_more_path, notice: 'Sales aid was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      format.html {
+        if @sales_aid.update(sales_aid_attributes)
+          redirect_to learn_more_path, notice: 'Sales Aid was successfully updated.'
+        else
+          render action: 'edit'
+        end
+      }
+      format.json {
+        new_position = params[:reposition].try(:to_i)
+        if new_position && @sales_aid.insert_at(new_position)
+          render json: @sales_aid, status: :created, location: @sales_aid
+        else
+          render json: @sales_aid.errors, status: :unprocessable_entity
+        end
+      }
     end
   end
 
   def destroy
     @sales_aid.destroy
     redirect_to learn_more_url
+  end
+
+  def manage
+    @sales_aids = SalesAid.order(:category, :position)
+    authorize! @sales_aids  
   end
 
   def download

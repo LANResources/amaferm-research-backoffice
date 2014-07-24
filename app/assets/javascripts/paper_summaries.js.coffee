@@ -5,6 +5,8 @@ $ ->
 initPage = ->
   if pageIs 'paper_summaries', 'manage'
     initDescriptionPopovers()
+
+  if pageIs('paper_summaries', 'manage') or pageIs('sales_aids', 'manage')
     initPositionButtons()
 
 initDescriptionPopovers = ->
@@ -25,9 +27,14 @@ incrementPosition = (e) ->
     url = $row.data 'update-url'
     newPosition = currentPosition - 1
     $swapRow = $row.prev 'tr'
-    $row.insertBefore $swapRow
-    $row.data('position', newPosition).find('.position').text(newPosition)
-    $swapRow.data('position', currentPosition).find('.position').text(currentPosition)
+    $row.addClass 'success'
+    $row.fadeOut 500, ->
+      $row.data('position', newPosition).find('.position').text(newPosition)
+      $swapRow.data('position', currentPosition).find('.position').text(currentPosition)
+      $row.insertBefore($swapRow).fadeIn 500, ->
+        setTimeout (->
+          $row.removeClass 'success'
+        ), 1000
 
     data = "reposition=" + newPosition
     $.ajax
@@ -40,16 +47,21 @@ decrementPosition = (e) ->
   e.preventDefault()
   $row = $(this).parents('tr').first()
   currentPosition = $row.data 'position'
-  species = $row.data 'species'
-  $speciesRows = $('tr[data-species="' + species + '"]')
-  unless currentPosition is $speciesRows.size()
+  groups = $row.data 'group'
+  $groupedRows = $('tr[data-group="' + groups + '"]')
+  unless currentPosition is $groupedRows.size()
     url = $row.data 'update-url'
     newPosition = currentPosition + 1
     $swapRow = $row.next 'tr'
-    $row.insertAfter $swapRow
-    $row.data('position', newPosition).find('.position').text(newPosition)
-    $swapRow.data('position', currentPosition).find('.position').text(currentPosition)
-
+    $row.addClass 'success'
+    $row.fadeOut 500, ->
+      $row.data('position', newPosition).find('.position').text(newPosition)
+      $swapRow.data('position', currentPosition).find('.position').text(currentPosition)
+      $row.insertAfter($swapRow).fadeIn 500, ->
+        setTimeout (->
+          $row.removeClass 'success'
+        ), 1000
+    
     data = "reposition=" + newPosition
     $.ajax
       type: "PUT"

@@ -35,6 +35,9 @@ Rails.application.routes.draw do
 
   resources :sales_aids, except: :show do
     get 'download', on: :member, as: :download
+    collection do
+      get 'manage', to: 'sales_aids#manage', as: :manage
+    end
   end
   get 'learn-more', to: 'sales_aids#index', as: :learn_more
 

@@ -6,7 +6,8 @@ class SalesAid < ActiveRecord::Base
   
   enum access_level: ACCESS_LEVELS
   mount_uploader :document, SalesAidUploader
-
+  acts_as_list scope: [:category]
+  
   validates :title,        presence: true
   validates :category,     presence: true, 
                            inclusion: { in: CATEGORIES }

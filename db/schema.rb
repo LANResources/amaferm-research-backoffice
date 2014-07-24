@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717212124) do
+ActiveRecord::Schema.define(version: 20140724033530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140717212124) do
     t.string   "document_content_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   add_index "sales_aids", ["access_level"], name: "index_sales_aids_on_access_level", using: :btree

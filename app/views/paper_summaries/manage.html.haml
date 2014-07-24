@@ -6,7 +6,7 @@
 
 .row
   .col-md-12
-    %table.table.table-condensed.table-striped
+    %table.table.table-condensed.table-striped.repositionable-table
       %thead
         %tr
           %td.max-half Title
@@ -21,7 +21,7 @@
       %tbody
         - if @paper_summaries.any?
           - @paper_summaries.each do |paper_summary|
-            %tr{data: {update_url: paper_summary_path(paper_summary), species: paper_summary.species, position: paper_summary.position}}
+            %tr{data: {update_url: paper_summary_path(paper_summary), group: paper_summary.species, position: paper_summary.position}}
               %td.max-half= paper_summary.title
               %td.c
                 %a.btn-link.description-popover{role: 'button', title: 'Description', data: {content: paper_summary.description}}

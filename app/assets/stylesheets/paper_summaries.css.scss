@@ -1,6 +1,12 @@
 td.max-half, th.max-half {
   width: 50%;
 }
+.repositionable-table {
+  tr td {
+    transition: background-color 1s;
+    -webkit-transition: background-color 1s;
+  }
+}
 .species-header {
   border-left: 3px solid $darkBlue;
   color: $darkBlue;

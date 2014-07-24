@@ -1,0 +1,47 @@
+- title 'Sales Aid Management'
+
+- breadcrumbs ['Learn More', learn_more_path], 'Manage'
+
+%br/
+
+.row
+  .col-md-12
+    %table.table.table-condensed.table-striped.repositionable-table
+      %thead
+        %tr
+          %td.max-half Title
+          %td.c Category
+          %td.c Position
+          %td.c Access Level
+          %td 
+
+      %tbody
+        - if @sales_aids.any?
+          - @sales_aids.each do |sales_aid|
+            %tr{data: {update_url: sales_aid_path(sales_aid), group: sales_aid.category, position: sales_aid.position}}
+              %td.max-half= sales_aid.title
+              %td.c= sales_aid.category.titleize
+              %td.c.position= sales_aid.position
+              %td.c= sales_aid.access_level.titleize
+              %td.c
+                .btn-group<
+                  - if policy(sales_aid).edit?
+                    %a.btn.btn-xs.btn-info.inc-position-btn{title: 'Move Up', data: {'no-turbolink' => true}}
+                      %i.fa.fa-fw.fa-chevron-up
+
+                    %a.btn.btn-xs.btn-info.dec-position-btn{title: 'Move Down', data: {'no-turbolink' => true}}
+                      %i.fa.fa-fw.fa-chevron-down
+
+                    = link_to edit_sales_aid_path(sales_aid), title: "Edit Sales Aid", class: "btn btn-xs btn-warning" do
+                      %i.fa.fa-fw.fa-pencil
+                  - if policy(sales_aid).destroy?
+                    = link_to sales_aid, title: "Delete Sales Aid", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+                      %i.fa.fa-fw.fa-trash-o
+
+%br/
+
+.row
+  .col-md-12
+    = link_to new_sales_aid_path, class: 'btn btn-primary' do
+      %i.fa.fa-plus
+      = p_space "Upload New Sales Aid"
