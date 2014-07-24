@@ -33,8 +33,7 @@ class PaperSummaryPolicy < ApplicationPolicy
   end
   
   def download?
-    # Pundit.policy(user, resource.trial).download?
-    user >= :biozyme
+    Pundit.policy(user, resource.trial).download?
   end
 
   def permitted_attributes
