@@ -20,7 +20,7 @@
           - @sales_aids.each do |sales_aid|
             %tr{data: {update_url: sales_aid_path(sales_aid), group: sales_aid.category, position: sales_aid.position}}
               %td.max-half= sales_aid.title
-              %td.c= sales_aid.category.titleize
+              %td.c= sales_aid_category sales_aid.category
               %td.c.position= sales_aid.position
               %td.c= sales_aid.access_level.titleize
               %td.c

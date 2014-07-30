@@ -20,4 +20,9 @@ module SalesAidsHelper
       
     content_tag :i, nil, class: "fa #{icon}"
   end
+
+  def sales_aid_category(category, options = {})
+    display = options.fetch(:plural, false) ? category.pluralize : category 
+    display.titleize.sub 'Newsletter', 'eNewsletter'
+  end
 end

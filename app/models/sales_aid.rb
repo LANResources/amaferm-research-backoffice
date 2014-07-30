@@ -1,7 +1,7 @@
 class SalesAid < ActiveRecord::Base
   belongs_to :user
 
-  CATEGORIES = %w[presentation literature calculator video]
+  CATEGORIES = %w[presentation literature calculator newsletter video]
   ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2}
   
   enum access_level: ACCESS_LEVELS

@@ -10,7 +10,7 @@
           .panel-heading
             %h3.panel-title
               = sales_aid_category_icon category
-              = p_space category.pluralize.titleize
+              = p_space sales_aid_category(category, plural: true)
 
           .panel-body
             - sales_aids.in_groups_of(category == 'video' ? 4 : 3).each do |grouped_sales_aids|
