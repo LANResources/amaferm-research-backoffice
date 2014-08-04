@@ -80,7 +80,7 @@ class SupplementalsController < ApplicationController
   end
 
   def scope_supplementals
-    @supplementals = Supplemental.with_paper_and_author
+    @supplementals = Supplemental.with_paper_and_author.uniq
     @supplementals = policy_scope @supplementals.order("#{sort_column} #{sort_direction}").order('paper_id asc, source_sub_id asc')
     @supplementals = @supplementals.page(params[:page]).per_page(15)
   end
