@@ -37,7 +37,7 @@
     .form-group
       = f.label :literature_type, 'Literature Type', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :humanize, {}, class: 'form-control'
+        = f.collection_select :literature_type, Supplemental::LITERATURE_TYPES, :to_s, :to_s, {}, class: 'form-control'
 
     .form-group
       = f.label :year, class: 'control-label col-sm-2'

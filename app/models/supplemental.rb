@@ -8,6 +8,11 @@ class Supplemental < ActiveRecord::Base
   mount_uploader :document, DocumentUploader
   
   attr_accessor :author_name
+  LITERATURE_TYPES = Paper::LITERATURE_TYPES + [
+    'Correction',
+    'Data',
+    'Internal Review'
+  ]
 
   # Validations
   validates :source_sub_id, presence: true,
@@ -18,7 +23,7 @@ class Supplemental < ActiveRecord::Base
   validates :title,     presence: true
   validates :author_id, presence: true
   validates :citation,  presence: true
-  validates :literature_type, inclusion: { in: Paper::LITERATURE_TYPES }
+  validates :literature_type, inclusion: { in: LITERATURE_TYPES }
 
   # Callbacks
   after_initialize :set_default_source_sub_id
