@@ -1,0 +1,64 @@
+- title 'Supplemental Document Management'
+
+%br/
+
+.row
+  .col-md-12
+    .table-responsive
+      %table.table.table-condensed.table-bordered
+        %thead
+          - if @supplementals.any?
+            %tr
+              %th{style: 'width: 20%;'}= sortable :title
+              %th.c= sortable :paper_id, 'Source'
+              %th.c Author
+              %th.c= sortable :year
+              %th.c= sortable :literature_type, 'Literature Type'
+              %th.c Level
+              %th.c Summary
+              %th.c
+
+        %tbody
+          - if @supplementals.any?
+            - @supplementals.each do |supplemental|
+              %tr
+                %td{style: 'width: 20%;'}
+                  = a_space supplemental.title
+                  %a.btn-link.reference-popover{role: 'button', title: 'Reference', data: {content: supplemental.formatted_citation}}
+                    = "..."
+                %td.c= supplemental.complete_source_id
+                %td.c= supplemental.author_name
+                %td.c= supplemental.year
+                %td.c= supplemental.literature_type
+                %td.c= supplemental.level.titleize
+                %td.c
+                  %a.btn-link.summary-popover{role: 'button', title: 'Summary', data: {content: supplemental.summary}}
+                    %i.fa.fa-ellipsis-h.fa-lg.fa-border
+                %td.c
+                  .btn-group.btn-group-vertical<
+                    = link_to supplemental, title: 'View', class: 'btn btn-xs btn-secondary' do
+                      %i.fa.fa-fw.fa-eye
+                    - if policy(supplemental).edit?
+                      = link_to edit_supplemental_path(supplemental), title: "Edit Supplemental", class: "btn btn-xs btn-warning" do
+                        %i.fa.fa-fw.fa-pencil
+                    - if policy(supplemental).destroy?
+                      = link_to supplemental, title: "Delete Supplemental", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+                        %i.fa.fa-fw.fa-trash-o
+          - else
+            %tr.warning
+              %td.c{colspan: 8}
+                %br/
+                There are no supplemental documents yet.
+                %br/
+                %br/
+
+      .text-center
+        = will_paginate @supplementals
+
+%br/
+
+.row
+  .col-md-12
+    = link_to new_supplemental_path, class: 'btn btn-primary' do
+      %i.fa.fa-plus
+      = p_space "Upload New Supplemental"

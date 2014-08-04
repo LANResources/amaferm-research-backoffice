@@ -1,0 +1,13 @@
+- title "Edit Supplemental Document"
+
+- breadcrumbs ['Supplemental Management', supplementals_path], [@supplemental.complete_source_id, supplemental_path(@supplemental)], 'Edit'
+
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h2
+          %i.fa.fa-file-text
+          = @supplemental.complete_source_id
+      .box-content
+        = render 'form'

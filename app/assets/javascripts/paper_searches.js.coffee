@@ -5,8 +5,10 @@ $ ->
 initPage = ->
   if pageIs 'paper_searches'
     initPaperSearchForm()
-    initDetailsToggle()
     initResultsPaginator()
+
+  if pageIs(['paper_searches', 'papers', 'trials'])
+    initDetailsToggle()
 
 initPaperSearchForm = ->
   $('.reset-search').hide()

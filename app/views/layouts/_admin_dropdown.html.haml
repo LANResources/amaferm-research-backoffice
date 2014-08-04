@@ -1,0 +1,25 @@
+- if current_user >= :manager
+  %li{class: "dropdown #{phone ? 'visible' : 'hidden'}-xs"}
+    %a.btn.dropdown-toggle{data: {toggle: 'dropdown'}, href: "#"}
+      %i.fa.fa-cogs
+    %ul.dropdown-menu
+      %li
+        %span.dropdown-menu-title Manage
+      
+      - if policy(SalesAid).manage?
+        %li
+          = link_to manage_sales_aids_path do
+            %i.fa.fa-cog
+            = p_space 'Sales Aids'
+
+      - if policy(PaperSummary).manage?
+        %li
+          = link_to manage_paper_summaries_path do
+            %i.fa.fa-cog
+            = p_space 'Latest Research'
+
+      - if policy(Supplemental).manage?
+        %li
+          = link_to supplementals_path do
+            %i.fa.fa-cog
+            = p_space 'Supplementals'

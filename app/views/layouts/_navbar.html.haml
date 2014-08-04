@@ -16,6 +16,8 @@
     .nav-no-collapse.header-nav
       %ul.nav.navbar-nav.pull-right
         - if signed_in?
+          = render partial: 'layouts/admin_dropdown', locals: { phone: false }
+
           %li.dropdown
             %a.btn.account.dropdown-toggle{data: {toggle: "dropdown"}, href: "#"}
               .avatar= image_tag(current_user.avatar.url(:tiny))
@@ -32,6 +34,8 @@
                 = link_to logout_path, method: :delete do
                   %i.fa.fa-off
                   Logout
+
+          = render partial: 'layouts/admin_dropdown', locals: { phone: true }
         - else
           %li
             = link_to login_path, class: 'btn' do

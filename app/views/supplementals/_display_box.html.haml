@@ -1,0 +1,53 @@
+- supplementals.each do |supplemental|
+  .row.supplemental
+    .col-md-12
+      .panel.panel-info.result-panel
+        .panel-body
+          %span.label.label-outline.label-warning= supplemental.complete_source_id
+          &nbsp;
+          %span.lightOrange= supplemental.author_name
+          %p.lead
+            = supplemental.title
+
+        %table.table.table-condensed.table-no-top-border.detail-table
+          %thead
+          %tbody
+            %tr
+              %th Lead Author
+              %td= supplemental.author_name
+
+            %tr
+              %th Reference
+              %td= supplemental.formatted_citation.html_safe
+
+            %tr
+              %th Literature Type
+              %td= supplemental.literature_type
+
+            %tr
+              %th Year
+              %td= supplemental.year
+
+            %tr
+              %th Summary
+              %td= supplemental.summary
+
+        .panel-footer
+          %a{class: 'btn-link details-toggle'}
+            %i.fa.fa-plus-square-o
+            = p_space 'Details'
+
+          .pull-right
+            .btn-group
+              - if policy(supplemental).download?
+                = link_to download_supplemental_path(supplemental), title: 'Download', class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
+                  %i.fa.fa-fw.fa-cloud-download
+                  = p_space 'Download'
+
+              - if policy(supplemental).edit?
+                = link_to edit_paper_supplemental_path(paper, supplemental.id), title: "Edit Supplemental", class: "btn btn-xs btn-warning" do
+                  %i.fa.fa-fw.fa-pencil
+                  
+              - if policy(supplemental).destroy?
+                = link_to paper_supplemental_path(paper, supplemental.id), title: "Delete Supplemental", class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
+                  %i.fa.fa-fw.fa-trash-o

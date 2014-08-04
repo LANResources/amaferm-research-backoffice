@@ -1,0 +1,67 @@
+= form_for @supplemental, html: { class: 'form-horizontal', multipart: true } do |f|
+  = render partial: 'shared/form_errors', locals: { resource: @supplemental }
+
+  = hidden_field_tag :source, @source
+
+  %fieldset
+    .form-group
+      = f.label :paper_id, 'Paper', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :paper_id, Paper.cached_all_for_select, :id, :display, {}, class: 'form-control'
+
+    .form-group
+      = f.label :source_sub_id, 'Source #', class: 'control-label col-sm-2'
+      .col-sm-2
+        .input-group
+          %span.input-group-addon
+            %span.paper-id-addon
+            = "."
+          = f.text_field :source_sub_id, class: 'form-control'
+
+    .form-group
+      = f.label :title, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.label :author_name, 'Author', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :author_name, class: 'form-control autocomplete', data: { authors: Author.cached_names }
+
+    .form-group
+      = f.label :citation, 'Reference', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :citation, class: 'form-control'
+        %span.help-block To italicize text, surround it with asterisks (*).
+
+    .form-group
+      = f.label :literature_type, 'Literature Type', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :year, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :year, class: 'form-control'
+
+    .form-group
+      = f.label :summary, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :summary, class: 'form-control'
+
+    .form-group
+      = f.label :level, class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :level, Supplemental.levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+
+    .form-group
+      = f.label :document, class: 'control-label col-sm-2'
+      .col-md-10
+        = f.file_field :document
+
+  %fieldset
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit class: 'btn btn-primary'
+        = f.submit 'Create and Add Another', class: 'btn btn-primary' if @supplemental.new_record?
+        = link_to 'Cancel', @source, class: 'btn btn-inverse'

@@ -20,8 +20,13 @@ Rails.application.routes.draw do
       get 'search', to: 'paper_searches#search', as: :search
     end
     resources :trials
+    resources :supplementals, except: [:index, :show], id: /[A-Za-z0-9\.]+?/, format: /html|js|json/
   end
 
+  resources :supplementals, except: :show, id: /[A-Za-z0-9\.]+?/, format: /html|js|json/ do
+    get 'download', on: :member, as: :download
+  end
+  
   resources :paper_summaries do
     get 'download', on: :member, as: :download
     collection do

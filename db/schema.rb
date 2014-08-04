@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724065610) do
+ActiveRecord::Schema.define(version: 20140724143653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,26 @@ ActiveRecord::Schema.define(version: 20140724065610) do
   add_index "sales_aids", ["access_level"], name: "index_sales_aids_on_access_level", using: :btree
   add_index "sales_aids", ["category"], name: "index_sales_aids_on_category", using: :btree
   add_index "sales_aids", ["user_id"], name: "index_sales_aids_on_user_id", using: :btree
+
+  create_table "supplementals", force: true do |t|
+    t.integer  "paper_id"
+    t.integer  "source_sub_id"
+    t.string   "title"
+    t.integer  "year"
+    t.integer  "author_id"
+    t.text     "citation"
+    t.string   "literature_type"
+    t.text     "summary"
+    t.integer  "level",                 default: 0
+    t.string   "document"
+    t.string   "document_size"
+    t.string   "document_content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "supplementals", ["author_id"], name: "index_supplementals_on_author_id", using: :btree
+  add_index "supplementals", ["paper_id"], name: "index_supplementals_on_paper_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
