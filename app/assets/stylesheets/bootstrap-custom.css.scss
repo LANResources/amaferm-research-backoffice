@@ -135,3 +135,8 @@ blockquote.pull-right {
     border: 1px solid #d9534f;
   }
 }
+
+// Add space between adjacent buttons
+.btn-row .btn {
+  margin-right: 4px;
+}

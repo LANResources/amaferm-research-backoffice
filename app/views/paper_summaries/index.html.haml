@@ -29,12 +29,11 @@
 
 - if policy(PaperSummary).create? || policy(PaperSummary).manage?
   .row
-    .col-md-12
+    .col-md-12.btn-row
       - if policy(PaperSummary).manage?
         = link_to manage_paper_summaries_path, class: 'btn btn-primary' do
           %i.fa.fa-cogs
           = p_space "Manage"
-      &nbsp;
       - if policy(PaperSummary).create?
         = link_to new_paper_summary_path, class: 'btn btn-primary' do
           %i.fa.fa-plus

@@ -16,7 +16,7 @@
   = render partial: 'supplementals/display_box', locals: { paper: @paper, supplementals: supplementals }
 
 .row
-  .col-md-12
+  .col-md-12.btn-row
     = link_to download_paper_path(@paper), title: "Download", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
       %i.fa.fa-cloud-download
       = p_space 'Download'
