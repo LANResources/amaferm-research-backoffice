@@ -1,17 +1,13 @@
 class FeedbackController < ApplicationController
   def new
-    respond_to do |format|
-      format.js
-    end
+    respond_with_js
   end
 
   def create
-    feedback = Feedback.new params[:feedback]
-    feedback.user = current_user
-    Notifier.feedback_submission(feedback).deliver
-
-    respond_to do |format|
-      format.js
+    respond_with_js do
+      feedback = Feedback.new params[:feedback]
+      feedback.user = current_user
+      Notifier.feedback_submission(feedback).deliver
     end
   end
 end

@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  #before_filter :verify_authenticated
-
   private
 
   def verify_authenticated
@@ -19,6 +17,13 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:error] = "You are not authorized to perform this action."
     deny_access
+  end
+
+  def respond_with_js(&block)
+    respond_to do |format|
+      format.html { render nothing: true }
+      format.js { yield if block_given? }
+    end
   end
 
   def sort_column(columns, default)
