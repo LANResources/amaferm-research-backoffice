@@ -5,6 +5,13 @@
       .caption
         %h2= sales_aid.title
 
+- elsif sales_aid.external_link?
+  .col-md-3.col-sm-6
+    = link_to sales_aid.link, target: :_blank, class: 'quick-button' do
+      %i.fa.fa-calculator.burntOrange
+      %p= sales_aid.title
+    %br.hidden-xs/
+
 - else
   .col-md-4
     .media.sales-aid

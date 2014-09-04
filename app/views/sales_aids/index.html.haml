@@ -13,11 +13,11 @@
               = p_space sales_aid_category(category, plural: true)
 
           .panel-body
-            - sales_aids.in_groups_of(category == 'video' ? 4 : 3).each do |grouped_sales_aids|
+            - sales_aids.in_groups_of(category.in?(%w[video calculator]) ? 4 : 3).each do |grouped_sales_aids|
               .row.sales-aid-row
                 - grouped_sales_aids.compact.each do |sales_aid|
                   = render sales_aid
-                
+
 - else
   .row
     .col-md-12
@@ -33,7 +33,7 @@
         = link_to manage_sales_aids_path, class: 'btn btn-primary' do
           %i.fa.fa-cogs
           = p_space "Manage"
-      
+
       - if policy(SalesAid).create?
         = link_to new_sales_aid_path, class: 'btn btn-primary' do
           %i.fa.fa-plus

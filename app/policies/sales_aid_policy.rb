@@ -42,7 +42,7 @@ class SalesAidPolicy < ApplicationPolicy
   def manage?
     new?
   end
-  
+
   def download?
     level = resource.access_level.to_sym
     if user >= :biozyme
@@ -55,6 +55,6 @@ class SalesAidPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:title, :user_id, :category, :access_level, :document, :position, :video_id]
+    [:title, :user_id, :category, :access_level, :document, :position, :video_id, :link]
   end
 end
