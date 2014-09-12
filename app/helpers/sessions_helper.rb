@@ -39,6 +39,14 @@ module SessionsHelper
     clear_return_to
   end
 
+  def referred_from_amaferm!
+    session[:referred_from_amaferm] = true
+  end
+
+  def referred_from_amaferm?
+    session[:referred_from_amaferm].present?
+  end
+
   private
 
   def store_location

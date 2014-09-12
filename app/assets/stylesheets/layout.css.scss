@@ -1,0 +1,13 @@
+#content {
+  min-height: 1000px;
+}
+a.navbar-brand span { 
+  color: $amafermBrandColor !important;
+}
+li.back-to-amaferm a {
+  background-color: rgba(244, 121, 54, 0.50) !important;
+  @include transition(all 1s);
+  &:hover {
+    background-color: rgba(244, 121, 54, 1.0) !important;
+  }
+}

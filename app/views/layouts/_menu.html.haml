@@ -1,12 +1,11 @@
 #sidebar-left.col-lg-2.col-sm-1
   .nav-collapse.sidebar-nav.collapse.navbar-collapse.bs-navbar-collapse
     %ul.nav.nav-tabs.nav-stacked.main-menu
+      = menu_link_to 'AMAFERM.com', 'http://amaferm.com',   icon: :reply,   li_class: 'visible-xs' if referred_from_amaferm?
       = menu_link_to 'Welcome',     welcome_path,           icon: :home,    active_if: ['pages', 'welcome']
       = menu_link_to 'About',       about_path,             icon: :info,    active_if: ['pages', 'about']
       = menu_link_to 'Latest',      latest_research_path,   icon: :star,    active_if: ['paper_summaries']
       = menu_link_to 'Literature',  papers_path,            icon: :archive, active_if: [['papers', 'trials']]
       = menu_link_to 'Search',      search_papers_path,     icon: :search,  active_if: ['paper_searches']
       = menu_link_to 'Learn More',  learn_more_path,        icon: :book,    active_if: ['sales_aids']
-      - if policy(User).index?
-        = menu_link_to 'Users',       users_path,           icon: :group,   active_if: ['users']
-
+      = menu_link_to 'Users',       users_path,             icon: :group,   active_if: ['users'] if policy(User).index?

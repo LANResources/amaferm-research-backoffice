@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  before_action :check_if_referred_from_amaferm_dot_com
+
   private
 
   def verify_authenticated
@@ -35,4 +37,8 @@ class ApplicationController < ActionController::Base
     %w[asc desc].include?(params[:direction]) ? params[:direction] : default
   end
   helper_method :sort_direction
+
+  def check_if_referred_from_amaferm_dot_com
+    referred_from_amaferm! if request.referer =~ /amaferm.com/i
+  end
 end

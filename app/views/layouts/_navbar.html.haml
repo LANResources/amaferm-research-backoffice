@@ -15,6 +15,12 @@
 
     .nav-no-collapse.header-nav
       %ul.nav.navbar-nav.pull-right
+        - if referred_from_amaferm?
+          %li.back-to-amaferm.hidden-xs
+            = link_to 'http://amaferm.com', class: 'btn' do
+              %i.fa.fa-reply
+              = p_space 'AMAFERM.com'
+
         - if signed_in?
           = render partial: 'layouts/admin_dropdown', locals: { phone: false }
 
