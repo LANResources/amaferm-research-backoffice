@@ -4,6 +4,8 @@ class SalesAid < ActiveRecord::Base
   CATEGORIES = {presentation: :document, literature: :document, calculator: :link, newsletter: :document, video: :video}
   ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2}
 
+  include FileDataManagement
+
   enum access_level: ACCESS_LEVELS
   store :video_data, accessors: [:name, :summary, :thumbnail_url, :large_thumbnail_url]
   mount_uploader :document, SalesAidUploader
@@ -18,18 +20,10 @@ class SalesAid < ActiveRecord::Base
   validates :link,         presence: { if: lambda { |s| s.external_link? } },
                            format: { with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?\z/ix, allow_nil: true }
 
-  before_save :set_metadata
+  before_save :set_video_metadata
 
   def type
     CATEGORIES.with_indifferent_access[category]
-  end
-
-  def filename
-    document.path.split('/').last
-  end
-
-  def file_extension
-    filename.split('.').last.to_sym
   end
 
   def external_link?
@@ -49,12 +43,7 @@ class SalesAid < ActiveRecord::Base
 
   private
 
-  def set_metadata
-    if document.present? && document_changed?
-      self.document_size = document.file.size
-      self.document_content_type = document.file.content_type
-    end
-
+  def set_video_metadata
     if video? && v = get_video
       self.name = v.title
       self.summary = v.description

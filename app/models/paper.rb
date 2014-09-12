@@ -6,6 +6,7 @@ class Paper < ActiveRecord::Base
   has_many :supplementals, dependent: :destroy
 
   include Filterable
+  include FileDataManagement
 
   LITERATURE_TYPES = [
     "Abstract", 
@@ -27,7 +28,7 @@ class Paper < ActiveRecord::Base
   
   validates :literature_type, inclusion: { in: LITERATURE_TYPES }
 
-  before_save :normalize_values, :set_metadata
+  before_save :normalize_values
   after_commit :flush_cache
 
   def self.cached_journals
@@ -39,10 +40,6 @@ class Paper < ActiveRecord::Base
 
   def author_name
     author.try(:last_name)
-  end
-
-  def filename
-    document.path.split('/').last
   end
 
   def formatted_citation
@@ -62,13 +59,6 @@ class Paper < ActiveRecord::Base
 
   def normalize_values
     self.journal = nil if journal.blank?
-  end
-
-  def set_metadata
-    if document.present? && document_changed?
-      self.document_size = document.file.size
-      self.document_content_type = document.file.content_type
-    end
   end
 
   def flush_cache
