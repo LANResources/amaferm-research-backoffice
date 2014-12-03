@@ -23,6 +23,9 @@ module SalesAidsHelper
 
   def sales_aid_category(category, options = {})
     display = options.fetch(:plural, false) ? category.pluralize : category 
-    display.titleize.sub 'Newsletter', 'eNewsletter'
+    display.titleize
+      .sub('Newsletter', 'eNewsletter')
+      .sub('Documents', 'Specs & Certificates')
+      .sub('Document', 'Spec/Certificate')
   end
 end

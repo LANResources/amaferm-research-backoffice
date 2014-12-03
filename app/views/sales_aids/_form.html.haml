@@ -10,7 +10,7 @@
     .form-group
       = f.label :category, 'Literature Type', class: 'control-label col-sm-2'
       .col-sm-6
-        = f.collection_select :category, SalesAid::CATEGORIES.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control category-select'
+        = f.collection_select :category, SalesAid::CATEGORIES.keys.map(&:to_s), :to_s, Proc.new{|c| sales_aid_category c }, {}, class: 'form-control category-select'
 
     .form-group
       = f.label :access_level, class: 'control-label col-sm-2'
