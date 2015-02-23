@@ -32,7 +32,7 @@
                 &nbsp;
                 %span.lightOrange= result.author_name
                 %p.lead
-                  = result.title
+                  = link_to result.title, [result.paper, result]
 
               = render partial: 'detail_table', locals: { trial: result }
               .container.performance-measures-container

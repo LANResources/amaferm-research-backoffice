@@ -21,4 +21,12 @@
 .result-panel .panel-body {
   background-color: $mainColor;
   color: white;
+
+  a {
+    color: white;
+
+    &:hover {
+      color: white;
+    }
+  }
 }
