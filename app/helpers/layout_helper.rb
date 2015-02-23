@@ -17,7 +17,7 @@ module LayoutHelper
     @show_title
   end
 
-  def breadcrumbs(*crumbs)
+  def breadcrumbs(*crumbs, show: true)
     content_for :breadcrumbs do
       content_tag :ul, class: 'breadcrumb' do
         crumb_items = []
@@ -33,6 +33,11 @@ module LayoutHelper
         crumb_items.join('').html_safe
       end
     end
+    @show_breadcrumbs = show
+  end
+
+  def show_breadcrumbs?
+    @show_breadcrumbs
   end
 
   def checkbox_images(changeable = true)

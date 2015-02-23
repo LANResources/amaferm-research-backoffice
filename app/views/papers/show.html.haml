@@ -1,25 +1,15 @@
-- title @paper.title
+- title @paper.title, false
 
-- breadcrumbs ['Literature', papers_path], @paper.source_id
-
-%br/
+- breadcrumbs ['Literature', papers_path], @paper.source_id, show: false
 
 .row
-  .col-md-12
-    = render partial: 'papers/detail_table', locals: { paper: @paper }
+  .col-md-3
+    = yield :breadcrumbs
 
-- policy_scope(@paper.trials).order(:source_sub_id).each do |trial|
-  = render partial: 'papers/trial_box_row', locals: { trial: trial, spotlight: @trial || nil }
-
-- if (supplementals = policy_scope(@paper.supplementals).order(:source_sub_id)).any?
-  %h2.supplementals-subheader Supplemental Documents
-  = render partial: 'supplementals/display_box', locals: { paper: @paper, supplementals: supplementals }
-
-.row
-  .col-md-12.btn-row
-    = link_to download_paper_path(@paper), title: "Download", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
+  .col-md-9.btn-row.text-right
+    = link_to download_paper_path(@paper), title: "Download Tech Sheet", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
       %i.fa.fa-cloud-download
-      = p_space 'Download'
+      = p_space 'Download Tech Sheet'
     - if policy(Trial).new?
       = link_to new_paper_trial_path(@paper), title: "Add Trial", remote: true, class: "btn btn-sm btn-primary" do
         %i.fa.fa-plus
@@ -36,4 +26,23 @@
       = link_to @paper, title: "Remove", class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' }, method: :delete do
         %i.fa.fa-trash-o
         = p_space 'Remove'
+
+.row
+  .col-md-12
+    %h1= @paper.title
+
+%br/
+
+.row
+  .col-md-12
+    = render partial: 'papers/detail_table', locals: { paper: @paper }
+
+- policy_scope(@paper.trials).order(:source_sub_id).each do |trial|
+  = render partial: 'papers/trial_box_row', locals: { trial: trial, spotlight: @trial || nil }
+
+- if (supplementals = policy_scope(@paper.supplementals).order(:source_sub_id)).any?
+  %h2.supplementals-subheader Supplemental Documents
+  = render partial: 'supplementals/display_box', locals: { paper: @paper, supplementals: supplementals }
+
+
 

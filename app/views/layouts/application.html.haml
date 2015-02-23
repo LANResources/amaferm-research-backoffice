@@ -25,7 +25,7 @@
         = render partial: 'layouts/menu'
 
         #content.col-lg-10.col-sm-11
-          = yield :breadcrumbs
+          = yield :breadcrumbs if show_breadcrumbs?
           = yield :page_header if show_title?
           - flash.each do |name, msg|
             .row
