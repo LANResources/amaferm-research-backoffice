@@ -1,0 +1,16 @@
+%table.table.table-striped.table-condensed
+  %thead
+    %tr
+      %th= sortable 'last_name', 'Name'
+      %th.c= sortable 'email'
+      %th.c= sortable 'role'
+      - if policy(current_user).edit?
+        %th.r
+  %tbody
+    - if users.any?
+      = render partial: 'users/user', collection: users
+    - else
+      %tr
+        %td.c.warning{colspan: (policy(current_user).edit? ? 4 : 3)} There are no users that match your search.
+
+= will_paginate users

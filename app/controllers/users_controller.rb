@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def index
     authorize! User
-    @users = policy_scope(User.order("#{sort_column} #{sort_direction}")).page(params[:page]).per_page(20)
+    @users = policy_scope(User.search_by_name(params[:q]).order("#{sort_column} #{sort_direction}")).page(params[:page]).per_page(20)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
