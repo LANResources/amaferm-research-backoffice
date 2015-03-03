@@ -4,44 +4,30 @@ class MeasuresController < ApplicationController
 
   def new
     @measure = @trial.performance_measures.build
-    respond_to do |format|
-      format.js
-    end
+    respond_with_js
   end
 
   def edit
-    respond_to do |format|
-      format.js { render action: 'new' }
-    end
+    respond_with_js { render action: 'new' }
   end
 
   def create
     @measure = PerformanceMeasure.new measure_attributes
 
-    respond_to do |format|
-      if @measure.save
-        format.js
-      else
-        format.js { render 'error' }
-      end
+    respond_with_js do
+      render 'error' unless @measure.save
     end
   end
 
   def update
-    respond_to do |format|
-      if @measure.update(measure_attributes)
-        format.js
-      else
-        format.js { render 'error' }
-      end
+    respond_with_js do
+      render 'error' unless @measure.update(measure_attributes)
     end
   end
 
   def destroy
     @measure.destroy
-    respond_to do |format|
-      format.js
-    end
+    respond_with_js
   end
 
   private

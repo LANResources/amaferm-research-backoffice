@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     authorize! @user
 
     if @user.save
-      Notifier.invitation(to: @user, from: current_user).deliver
+      Notifier.invitation(to: @user, from: current_user).deliver_now
       redirect_to users_path, notice: 'User was successfully created.'
     else
       render action: 'new'

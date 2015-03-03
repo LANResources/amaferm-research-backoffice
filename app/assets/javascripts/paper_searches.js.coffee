@@ -14,7 +14,7 @@ initPaperSearchForm = ->
   $('.reset-search').hide()
 
   $(document.body).on 'submit', '#new_paper_search', ->
-    $(this).parents('.box').find('h2 i').replaceWith($('<i class="fa fa-spinner fa-spin"></i>'));
+    $(this).parents('.box').find('h2 i').replaceWith($('<i class="fa fa-spinner fa-spin"></i>'))
 
   $(document.body).on 'change', '#new_paper_search input', ->
     setPage 1

@@ -4,34 +4,34 @@ body[data-controller="pages"][data-action="about"] {
   #content {
     padding-top: 0px;
     padding-bottom: 0px;
-  }
 
-  strong {
-    font-weight: 900;
-  }
+    strong {
+      font-weight: 900;
+    }
 
-  #about-page {
-    width: 100%;
-    overflow: hidden;
-    padding-bottom: 250px;
-    position:relative;
-  }
+    #about-page {
+      width: 100%;
+      overflow: hidden;
+      padding-bottom: 250px;
+      position:relative;
+    }
 
-  .img-center {
-    margin: 0px auto;
-  }
+    .img-center {
+      margin: 0px auto;
+    }
 
-  p, li {
-    font-family: 'Roboto', sans-serif !important;
-  }
+    p, li {
+      font-family: 'Roboto', sans-serif !important;
+    }
 
-  h2 {
-    font-size: 1.5em;
-    font-weight: 900 !important;
-    font-family: 'Roboto', sans-serif!important;
-  }
+    h2 {
+      font-size: 1.5em;
+      font-weight: 900 !important;
+      font-family: 'Roboto', sans-serif!important;
+    }
 
-  .orange-text {
-    color: #F47936;
+    .orange-text {
+      color: #F47936;
+    }
   }
 }

@@ -1,13 +1,13 @@
 class InvitesController < ApplicationController
-  before_filter :verify_invitation, only: [:edit, :update]
-  before_filter :authenticate_registration, only: :update
+  before_action :verify_invitation, only: [:edit, :update]
+  before_action :authenticate_registration, only: :update
   layout 'registration', only: [:edit, :update]
 
   def create
     @user = User.find(params[:id]) if params[:id]
     authorize_invite
 
-    Notifier.invitation(to: @user, from: current_user).deliver if @user
+    Notifier.invitation(to: @user, from: current_user).deliver_now if @user
 
     respond_to do |format|
       flash[:notice] = "Successfully sent an invitation to #{@user.full_name}."

@@ -10,7 +10,7 @@ class AccessRequestsController < ApplicationController
     respond_with_js do
       @access_request = AccessRequest.new access_request_attributes
       if @access_request.save
-        Notifier.access_request_submission(@access_request).deliver
+        Notifier.access_request_submission(@access_request).deliver_now
       else
         render :error
       end

@@ -3,7 +3,7 @@ source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
 ruby '2.1.0'
 
-gem 'rails', '4.1.4'
+gem 'rails', '4.2.0'
 
 # Database
 gem 'pg'
@@ -28,10 +28,9 @@ gem 'lr-simpliq'
 
 # JavaScript
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'turbolinks', git: 'https://github.com/rails/turbolinks.git'
 gem 'dropzonejs-rails'
 gem 'select2-rails'
-gem 'best_in_place', git: 'https://github.com/bernat/best_in_place.git', branch: 'rails-4'
 
 # JSON
 gem 'jbuilder', '~> 1.2'
@@ -79,6 +78,7 @@ gem 'newrelic_rpm'
 # Debugging
 gem 'exception_notification'
 group :development do
+  gem 'web-console', '~> 2.0'
   gem "pry"
   gem 'meta_request'
   gem 'rails-erd'

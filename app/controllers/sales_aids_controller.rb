@@ -6,12 +6,8 @@ class SalesAidsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.js {
-        unless @sales_aid.video?
-          render :nothing
-        end
-      }
+    respond_with_js do
+      render :nothing unless @sales_aid.video?
     end
   end
 

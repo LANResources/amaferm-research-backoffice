@@ -1,6 +1,6 @@
 class PasswordResetsController < ApplicationController
-  skip_before_filter :verify_authenticated
-  before_filter :find_user, only: [:edit, :update]
+  skip_before_action :verify_authenticated
+  before_action :find_user, only: [:edit, :update]
   layout 'registration'
 
   def new
@@ -8,7 +8,7 @@ class PasswordResetsController < ApplicationController
   
   def create
     user = User.find_by_email params[:email]
-    Notifier.password_reset(user).deliver if user
+    Notifier.password_reset(user).deliver_now if user
     flash[:success] = "Email sent with password reset instructions."
     redirect_to login_url
   end

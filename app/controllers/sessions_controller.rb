@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   layout 'external', only: [:new, :create]
-  skip_before_filter :verify_authenticated, except: :destroy
+  skip_before_action :verify_authenticated, except: :destroy
 
   def new
   end
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to welcome_url
     else
       flash.now[:error] = 'Invalid email/password combination'
-      render 'new'
+      render :new
     end
   end
 

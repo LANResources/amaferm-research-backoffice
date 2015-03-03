@@ -5,7 +5,10 @@ $ ->
 initPage = ->
   if pageIs 'pages', 'welcome'
     hideMenu()
+  else if localStorage.mainMenuPreference is 'open'
+    $('#sidebar-left').show()
 
 hideMenu = ->
-  $('#main-menu-toggle').click()
-  localStorage.mainMenuPreference = 'open'
+  unless localStorage.mainMenuPreference is 'closed'
+    $('#main-menu-toggle').click()
+    localStorage.mainMenuPreference = 'open'
