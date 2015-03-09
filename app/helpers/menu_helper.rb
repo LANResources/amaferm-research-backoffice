@@ -4,7 +4,7 @@ module MenuHelper
     label = content_tag(:span, p_space(label), class: 'hidden-sm').html_safe
     chevron_down = content_tag(:span, content_tag(:i, nil, class: 'fa fa-chevron-down').html_safe, class: 'label').html_safe
 
-    content_tag :li, class: options[:li_class], data: {active: options[:active_if].join(' ')} do
+    content_tag :li, class: options[:li_class], data: {active: Array(options[:active_if]).join(' ')} do
       if block_given?
         [
           link_to((icon + label + chevron_down).html_safe, '#', class: 'dropmenu').html_safe,
