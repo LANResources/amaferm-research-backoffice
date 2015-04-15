@@ -16,12 +16,13 @@ class SalesAid < ActiveRecord::Base
                            inclusion: { in: CATEGORIES.keys.map(&:to_s) }
   validates :user_id,      presence: true
   validates :access_level, presence: true
+  validates :document,     presence: { if: lambda { |s| type == :document } }
   validates :video_id,     presence: { if: lambda { |s| s.video? } }
   validates :link,         presence: { if: lambda { |s| s.external_link? } },
-                           format: { 
-                            with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?\z/ix, 
-                            allow_nil: true, 
-                            if: lambda { |s| s.external_link? } 
+                           format: {
+                            with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?\z/ix,
+                            allow_nil: true,
+                            if: lambda { |s| s.external_link? }
                            }
 
   before_save :set_video_metadata
