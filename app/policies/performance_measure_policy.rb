@@ -28,6 +28,6 @@ class PerformanceMeasurePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [ :trial_id, :measure, :control, :amaferm ]
+    [ :trial_id, :measure, :control, :amaferm, :rumensin, :amaferm_rumensin ]
   end
 end

@@ -1,15 +1,24 @@
-.col-md-3.col-xs-6.col-xxs-12.measure-container
+- column_classes = measure.rumensin.present? ? 'col-md-6 col-xs-12 col-xxs-12' : 'col-md-3 col-xs-6 col-xxs-12'
+.measure-container{class: column_classes}
   .box.smallchart.measure-box{class: ('editable' if defined?(editable) && editable), data: { measure: measure.id, path: edit_performance_measure_path(measure) }}
     .title= measure.measure.gsub(/\^(\d+)/, "<sup>\\1</sup>").html_safe
     .value.pm-control
       .container
         .row
-          .col-md-12
+          %div{class: ['col-md-', 'col-xs-', 'col-xxs-'].map{|c| [c, measure.rumensin.present? ? '6' : '12'].join }.join(' ') }
             %h1= measure.control
             %h4 Control
+          - if measure.rumensin.present?
+            .col-md-6
+              %h1= measure.rumensin
+              %h4 Rumensin
     .value.pm-amaferm
       .container
         .row
-          .col-md-12
+          %div{class: ['col-md-', 'col-xs-', 'col-xxs-'].map{|c| [c, measure.amaferm_rumensin.present? ? '6' : '12'].join }.join(' ') }
             %h1= measure.amaferm
             %h4 Amaferm
+          - if measure.amaferm_rumensin.present?
+            .col-md-6
+              %h1= measure.amaferm_rumensin
+              %h4 Amaferm + Rumensin

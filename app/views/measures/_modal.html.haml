@@ -11,20 +11,30 @@
           = f.hidden_field :trial_id
 
           .form-group
-            = f.label :measure, class: 'control-label col-sm-2'
-            .col-sm-10
+            = f.label :measure, class: 'control-label col-sm-3'
+            .col-sm-9
               = f.text_field :measure, class: 'form-control'
 
           .form-group
-            = f.label :control, class: 'control-label col-sm-2'
-            .col-sm-10
+            = f.label :control, class: 'control-label col-sm-3'
+            .col-sm-9
               = f.text_field :control, class: 'form-control'
 
           .form-group
-            = f.label :amaferm, class: 'control-label col-sm-2'
-            .col-sm-10
+            = f.label :amaferm, class: 'control-label col-sm-3'
+            .col-sm-9
               = f.text_field :amaferm, class: 'form-control'
-              
+
+          .form-group
+            = f.label :rumensin, class: 'control-label col-sm-3'
+            .col-sm-9
+              = f.text_field :rumensin, class: 'form-control'
+
+          .form-group
+            = f.label :amaferm_rumensin, 'Amaferm + Rumensin', class: 'control-label col-sm-3'
+            .col-sm-9
+              = f.text_field :amaferm_rumensin, class: 'form-control'
+
         .modal-footer
           - if new_or_edit == 'edit'
             = link_to measure, method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this performance measure?' } do

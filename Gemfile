@@ -35,6 +35,9 @@ gem 'select2-rails'
 # JSON
 gem 'jbuilder', '~> 1.2'
 
+# Models
+gem 'strip_attributes'
+
 # Views
 gem 'haml-rails'
 gem 'will_paginate'

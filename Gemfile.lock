@@ -336,6 +336,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    strip_attributes (1.7.0)
+      activemodel (>= 3.0, < 5.0)
     subexec (0.2.3)
     terminal-notifier-guard (1.5.3)
     thin (1.6.1)
@@ -413,6 +415,7 @@ DEPENDENCIES
   select2-rails
   selenium-webdriver (= 2.35.1)
   spork-rails (= 4.0.0)
+  strip_attributes
   terminal-notifier-guard
   thin
   turbolinks!
