@@ -70,7 +70,7 @@ gem 'memcachier'
 gem 'dalli'
 
 # Videos
-gem 'youtube_it', git: 'https://github.com/kylejginavan/youtube_it.git'
+gem 'yt'
 
 # Heroku
 gem 'rails_12factor', group: :production

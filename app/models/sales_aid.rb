@@ -40,8 +40,7 @@ class SalesAid < ActiveRecord::Base
   end
 
   def get_video
-    youtube_client = YouTubeIt::Client.new
-    youtube_client.video_by(video_id)
+    Yt::Video.new id: video_id
   rescue
     nil
   end
