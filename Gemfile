@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
-source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
-ruby '2.1.0'
+ruby '2.2.1'
 
 gem 'rails', '4.2.0'
 
@@ -24,7 +23,7 @@ gem 'figaro', git: 'https://github.com/laserlemon/figaro.git', branch: 'master'
 gem 'pundit'
 
 # Theme
-gem 'lr-simpliq'
+gem 'lr-simpliq', source: 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
 
 # JavaScript
 gem 'jquery-rails'
@@ -98,7 +97,6 @@ group :development, :test do
   gem 'guard-spork', '1.5.1'
   gem 'childprocess', '0.3.9'
   gem 'terminal-notifier-guard'
-  gem 'debugger'
 end
 
 group :test do
