@@ -1,3 +1,5 @@
+require 'uri'
+
 class PasswordResetsController < ApplicationController
   skip_before_action :verify_authenticated
   before_action :find_user, only: [:edit, :update]
@@ -29,7 +31,7 @@ class PasswordResetsController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by_password_reset_token! params[:token]
+    @user = User.find_by_password_reset_token! URI.decode(params[:token])
     if @user == :expired
       flash[:error] = "Password reset has expired."
       redirect_to new_password_reset_path
