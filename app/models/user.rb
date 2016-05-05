@@ -48,6 +48,12 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def matches?(*names, compare: :full_name)
+    names.flatten.each{ |name| return true if send(compare.to_sym).casecmp(name) == 0 }
+    false
+  end
+  alias_method :matches_any?, :matches?
+
   private
 
   def check_password

@@ -1,5 +1,5 @@
 class UserPolicy < ApplicationPolicy
-  self::Scope = Struct.new(:user, :scope) do
+  class Scope < Scope
     def resolve
       if user.guest?
         scope.none

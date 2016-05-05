@@ -1,5 +1,5 @@
 class TrialPolicy < ApplicationPolicy
-  self::Scope = Struct.new(:user, :scope) do
+  class Scope < Scope
     def resolve
       if user >= :biozyme
         scope #.all

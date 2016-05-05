@@ -136,3 +136,14 @@ blockquote.pull-right {
 .btn-row .btn {
   margin-right: 4px;
 }
+
+// Impersonation dropdown menu color
+li.dropdown.impersonation .dropdown-toggle {
+  background-color: rgb(148, 74, 74);
+}
+.navbar .nav li.dropdown.impersonation > .dropdown-toggle:hover,
+.navbar .nav li.dropdown.impersonation.open > .dropdown-toggle,
+.navbar .nav li.dropdown.impersonation.active > .dropdown-toggle,
+.navbar .nav li.dropdown.impersonation.open.active > .dropdown-toggle {
+    background-color: darken(rgb(148, 74, 74), 10%);
+}

@@ -1,5 +1,5 @@
 class PaperPolicy < ApplicationPolicy
-  self::Scope = Struct.new(:user, :scope) do
+  class Scope < Scope
     def resolve
       scope.all
     end

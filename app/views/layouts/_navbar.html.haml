@@ -24,6 +24,9 @@
         - if signed_in?
           = render partial: 'layouts/admin_dropdown', locals: { phone: false }
 
+          - if current_user.impersonating?
+            = render partial: 'layouts/impersonation_dropdown'
+
           %li.dropdown
             %a.btn.account.dropdown-toggle{data: {toggle: "dropdown"}, href: "#"}
               .avatar= image_tag(current_user.avatar.url(:tiny))
@@ -36,6 +39,13 @@
                 = link_to edit_user_path(current_user) do
                   %i.fa.fa-pencil
                   Edit Profile
+                  
+              - if policy(:role_impersonation).new?
+                %li
+                  = link_to new_role_impersonation_path, data: { remote: true } do
+                    %i.fa.fa-magic
+                    Change Role
+
               %li
                 = link_to logout_path, method: :delete do
                   %i.fa.fa-off

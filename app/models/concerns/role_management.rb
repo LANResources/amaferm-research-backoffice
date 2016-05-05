@@ -43,32 +43,62 @@ module RoleManagement
     end
   end
 
+  def impersonatable_roles
+    case self.role.to_sym
+    when :admin
+      ROLES[1..5]
+    when :manager
+      ROLES[1..4]
+    when :biozyme
+      ROLES[1..3]
+    else
+      []
+    end
+  end
+
+  def current_role
+    @current_role ||= self.role
+  end
+
+  def current_role=(impersonating_role)
+    @current_role = impersonating_role if impersonating_role.to_sym.in? impersonatable_roles
+  end
+  alias :impersonate! :current_role=
+
+  def reset_current_role!
+    @current_role = self.role
+  end
+
+  def impersonating?
+    current_role != role
+  end
+
   def <(other)
     return false if other == User
     return false unless comparable? other
     return true if self.role.nil?
-    ROLES.index(self.role.to_sym) < ROLES.index((other.try(:role) || other).try(:to_sym)).to_i
+    ROLES.index(current_role.to_sym) < ROLES.index((other.try(:current_role) || other).try(:to_sym)).to_i
   end
 
   def <=(other)
     return false if other == User
     return false unless comparable? other
-    return true if self.role.nil?
-    ROLES.index(self.role.to_sym) <= ROLES.index((other.try(:role) || other).try(:to_sym)).to_i
+    return true if current_role.nil?
+    ROLES.index(current_role.to_sym) <= ROLES.index((other.try(:current_role) || other).try(:to_sym)).to_i
   end
 
   def >(other)
     return true if other == User
     return false unless comparable? other
-    return false if self.role.nil?
-    ROLES.index(self.role.to_sym) > ROLES.index((other.try(:role) || other).try(:to_sym)).to_i
+    return false if current_role.nil?
+    ROLES.index(current_role.to_sym) > ROLES.index((other.try(:current_role) || other).try(:to_sym)).to_i
   end
 
   def >=(other)
     return true if other == User
     return false unless comparable? other
-    return false if self.role.nil?
-    ROLES.index(self.role.to_sym) >= ROLES.index((other.try(:role) || other).try(:to_sym)).to_i
+    return false if current_role.nil?
+    ROLES.index(current_role.to_sym) >= ROLES.index((other.try(:current_role) || other).try(:to_sym)).to_i
   end
 
   private

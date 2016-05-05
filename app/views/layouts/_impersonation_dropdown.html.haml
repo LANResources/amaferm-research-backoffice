@@ -1,0 +1,12 @@
+%li.dropdown.impersonation
+  %a.btn.account.dropdown-toggle{data: {toggle: 'dropdown'}, href: '#'}
+    .avatar
+    .user
+      %span.hello Viewing As
+      %span.name= current_user.current_role.titleize
+  %ul.dropdown-menu
+    %li.dropdown-menu-title
+    %li
+      = link_to role_impersonation_path, method: :delete do
+        %i.fa.fa-off
+        = p_space 'Stop Impersonating'
