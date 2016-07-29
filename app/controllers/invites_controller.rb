@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+  skip_before_action :verify_authenticated, only: [:edit, :update]
   before_action :verify_invitation, only: [:edit, :update]
   before_action :authenticate_registration, only: :update
   layout 'registration', only: [:edit, :update]

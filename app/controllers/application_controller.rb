@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  before_action :check_if_referred_from_amaferm_dot_com
+  before_action :verify_authenticated, :check_if_referred_from_amaferm_dot_com
 
   private
 
