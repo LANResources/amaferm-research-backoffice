@@ -56,7 +56,7 @@ class SalesAidsController < ApplicationController
   end
 
   def manage
-    @sales_aids = SalesAid.order(:category, :position)
+    @sales_aids = policy_scope(SalesAid).order(:category, :position)
     authorize! @sales_aids  
   end
 

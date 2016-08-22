@@ -1,12 +1,10 @@
 class SalesAidPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user >= :biozyme
-        scope #.all
-      elsif user >= :public_sales
-        scope.where(access_level: [SalesAid.access_levels[:guest], SalesAid.access_levels[:public_sales]])
+      if user >= :admin
+        scope
       else
-        scope.where(access_level: SalesAid.access_levels[:guest])
+        scope.where access_level: SalesAidPolicy.new(user, nil).accessible_levels.values
       end
     end
   end
@@ -44,13 +42,20 @@ class SalesAidPolicy < ApplicationPolicy
   end
 
   def download?
-    level = resource.access_level.to_sym
-    if user >= :biozyme
-      true
-    elsif user >= :public_sales
-      level.in? [:guest, :public_sales]
-    else
-      level == :guest
+    accessible_levels.has_key? resource.access_level
+  end
+
+  def accessible_levels
+    SalesAid.access_levels.select do |level,_|
+      if user >= :admin
+        true
+      elsif user >= :biozyme
+        level != '_private'
+      elsif user >= :public_sales
+        level.in? %w[guest public_sales]
+      else
+        level == 'guest'
+      end
     end
   end
 

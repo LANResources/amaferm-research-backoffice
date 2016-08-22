@@ -4,7 +4,7 @@ class Supplemental < ActiveRecord::Base
 
   LITERATURE_TYPES = Paper::LITERATURE_TYPES + ['Correction', 'Data', 'Internal Review']
 
-  LEVELS = {web: 0, shared: 2, biozyme: 1}
+  LEVELS = {web: 0, shared: 2, biozyme: 1, _private: 3}
   enum level: LEVELS
 
   mount_uploader :document, DocumentUploader

@@ -1,12 +1,10 @@
 class SupplementalPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user >= :biozyme
-        scope #.all
-      elsif user >= :basic
-        scope.where level: [Trial.levels[:web], Trial.levels[:shared]]
+      if user >= :admin
+        scope
       else
-        scope.where level: Trial.levels[:web]
+        scope.where level: SupplementalPolicy.new(user, nil).accessible_levels.values
       end
     end
   end
@@ -16,14 +14,7 @@ class SupplementalPolicy < ApplicationPolicy
   end
 
   def show?
-    level = resource.level.to_sym
-    if user >= :biozyme
-      true
-    elsif user >= :basic
-      level.in? [:web, :shared]
-    else
-      level == :web
-    end
+    accessible_levels.has_key? resource.level
   end
 
   def download?
@@ -39,7 +30,7 @@ class SupplementalPolicy < ApplicationPolicy
   end
 
   def edit?
-    user >= :manager
+    show? && user >= :manager
   end
 
   def update?
@@ -56,6 +47,20 @@ class SupplementalPolicy < ApplicationPolicy
   
   def manage?
     create? || update?
+  end
+
+  def accessible_levels
+    Supplemental.levels.select do |level,_|
+      if user >= :admin
+        true
+      elsif user >= :biozyme
+        level != '_private'
+      elsif user >= :basic
+        level.in? %w[web shared]
+      else
+        level == 'web'
+      end
+    end
   end
 
   def permitted_attributes

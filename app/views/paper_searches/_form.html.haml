@@ -54,13 +54,13 @@
                 = check_box_tag 'paper_search[literature_types][]', type, @paper_search.literature_types.include?(type)
                 = type
 
-    - if current_user >= :manager
+    - if policy(Trial).search_by_level?
       .form-group
         = f.label :levels, 'Select level(s):', class: 'control-label col-sm-2'
         .col-sm-10
           .checkbox
             .btn-group{data: {toggle: 'buttons'}}
-              - Trial.levels.each do |level, level_number|
+              - policy(Trial).accessible_levels.each do |level, level_number|
                 %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.levels.include?(level))}
                   = check_box_tag 'paper_search[levels][]', level, @paper_search.levels.include?(level)
                   = level.titleize

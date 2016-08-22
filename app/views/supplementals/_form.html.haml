@@ -52,7 +52,7 @@
     .form-group
       = f.label :level, class: 'control-label col-sm-2'
       .col-sm-10
-        = f.collection_select :level, Supplemental.levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
+        = f.collection_select :level, policy(Supplemental).accessible_levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
 
     .form-group
       = f.label :document, class: 'control-label col-sm-2'

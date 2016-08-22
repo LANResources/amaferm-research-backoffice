@@ -2,7 +2,7 @@ class SalesAid < ActiveRecord::Base
   belongs_to :user
 
   CATEGORIES = {presentation: :document, literature: :document, document: :document, calculator: :link, newsletter: :document, video: :video}
-  ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2}
+  ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2, _private: 3}
 
   include FileDataManagement
 
