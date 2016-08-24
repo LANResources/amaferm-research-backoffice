@@ -15,7 +15,8 @@ class Paper < ActiveRecord::Base
     "Dissertation", 
     "Final Report", 
     "Journal Article", 
-    "Proceedings & Bulletins"
+    "Proceedings & Bulletins",
+    "Thesis"
   ]
 
   mount_uploader :document, DocumentUploader
