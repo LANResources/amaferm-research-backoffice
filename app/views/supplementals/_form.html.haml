@@ -52,7 +52,8 @@
     .form-group
       = f.label :level, class: 'control-label col-sm-2'
       .col-sm-10
-        = f.collection_select :level, policy(Supplemental).accessible_levels.keys.map(&:to_s), :to_s, Proc.new{|l| Supplemental.display_level(l) }, {}, class: 'form-control'
+        - f.object.level = nil if f.object.new_record? && f.object.errors.none?
+        = f.collection_select :level, policy(Supplemental).accessible_levels.keys.map(&:to_s), :to_s, Proc.new{|l| Supplemental.display_level(l) }, {include_blank: 'Choose...'}, class: 'form-control'
 
     .form-group
       = f.label :document, class: 'control-label col-sm-2'

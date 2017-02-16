@@ -59,7 +59,8 @@
       .form-group
         = tf.label :level, class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.collection_select :level, policy(Trial).accessible_levels.keys.map(&:to_s), :to_s, Proc.new{|l| Trial.display_level(l) }, {}, class: 'form-control'
+          - tf.object.level = nil if tf.object.new_record? && tf.object.errors.none? && f.object.errors.none?
+          = tf.collection_select :level, policy(Trial).accessible_levels.keys.map(&:to_s), :to_s, Proc.new{|l| Trial.display_level(l) }, {include_blank: 'Choose...'}, class: 'form-control'
 
       .form-group
         = tf.label :year, class: 'control-label col-sm-2'

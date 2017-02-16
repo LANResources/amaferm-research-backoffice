@@ -12,6 +12,7 @@ class Trial < ActiveRecord::Base
                             uniqueness: { scope: :paper_id, case_sensitive: false },
                             format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :year, presence: true
+  validates :level, presence: true
   acts_as_taggable_on :species, :focus
 
   after_initialize :set_default_source_sub_id
