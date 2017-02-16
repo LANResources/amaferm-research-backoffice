@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430182735) do
+ActiveRecord::Schema.define(version: 20170216211844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,8 +154,8 @@ ActiveRecord::Schema.define(version: 20150430182735) do
     t.integer  "year"
     t.text     "summary"
     t.string   "dose",          limit: 255
-    t.float    "forage"
-    t.float    "concentrate"
+    t.string   "forage"
+    t.string   "concentrate"
     t.string   "calculations",              default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
