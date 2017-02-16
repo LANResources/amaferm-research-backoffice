@@ -74,19 +74,19 @@
       .form-group
         = tf.label :species_list, 'Species', class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.text_field :species_list, class: 'form-control species-select2', data: { tags: Trial.cached_species }
+          = tf.text_field :species_list, class: 'form-control species-select2', value: tf.object.species_list.to_s, data: { tags: Trial.cached_species }
           %span.help-block Separate with commas
 
       .form-group
         = tf.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.text_field :focus_list, class: 'form-control focuses-select2', data: { tags: Trial.cached_focuses }
+          = tf.text_field :focus_list, class: 'form-control focuses-select2', value: tf.object.focus_list.to_s, data: { tags: Trial.cached_focuses }
           %span.help-block Separate with commas
 
       .form-group
         = tf.label :calculation_list, 'Included in X Calculations', class: 'control-label col-sm-2'
         .col-sm-10
-          = tf.text_field :calculation_list, class: 'form-control calculations-select2', data: { tags: Trial.cached_calculations }
+          = tf.text_field :calculation_list, class: 'form-control calculations-select2', value: tf.object.calculation_list.to_s, data: { tags: Trial.cached_calculations }
           %span.help-block Separate with commas
 
       .form-group

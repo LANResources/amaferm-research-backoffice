@@ -36,7 +36,7 @@
           .form-group
             = f.label :species_list, 'Species', class: 'control-label col-sm-2 col-md-4'
             .col-sm-10.col-md-8
-              = f.text_field :species_list, class: 'form-control species-select2', data: { tags: Trial.cached_species }
+              = f.text_field :species_list, class: 'form-control species-select2', value: f.object.species_list.to_s, data: { tags: Trial.cached_species }
               %span.help-block Separate with commas
 
       .row
@@ -44,7 +44,7 @@
           .form-group
             = f.label :focus_list, 'Focus(es)', class: 'control-label col-sm-2'
             .col-sm-10
-              = f.text_field :focus_list, class: 'form-control focuses-select2', data: { tags: Trial.cached_focuses }
+              = f.text_field :focus_list, class: 'form-control focuses-select2', value: f.object.focus_list.to_s, data: { tags: Trial.cached_focuses }
               %span.help-block Separate with commas
 
       .row
@@ -52,7 +52,7 @@
           .form-group
             = f.label :calculation_list, 'Included in X Calculations', class: 'control-label col-sm-2'
             .col-sm-10
-              = f.text_field :calculation_list, class: 'form-control calculations-select2', data: { tags: Trial.cached_calculations }
+              = f.text_field :calculation_list, class: 'form-control calculations-select2', value: f.object.calculation_list.to_s, data: { tags: Trial.cached_calculations }
               %span.help-block Separate with commas
 
       .row
