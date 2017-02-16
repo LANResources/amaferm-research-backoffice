@@ -23,7 +23,9 @@ gem 'figaro', git: 'https://github.com/laserlemon/figaro.git', branch: 'master'
 gem 'pundit'
 
 # Theme
-gem 'lr-simpliq', source: 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
+source 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/' do
+  gem 'lr-simpliq' #, source: 'https://2gzsjvsxbBG9UWWXiJQx@gem.fury.io/lanresources/'
+end
 
 # JavaScript
 gem 'jquery-rails'
