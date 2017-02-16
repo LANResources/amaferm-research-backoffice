@@ -26,7 +26,7 @@
     .form-group
       = f.label :literature_type, 'Literature Type', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :humanize, {}, class: 'form-control'
+        = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :titleize, {}, class: 'form-control'
 
     .form-group
       = f.label :journal, 'Peer Reviewed Journal', class: 'control-label col-sm-2'
