@@ -63,5 +63,5 @@
               - policy(Trial).accessible_levels.each do |level, level_number|
                 %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.levels.include?(level))}
                   = check_box_tag 'paper_search[levels][]', level, @paper_search.levels.include?(level)
-                  = level.titleize
+                  = Trial.display_level level
 

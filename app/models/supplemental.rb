@@ -11,7 +11,7 @@ class Supplemental < ActiveRecord::Base
   include FileDataManagement
 
   attr_accessor :author_name
-  
+
   # Validations
   validates :source_sub_id, presence: true,
                             uniqueness: { scope: :paper_id },
@@ -37,6 +37,10 @@ class Supplemental < ActiveRecord::Base
     end
   end
 
+  def self.display_level(level)
+    level.sub('web', 'public').titleize.sub('Biozyme', 'BioZyme')
+  end
+
   def to_param
     complete_source_id
   end
@@ -51,6 +55,10 @@ class Supplemental < ActiveRecord::Base
 
   def formatted_citation
     Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(citation).html_safe
+  end
+
+  def display_level
+    self.class.display_level level
   end
 
   private

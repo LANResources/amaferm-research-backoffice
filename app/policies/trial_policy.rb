@@ -52,7 +52,7 @@ class TrialPolicy < ApplicationPolicy
   def show_level?
     user >= :biozyme
   end
-  
+
   def search_by_level?
     user >= :manager
   end

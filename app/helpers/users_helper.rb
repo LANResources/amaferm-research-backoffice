@@ -13,10 +13,10 @@ module UsersHelper
         dt = content_tag :dt, role.to_s.titleize
         explanation = case role.to_s.titleize
                       when 'Public Sales'
-                        ['Can only view web-level research papers.',
+                        ['Can only view public-level research papers.',
                           'Can access public-sales-level sales aids.'].join('<br/>')
                       when 'Basic'
-                        'Can only view web and shared-level research papers.'
+                        'Can only view public and shared-level research papers.'
                       when 'Basic Manager'
                         'Can create/invite new basic users.'
                       when 'Biozyme'

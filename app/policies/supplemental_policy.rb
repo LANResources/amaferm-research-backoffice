@@ -44,7 +44,7 @@ class SupplementalPolicy < ApplicationPolicy
   def show_level?
     user >= :biozyme
   end
-  
+
   def manage?
     create? || update?
   end
@@ -65,8 +65,8 @@ class SupplementalPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
-      :paper_id, :source_sub_id, :title, :level, :year, :author_id, 
-      :author_name, :citation, :summary, :literature_type, :document 
+      :paper_id, :source_sub_id, :title, :level, :year, :author_id,
+      :author_name, :citation, :summary, :literature_type, :document
     ]
   end
 end

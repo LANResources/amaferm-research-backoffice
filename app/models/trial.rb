@@ -25,6 +25,10 @@ class Trial < ActiveRecord::Base
     input.to_i == 0 ? where(source_sub_id: input).first : super
   end
 
+  def self.display_level(level)
+    level.sub('web', 'public').titleize.sub('Biozyme', 'BioZyme')
+  end
+
   def self.cached_species
     Rails.cache.fetch([name, 'species']) do
       ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'species').pluck(:name).uniq.sort
@@ -92,7 +96,7 @@ class Trial < ActiveRecord::Base
   end
 
   def display_level
-    level.sub('web', 'public').titleize.sub('Biozyme', 'BioZyme')
+    self.class.display_level level
   end
 
   private
