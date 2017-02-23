@@ -3,10 +3,19 @@ class UsersController < ApplicationController
 
   def index
     authorize! User
-    @users = policy_scope(User.search_by_name(params[:q]).order("#{sort_column} #{sort_direction}")).page(params[:page]).per_page(20)
+    @users = policy_scope(User).search_by_name(params[:q]).order("#{sort_column} #{sort_direction}#{', last_name ASC' unless sort_column == 'last_name'}")
     respond_to do |format|
-      format.html
-      format.js
+      format.html {
+        @users = @users.page(params[:page]).per_page(20)
+      }
+      format.js {
+        @users = @users.page(params[:page]).per_page(20)
+      }
+      format.csv {
+        authorize! User, :export?
+        response.headers['Content-Type'] = 'text/csv';
+        response.headers['Content-Disposition'] = "attachment; filename=AmafermResearchUsers.csv"
+      }
     end
   end
 

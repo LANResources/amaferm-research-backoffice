@@ -24,13 +24,9 @@ class User < ActiveRecord::Base
   before_create :check_password
   before_save { self.email = email.downcase }
 
-  def self.search_by_name(search = nil)
-    if search
-      where("CONCAT(first_name, last_name) ILIKE :q", q: "%#{search.gsub(' ', '')}%")
-    else
-      self
-    end
-  end
+  scope :search_by_name, ->(search = nil){
+    search ? where("CONCAT(first_name, last_name) ILIKE :q", q: "%#{search.gsub(' ', '')}%") : all
+  }
 
   def authenticate(unencrypted_password)
     if status == 'registered'

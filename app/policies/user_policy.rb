@@ -3,18 +3,20 @@ class UserPolicy < ApplicationPolicy
     def resolve
       if user.guest?
         scope.none
-      else
+      elsif user == :admin
         scope
+      else
+        scope.where role: user.assignable_roles.map{|r| User.roles[r] }
       end
     end
   end
 
   def index?
-    !user.guest?
+    user >= :basic_manager
   end
 
   def show?
-    !user.guest?
+    user >= :admin || user == resource || (!user.guest? && scope.where(id: resource.id).exists?)
   end
 
   def new?
@@ -35,6 +37,10 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     create? && !resource.admin? && user != resource && !(user.manager? && resource.manager?)
+  end
+
+  def export?
+    user >= :admin
   end
 
   def permitted_attributes

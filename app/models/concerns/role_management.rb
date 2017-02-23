@@ -29,7 +29,7 @@ module RoleManagement
   end
 
   def assignable_roles
-    case self.role.to_sym
+    case self.current_role.to_sym
     when :admin
       ROLES[1..6]
     when :manager

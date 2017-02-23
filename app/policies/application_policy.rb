@@ -5,13 +5,13 @@ class ApplicationPolicy
     @user = user
     @resource = resource
   end
-  
+
   def index?
     false
   end
 
   def show?
-    scope.where(:id => resource.id).exists?
+    scope.where(id: resource.id).exists?
   end
 
   def create?

@@ -14,8 +14,13 @@
   .col-md-12#users-container
     = render partial: 'users/users', locals: { users: @users }
 
-- if policy(User).create?
+- user_policy = policy(User)
+- if user_policy.create? || user_policy.export?
   .row
     .col-md-12
-      = link_to "Add User", new_user_path, class: 'btn btn-primary'
+      - if user_policy.create?
+        = link_to fa_icon('plus', text: p_space('Add User').html_safe).html_safe, new_user_path, class: 'btn btn-primary'
+        &nbsp;
+      - if user_policy.export?
+        = link_to fa_icon('download', text: p_space('Export').html_safe).html_safe, params.slice(:sort, :direction).merge({format: :csv}), target: :_blank, class: 'btn btn-primary'
 
