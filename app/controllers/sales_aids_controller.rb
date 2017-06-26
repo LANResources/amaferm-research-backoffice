@@ -57,11 +57,11 @@ class SalesAidsController < ApplicationController
 
   def manage
     @sales_aids = policy_scope(SalesAid).order(:category, :position)
-    authorize! @sales_aids  
+    authorize! @sales_aids
   end
 
   def download
-    send_data @sales_aid.document.file.download,
+    send_data (open @sales_aid.document.url).read,
       type: @sales_aid.document.file.content_type,
       filename: @sales_aid.filename,
       disposition: 'attachment'

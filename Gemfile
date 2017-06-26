@@ -49,7 +49,7 @@ gem 'redcarpet'
 
 # Files
 gem 'carrierwave'
-gem 'carrierwave-dropbox', '~> 1.1.0'
+gem 'carrierwave-dropbox', git: 'https://github.com/LANResources/carrierwave-dropbox.git', branch: 'master'
 gem 'mini_magick'
 # gem 'rmagick'
 # gem 'rghost'

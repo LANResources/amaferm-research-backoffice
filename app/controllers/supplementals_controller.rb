@@ -14,15 +14,15 @@ class SupplementalsController < ApplicationController
   def create
     @author = Author.find_or_create_from params[:supplemental][:author_name]
     @supplemental = @author.supplementals.build supplemental_attributes
- 
+
     if @supplemental.save
       if params[:commit] == 'Create and Add Another'
         redirect_to source_form, notice: [
-                                    'Supplemental was successfully created.', 
+                                    'Supplemental was successfully created.',
                                     view_context.link_to('View', @supplemental.paper)
                                   ].join('&nbsp;').html_safe
       else
-        redirect_to @source, notice: 'Supplemental was successfully created.' 
+        redirect_to @source, notice: 'Supplemental was successfully created.'
       end
     else
       render action: 'new'
@@ -50,7 +50,7 @@ class SupplementalsController < ApplicationController
   end
 
   def download
-    send_data @supplemental.document.file.download,
+    send_data (open @supplemental.document.url).read,
       type: @supplemental.document.file.content_type,
       filename: @supplemental.filename,
       disposition: 'attachment'

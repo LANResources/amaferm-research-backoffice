@@ -51,11 +51,11 @@ class PaperSummariesController < ApplicationController
 
   def manage
     @paper_summaries = PaperSummary.includes(trial: :paper).order(:species, :position)
-    authorize! @paper_summaries  
+    authorize! @paper_summaries
   end
 
   def download
-    send_data @paper_summary.document.file.download,
+    send_data (open @paper_summary.document.url).read,
       type: @paper_summary.document.file.content_type,
       filename: @paper_summary.filename,
       disposition: 'attachment'

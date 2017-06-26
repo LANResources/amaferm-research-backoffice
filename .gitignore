@@ -24,6 +24,7 @@ dropbox.yml
 .DS_Store
 ._.DS_Store
 # public/assets
+public/uploads
 vendor/cache
 *.csv
 .sass-cache

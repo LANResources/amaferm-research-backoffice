@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/LANResources/carrierwave-dropbox.git
+  revision: 1b576464debd022ea322d19676029d7099d625a9
+  branch: master
+  specs:
+    carrierwave-dropbox (2.0.0)
+      carrierwave (~> 0.10)
+      dropbox-sdk-v2
+
+GIT
   remote: https://github.com/laserlemon/figaro.git
   revision: e16f2d47f6516e8420ce21c9de76785d9f244bae
   branch: master
@@ -78,9 +87,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    carrierwave-dropbox (1.1.1)
-      carrierwave (~> 0.9)
-      dropbox-sdk (~> 1.6)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     childprocess (0.3.9)
@@ -110,8 +116,10 @@ GEM
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    dropbox-sdk (1.6.3)
-      json
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
+    dropbox-sdk-v2 (0.0.3)
+      http (~> 2.0)
     dropzonejs-rails (0.4.13)
       rails (> 3.1)
     erubis (2.7.0)
@@ -155,6 +163,15 @@ GEM
       railties (>= 4.0.1)
     hike (1.2.3)
     hirb (0.7.1)
+    http (2.2.2)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 1.0.1)
+      http_parser.rb (~> 0.6.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    http-form_data (1.0.3)
+    http_parser.rb (0.6.0)
     i18n (0.7.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -318,6 +335,9 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -345,7 +365,7 @@ DEPENDENCIES
   bootstrap-will_paginate
   capybara (= 2.1.0)
   carrierwave
-  carrierwave-dropbox (~> 1.1.0)
+  carrierwave-dropbox!
   childprocess (= 0.3.9)
   coffee-rails (~> 4.0.0)
   cucumber-rails (= 1.4.0)
