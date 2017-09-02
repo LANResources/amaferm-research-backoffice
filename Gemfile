@@ -48,6 +48,7 @@ gem 'bootstrap-will_paginate'
 gem 'redcarpet'
 
 # Files
+gem 'dropbox-sdk-v2', git: 'https://github.com/LANResources/dropbox-sdk-ruby.git', branch: 'master'
 gem 'carrierwave'
 gem 'carrierwave-dropbox', git: 'https://github.com/LANResources/carrierwave-dropbox.git', branch: 'master'
 gem 'mini_magick'
