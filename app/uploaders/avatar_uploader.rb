@@ -3,26 +3,14 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage :dropbox
+  storage :fog
 
   def store_dir
-    ['AmafermResearchBackOffice', DropboxConfig::SUBFOLDER, model.class.to_s.pluralize.underscore, model.id].join '/'
+    [S3Config::SUBFOLDER, model.class.to_s.pluralize.underscore, model.id].join '/'
   end
 
   def default_url
-    url_string = case version_name.try(:to_sym)
-    when :small
-      "trvfih3c3sybsst"
-    when :thumb
-      "grdkk49dep2ppmg"
-    when :medium
-      "mynwp7gjfia62cu"
-    when :tiny
-      "kfr8kdsct5h848y"
-    else
-      "eoje2v7ua3vsv46"
-    end
-    "https://www.dropbox.com/s/#{url_string}/missing.png?dl=1"
+    "https://#{S3Config::BUCKET}.s3.us-east-3.amazonaws.com/#{S3Config::SUBFOLDER}/users/default/#{version_name}/missing.png"
   end
 
   # Process files as they are uploaded:
