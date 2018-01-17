@@ -41,13 +41,21 @@
         <Cell ss:StyleID="s65"><Data ss:Type="String">Title</Data></Cell>
         <Cell><Data ss:Type="String">Year</Data></Cell>
         <Cell><Data ss:Type="String">Author</Data></Cell>
+        <Cell><Data ss:Type="String">Literature Type</Data></Cell>
+        <Cell><Data ss:Type="String">Species</Data></Cell>
+        <Cell><Data ss:Type="String">Focus</Data></Cell>
+        <Cell><Data ss:Type="String">Dose</Data></Cell>
       </Row>
-    <% @trials.each do |trial| %>
+    <% @trials.includes(paper: :author).each do |trial| %>
       <Row ss:AutoFitHeight="0" ss:Height="72" ss:StyleID="s63">
         <Cell><Data ss:Type="String"><%= trial.complete_source_id %></Data></Cell>
         <Cell ss:StyleID="s65"><Data ss:Type="String"><%= trial.title %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= trial.year %></Data></Cell>
         <Cell><Data ss:Type="String"><%= trial.author_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.literature_type %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.expanded_species_list.gsub(', ', '; ') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.cached_focus_list.join('; ') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.dose %></Data></Cell>
       </Row>
     <% end %>
     </Table>
