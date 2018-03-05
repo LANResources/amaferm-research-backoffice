@@ -13,7 +13,7 @@ class PaperSearchesController < ApplicationController
       format.html
       format.js
       format.xls {
-        headers["Content-Disposition"] = "attachment; filename=\"Amaferm Research Table.xls\""
+        headers["Content-Disposition"] = "attachment; filename=\"Research Center Table.xls\""
       }
     end
   end

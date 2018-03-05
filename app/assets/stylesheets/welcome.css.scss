@@ -3,11 +3,10 @@ body[data-controller="pages"][data-action="welcome"] {
 
   #content {
     padding: 0px;
-    background-image: image_url('landing-page-bg.jpg');
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-image: image_url('welcome-top-left-bg.png'), image_url('welcome-bottom-right-bg.png');
+    background-position: left top, right bottom;
+    background-repeat: no-repeat, no-repeat;
+    background-color: white;
 
     .light-green-header {
       padding: 25px;
@@ -54,8 +53,6 @@ body[data-controller="pages"][data-action="welcome"] {
       background: #f47937;
       margin-bottom: 55px;
       position: relative;
-      top: -35px;
-      z-index: 1;
     }
 
     .orange-bar-text {
@@ -65,13 +62,34 @@ body[data-controller="pages"][data-action="welcome"] {
       color: #fff;
     }
 
-    .hub-icons {
-      background-image: image_url('icon-bg.png');
-      margin: 10px auto;
+    .hub-link {
+      display: block;
+      margin-top: 5px;
+      &:hover {
+        text-decoration: none;
+      }
     }
 
-    .hub-icons:hover {
-      background-image: image_url('icon-bg-over.png');
+    .hub-icon {
+      margin: 0px auto;
+      background-color: #96ccef;
+      padding: 10px;
+      transition: background-color .5s ease-in-out;
+
+      img {
+        margin: 0px auto;
+      }
+    }
+
+    .hub-icons:hover, .hub-icon:hover {
+      background-color: #CCCCCC;
+    }
+
+    .hub-icon-title {
+      background-color: #97b8cd;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
     .orange-bar-text h2 {
@@ -91,14 +109,11 @@ body[data-controller="pages"][data-action="welcome"] {
       width: 100%;
       overflow: hidden;
       padding-bottom: 250px;
-      position:relative;
+      position: relative;
     }
 
     .landing-logo {
-      max-width: 459px;
-      margin: 0px auto;
-      position: relative;
-      z-index: 2;
+      margin: 30px auto;
     }
 
     p, li {

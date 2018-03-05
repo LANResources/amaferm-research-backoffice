@@ -6,12 +6,12 @@
     %a#main-menu-toggle.hidden-xs
       %i.fa.fa-bars
     = link_to main_app.root_path, class: "navbar-brand col-lg-2 col-sm-1 col-xs-12" do
-      %span.hidden-xs.hidden-sm Amaferm Research
-      %span.visible-sm Amaferm
+      %span.hidden-xs.hidden-sm Research Center
+      %span.visible-sm Research
       %span.visible-xs
-        = a_space 'Amaferm Research'
+        = a_space 'Research'
         = image_tag 'open-door.png', size: '20x20'
-        = signed_in? ? 'BackOffice' : 'Center'
+        = 'Center'
 
     .nav-no-collapse.header-nav
       %ul.nav.navbar-nav.pull-right
@@ -39,7 +39,7 @@
                 = link_to edit_user_path(current_user) do
                   %i.fa.fa-pencil
                   Edit Profile
-                  
+
               - if policy(:role_impersonation).new?
                 %li
                   = link_to new_role_impersonation_path, data: { remote: true } do

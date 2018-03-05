@@ -7,13 +7,13 @@ class TrialsController < ApplicationController
       format.html {
         redirect_to paper_path(params[:paper_id]) if params[:paper_id]
       }
-      format.js { 
+      format.js {
         scope_trials
-        @trials = @trials.page(params[:page]).per_page(15) 
+        @trials = @trials.page(params[:page]).per_page(15)
       }
-      format.xls { 
+      format.xls {
         scope_trials
-        headers["Content-Disposition"] = "attachment; filename=\"Amaferm Research Table.xls\"" 
+        headers["Content-Disposition"] = "attachment; filename=\"Research Center Table.xls\""
       }
     end
   end

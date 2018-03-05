@@ -24,7 +24,7 @@ class InvitesController < ApplicationController
     authorize_invite
 
     if @user.register user_attributes
-      redirect_to root_url, notice: 'Success! You are now a registered user of the Amaferm Research BackOffice.'
+      redirect_to root_url, notice: 'Success! You are now a registered user of the BioZyme Amaferm Research Center.'
     else
       sign_out
       render action: 'edit'

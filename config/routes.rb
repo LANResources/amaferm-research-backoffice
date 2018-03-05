@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'about', to: 'pages#about', as: :about
   get 'welcome', to: 'pages#welcome', as: :welcome
 
   resource :feedback, only: [:new, :create]
@@ -26,7 +25,7 @@ Rails.application.routes.draw do
   resources :supplementals, except: :show, id: /[A-Za-z0-9\.]+?/, format: /html|js|json/ do
     get 'download', on: :member, as: :download
   end
-  
+
   resources :paper_summaries do
     get 'download', on: :member, as: :download
     collection do
@@ -49,7 +48,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resource :password_reset, only: [:new, :create, :edit, :update]
   resource :role_impersonation, only: [:new, :create, :destroy]
-  
+
   get 'login', to: 'sessions#new', as: :login
   delete 'logout', to: 'sessions#destroy', as: :logout
 

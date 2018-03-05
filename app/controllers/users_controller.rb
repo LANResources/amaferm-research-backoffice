@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       format.csv {
         authorize! User, :export?
         response.headers['Content-Type'] = 'text/csv';
-        response.headers['Content-Disposition'] = "attachment; filename=AmafermResearchUsers.csv"
+        response.headers['Content-Disposition'] = "attachment; filename=ResearchCenterUsers.csv"
       }
     end
   end
