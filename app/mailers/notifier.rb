@@ -33,7 +33,7 @@ class Notifier < ActionMailer::Base
   def access_request_submission(access_request)
     @access_request = access_request
 
-    mail  to: ['mbaker@biozymeinc.com', 'ecarrillo@biozymeinc.com'],
+    mail  to: 'mbaker@biozymeinc.com',
           from: 'Research Center <access-requests@amafermresearch.backofficeapps.com>',
           subject: "Research Center Access Request"
   end
