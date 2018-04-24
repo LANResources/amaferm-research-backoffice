@@ -82,7 +82,7 @@ gem 'newrelic_rpm'
 # Debugging
 gem 'exception_notification'
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.1'
   gem "pry"
   gem 'meta_request'
   gem 'rails-erd'
@@ -93,16 +93,16 @@ end
 
 # Testing
 group :development, :test do
-  gem 'rspec-rails', '2.14.0'
-  gem 'guard-rspec', '4.0.1'
-  gem 'spork-rails', '4.0.0'
-  gem 'guard-spork', '1.5.1'
-  gem 'childprocess', '0.3.9'
+  gem 'rspec-rails', '3.7.2'
+  gem 'guard-rspec', '4.7.3'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'childprocess'
   gem 'terminal-notifier-guard'
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
+  gem 'selenium-webdriver'
   gem 'capybara', '2.1.0'
   gem 'factory_girl_rails', '4.2.1'
   gem 'cucumber-rails', '1.4.0', :require => false
