@@ -1,7 +1,7 @@
 class PaperSearch
   include ActiveModel::Model
 
-  ARRAY_ATTRIBUTES = [:years, :authors, :species, :focuses, :literature_types, :levels]
+  ARRAY_ATTRIBUTES = [:years, :authors, :locations, :species, :focuses, :literature_types, :levels]
   attr_accessor :page, *ARRAY_ATTRIBUTES
   attr_reader :results
 
@@ -15,6 +15,7 @@ class PaperSearch
     super(params)
     @years ||= []
     @authors ||= []
+    @locations ||= []
     @species ||= []
     @focuses ||= []
     @literature_types ||= []
@@ -27,6 +28,7 @@ class PaperSearch
 
     match_years
     match_authors
+    match_locations
     match_species
     match_focuses
     match_literature_types
@@ -43,6 +45,11 @@ class PaperSearch
 
     def match_authors
        @results = @results.where(authors: { last_name: authors }) if authors.any?
+       self
+    end
+
+    def match_locations
+       @results = @results.where(papers: { location: locations }) if locations.any?
        self
     end
 

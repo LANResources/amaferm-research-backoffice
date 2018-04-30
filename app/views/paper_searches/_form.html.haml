@@ -25,6 +25,16 @@
                 = author
 
     .form-group
+      = f.label :authors, 'Select location(s) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - policy_scope(Trial).joins(:paper).pluck('papers.location').reject(&:blank?).uniq.sort.each do |location|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.locations.include?(location))}
+                = check_box_tag 'paper_search[locations][]', location, @paper_search.locations.include?(location)
+                = location
+
+    .form-group
       = f.label :species, 'Select species of interest:', class: 'control-label col-sm-2'
       .col-sm-10
         .checkbox
