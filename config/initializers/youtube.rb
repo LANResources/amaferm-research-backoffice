@@ -1,5 +1,5 @@
 Yt.configure do |config|
-  config.api_key = ENV['youtube_key']
+  config.api_key = ENV['YOUTUBE_KEY']
 end
 
 class Yt::Models::Video
