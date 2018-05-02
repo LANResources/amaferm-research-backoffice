@@ -41,6 +41,7 @@
         <Cell ss:StyleID="s65"><Data ss:Type="String">Title</Data></Cell>
         <Cell><Data ss:Type="String">Year</Data></Cell>
         <Cell><Data ss:Type="String">Author</Data></Cell>
+        <Cell><Data ss:Type="String">Location</Data></Cell>
       </Row>
     <% @results.each do |trial| %>
       <Row ss:AutoFitHeight="0" ss:Height="72" ss:StyleID="s63">
@@ -48,6 +49,7 @@
         <Cell ss:StyleID="s65"><Data ss:Type="String"><%= trial.title %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= trial.year %></Data></Cell>
         <Cell><Data ss:Type="String"><%= trial.author_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trial.location %></Data></Cell>
       </Row>
     <% end %>
     </Table>
