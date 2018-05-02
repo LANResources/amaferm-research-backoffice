@@ -51,8 +51,8 @@ class SalesAid < ActiveRecord::Base
     if video? && v = get_video
       self.name = v.title
       self.summary = v.description
-      self.thumbnail_url = v.thumbnails[0].url
-      self.large_thumbnail_url = v.thumbnails[1].url
+      self.thumbnail_url = v.thumbnail_url
+      self.large_thumbnail_url = v.thumbnail_url
     end
   end
 end
