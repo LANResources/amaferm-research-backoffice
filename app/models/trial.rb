@@ -18,7 +18,7 @@ class Trial < ActiveRecord::Base
   after_initialize :set_default_source_sub_id
   after_commit :flush_cache
 
-  delegate :source_id, :title, :citation, :formatted_citation, :location, :literature_type, :journal, :document, :author_name, to: :paper
+  delegate :source_id, :title, :citation, :formatted_citation, :location, :literature_type, :product, :journal, :document, :author_name, to: :paper
   attr_accessor :calculation_list
   accepts_nested_attributes_for :performance_measures
 

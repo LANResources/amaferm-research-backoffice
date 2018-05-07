@@ -29,6 +29,11 @@
         = f.collection_select :literature_type, Paper::LITERATURE_TYPES, :to_s, :titleize, {}, class: 'form-control'
 
     .form-group
+      = f.label :product, 'Product', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.collection_select :product, Paper::PRODUCTS, :to_s, :to_s, {}, class: 'form-control'
+
+    .form-group
       = f.label :journal, 'Peer Reviewed Journal', class: 'control-label col-sm-2'
       .col-sm-10
         = f.text_field :journal, class: 'form-control autocomplete', data: { journals: Paper.cached_journals }

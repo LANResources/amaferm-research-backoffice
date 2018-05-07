@@ -12,7 +12,7 @@ class PaperPolicy < ApplicationPolicy
   def search?
     true
   end
-  
+
   def show?
     resource.trials.all.map{|t| TrialPolicy.new(user, t).show? || nil }.compact.any?
   end
@@ -43,9 +43,9 @@ class PaperPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
-      :source_id, :citation, :title, :location, :author_id, 
-      :author_name, :journal, :literature_type, :document,
-      trials_attributes: permitted_trial_attributes
+      :source_id, :citation, :title, :location, :author_id,
+      :author_name, :journal, :literature_type, :product,
+      :document, trials_attributes: permitted_trial_attributes
     ]
   end
 
@@ -53,7 +53,7 @@ class PaperPolicy < ApplicationPolicy
 
   def permitted_trial_attributes
     [
-      :id, :source_sub_id, :level, :year, :summary, :dose, :species_list, 
+      :id, :source_sub_id, :level, :year, :summary, :dose, :species_list,
       :focus_list, :forage, :concentrate, :calculations, :calculation_list
     ]
   end

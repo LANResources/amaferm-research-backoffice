@@ -64,6 +64,16 @@
                 = check_box_tag 'paper_search[literature_types][]', type, @paper_search.literature_types.include?(type)
                 = type
 
+    .form-group
+      = f.label :products, 'Select product(s) of interest:', class: 'control-label col-sm-2'
+      .col-sm-10
+        .checkbox
+          .btn-group{data: {toggle: 'buttons'}}
+            - Paper::PRODUCTS.each do |product|
+              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.products.include?(product))}
+                = check_box_tag 'paper_search[products][]', product, @paper_search.products.include?(product)
+                = product
+
     - if policy(Trial).search_by_level?
       .form-group
         = f.label :levels, 'Select level(s):', class: 'control-label col-sm-2'

@@ -8,26 +8,28 @@ class Paper < ActiveRecord::Base
   include Filterable
   include FileDataManagement
 
+  PRODUCTS = ['AMAFERM', 'AO-Biotics']
   LITERATURE_TYPES = [
-    "Abstract", 
-    "Book", 
-    "Controlled Field Trial", 
-    "Dissertation", 
-    "Final Report", 
-    "Journal Article", 
+    "Abstract",
+    "Book",
+    "Controlled Field Trial",
+    "Dissertation",
+    "Final Report",
+    "Journal Article",
     "Proceedings & Bulletins",
     "Thesis"
   ]
 
   mount_uploader :document, DocumentUploader
-  
+
   attr_accessor :author_name
   accepts_nested_attributes_for :trials
-  
+
   validates :author_id, presence: true
   validates :citation, presence: true
-  
+
   validates :literature_type, inclusion: { in: LITERATURE_TYPES }
+  validates :product, presence: true, inclusion: { in: PRODUCTS }
 
   before_save :normalize_values
   after_commit :flush_cache

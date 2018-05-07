@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216211844) do
+ActiveRecord::Schema.define(version: 20180507195241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170216211844) do
     t.string   "phone",      limit: 255
     t.string   "email",      limit: 255
     t.string   "occupation", limit: 255
-    t.string   "species",                default: [], array: true
+    t.string   "species",    limit: 255, default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20170216211844) do
     t.string   "document_content_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "product"
   end
 
   add_index "papers", ["author_id"], name: "index_papers_on_author_id", using: :btree
@@ -156,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170216211844) do
     t.string   "dose",          limit: 255
     t.string   "forage"
     t.string   "concentrate"
-    t.string   "calculations",              default: [], array: true
+    t.string   "calculations",  limit: 255, default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
