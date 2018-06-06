@@ -25,7 +25,7 @@ class Notifier < ActionMailer::Base
   def feedback_submission(feedback)
     @feedback = feedback
 
-    mail  to: ['mbaker@biozymeinc.com', 'ecarrillo@biozymeinc.com'],
+    mail  to: 'lwhitacre@biozymeinc.com',
           from: 'Research Center <contact-us@amafermresearch.backofficeapps.com>',
           subject: "Amaferm Research Center Contact Submission"
   end
