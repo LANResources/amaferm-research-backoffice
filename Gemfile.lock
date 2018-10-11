@@ -423,9 +423,3 @@ DEPENDENCIES
   web-console (~> 2.1)
   will_paginate
   yt
-
-RUBY VERSION
-   ruby 2.2.1p85
-
-BUNDLED WITH
-   1.16.1

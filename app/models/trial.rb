@@ -59,6 +59,12 @@ class Trial < ActiveRecord::Base
     end
   end
 
+  def self.expand_species_list(list)
+    list = Array(list)
+    list += ['Ruminant'] if (list & ['Beef', 'Dairy', 'Sheep', 'Goat']).any?
+    list.uniq
+  end
+
   def cached_species_list
     Rails.cache.fetch([self, 'species-list']){ species_list }
   end
@@ -68,8 +74,11 @@ class Trial < ActiveRecord::Base
   end
 
   scope :with_paper_and_author, -> { joins(paper: :author) }
-  scope :for_species,     -> (species) { tagged_with(species, on: :species) }
-  scope :for_any_species, -> (species) { tagged_with(species, on: :species, any: 'distinct') }
+  scope :for_species,     -> (species) {
+    species = Trial.expand_species_list(species)
+    species.count > 1 ? for_any_species(species) : tagged_with(species, on: :species)
+  }
+  scope :for_any_species, -> (species) { tagged_with(Trial.expand_species_list(species), on: :species, any: 'distinct') }
   scope :for_focus,       -> (focus)   { tagged_with(focus, on: :focus) }
   scope :for_any_focus,   -> (focus)   { tagged_with(focus, on: :focus, any: 'distinct') }
   scope :for_author,      -> (author)  { where authors: { id: author } }
