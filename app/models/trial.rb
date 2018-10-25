@@ -36,14 +36,30 @@ class Trial < ActiveRecord::Base
     end
   end
 
+  def self.cached_species_for(user)
+    Rails.cache.fetch([name, 'species', user.current_role]) do
+      TrialPolicy::Scope.new(user, Trial).resolve.to_a.map{|t| t.cached_species_list }.flatten.uniq.sort
+    end
+  end
+
   def self.cached_focuses
     Rails.cache.fetch([name, 'focuses']) do
       ActsAsTaggableOn::Tagging.joins(:tag).where(context: 'focus').pluck(:name).uniq.sort
     end
   end
 
+  def self.cached_focuses_for(user)
+    Rails.cache.fetch([name, 'focuses', user.current_role]) do
+      TrialPolicy::Scope.new(user, Trial).resolve.to_a.map{|t| t.cached_focus_list }.flatten.uniq.sort
+    end
+  end
+
   def self.cached_years
     Rails.cache.fetch([name, 'years']){ pluck(:year).uniq.sort }
+  end
+
+  def self.cached_years_for(user)
+    Rails.cache.fetch([name, 'years', user.current_role]){ TrialPolicy::Scope.new(user, Trial).resolve.pluck(:year).uniq.sort }
   end
 
   def self.cached_calculations
@@ -119,6 +135,11 @@ class Trial < ActiveRecord::Base
     Rails.cache.delete([self.class.name, 'all-for-select'])
     Rails.cache.delete([self, 'species-list'])
     Rails.cache.delete([self, 'focus-list'])
+    User.roles.values.each do |role|
+      Rails.cache.delete([self.class.name, 'years', role])
+      Rails.cache.delete([self.class.name, 'species', role])
+      Rails.cache.delete([self.class.name, 'focuses', role])
+    end
   end
 
   def set_default_source_sub_id

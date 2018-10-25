@@ -38,6 +38,10 @@ class Paper < ActiveRecord::Base
     Rails.cache.fetch([name, 'journals']){ pluck(:journal).uniq.compact.sort }
   end
 
+  def self.cached_journals_for(user)
+    Rails.cache.fetch([name, 'journals', user.current_role]){ TrialPolicy::Scope.new(user, Trial).resolve.joins(:paper).pluck('papers.journal').uniq.compact.sort }
+  end
+
   scope :for_author,      -> (author)  { where(author_id: author) }
   scope :for_journal,     -> (journal) { where(journal: journal) }
 
@@ -69,5 +73,10 @@ class Paper < ActiveRecord::Base
     Rails.cache.delete([self.class.name, 'all-for-select'])
     Rails.cache.delete(['Author', 'having-papers'])
     Rails.cache.delete(['Author', 'names-having-papers'])
+    User.roles.values.each do |role|
+      Rails.cache.delete([self.class.name, 'journals', role])
+      Rails.cache.delete(['Author', 'having-papers', role])
+      Rails.cache.delete(['Author', 'names-having-papers', role])
+    end
   end
 end

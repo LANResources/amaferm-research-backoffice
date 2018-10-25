@@ -4,75 +4,82 @@
   = f.hidden_field :page
 
   %fieldset
-    .form-group
-      = f.label :years, 'Select year(s) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Trial.cached_years.each do |year|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.years.include?(year.to_s))}
-                = check_box_tag 'paper_search[years][]', year, @paper_search.years.include?(year.to_s)
-                = year
+    - if (available_years = Trial.cached_years_for(current_user)).count > 1
+      .form-group
+        = f.label :years, 'Select year(s) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_years.each do |year|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.years.include?(year.to_s))}
+                  = check_box_tag 'paper_search[years][]', year, @paper_search.years.include?(year.to_s)
+                  = year
 
-    .form-group
-      = f.label :authors, 'Select author(s) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Author.cached_names_having_papers.each do |author|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.authors.include?(author))}
-                = check_box_tag 'paper_search[authors][]', author, @paper_search.authors.include?(author)
-                = author
+    - if (available_authors = Author.cached_names_having_papers(current_user)).count > 1
+      .form-group
+        = f.label :authors, 'Select author(s) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_authors.each do |author|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.authors.include?(author))}
+                  = check_box_tag 'paper_search[authors][]', author, @paper_search.authors.include?(author)
+                  = author
 
-    .form-group
-      = f.label :authors, 'Select location(s) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - policy_scope(Trial).joins(:paper).pluck('papers.location').reject(&:blank?).uniq.sort.each do |location|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.locations.include?(location))}
-                = check_box_tag 'paper_search[locations][]', location, @paper_search.locations.include?(location)
-                = location
+    - if (available_locations = policy_scope(Trial).joins(:paper).pluck('papers.location').reject(&:blank?).uniq.sort).count > 1
+      .form-group
+        = f.label :authors, 'Select location(s) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_locations.each do |location|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.locations.include?(location))}
+                  = check_box_tag 'paper_search[locations][]', location, @paper_search.locations.include?(location)
+                  = location
 
-    .form-group
-      = f.label :species, 'Select species of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Trial.cached_species.each do |species|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.species.include?(species))}
-                = check_box_tag 'paper_search[species][]', species, @paper_search.species.include?(species)
-                = species
+    - if (available_species = Trial.cached_species_for(current_user)).count > 1
+      .form-group
+        = f.label :species, 'Select species of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_species.each do |species|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.species.include?(species))}
+                  = check_box_tag 'paper_search[species][]', species, @paper_search.species.include?(species)
+                  = species
 
-    .form-group
-      = f.label :species, 'Select focus(es) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Trial.cached_focuses.each do |focus|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.focuses.include?(focus))}
-                = check_box_tag 'paper_search[focuses][]', focus, @paper_search.focuses.include?(focus)
-                = focus
+    - if (available_focuses = Trial.cached_focuses_for(current_user)).count > 1
+      .form-group
+        = f.label :species, 'Select focus(es) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_focuses.each do |focus|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.focuses.include?(focus))}
+                  = check_box_tag 'paper_search[focuses][]', focus, @paper_search.focuses.include?(focus)
+                  = focus
 
-    .form-group
-      = f.label :literature_types, 'Select literature type(s) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Paper::LITERATURE_TYPES.each do |type|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.literature_types.include?(type))}
-                = check_box_tag 'paper_search[literature_types][]', type, @paper_search.literature_types.include?(type)
-                = type
+    - if (available_literature_types = policy_scope(Trial).joins(:paper).pluck('papers.literature_type').reject(&:blank?).uniq.sort).count > 1
+      .form-group
+        = f.label :literature_types, 'Select literature type(s) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_literature_types.each do |type|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.literature_types.include?(type))}
+                  = check_box_tag 'paper_search[literature_types][]', type, @paper_search.literature_types.include?(type)
+                  = type
 
-    .form-group
-      = f.label :products, 'Select product(s) of interest:', class: 'control-label col-sm-2'
-      .col-sm-10
-        .checkbox
-          .btn-group{data: {toggle: 'buttons'}}
-            - Paper::PRODUCTS.each do |product|
-              %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.products.include?(product))}
-                = check_box_tag 'paper_search[products][]', product, @paper_search.products.include?(product)
-                = product
+    - if (available_products = policy_scope(Trial).joins(:paper).pluck('papers.product').reject(&:blank?).uniq.sort).count > 1
+      .form-group
+        = f.label :products, 'Select product(s) of interest:', class: 'control-label col-sm-2'
+        .col-sm-10
+          .checkbox
+            .btn-group{data: {toggle: 'buttons'}}
+              - available_products.each do |product|
+                %label.btn.btn-sm.btn-secondary{class: ('active' if @paper_search.products.include?(product))}
+                  = check_box_tag 'paper_search[products][]', product, @paper_search.products.include?(product)
+                  = product
 
     - if policy(Trial).search_by_level?
       .form-group

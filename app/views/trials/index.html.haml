@@ -8,19 +8,19 @@
           .row
             .col-md-3.text-center
               %h4.white Species
-              = select_tag :species, options_for_select(Trial.cached_species, params[:species]), include_blank: true, class: 'form-control'
+              = select_tag :species, options_for_select(Trial.cached_species_for(current_user), params[:species]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Focus
-              = select_tag :focus, options_for_select(Trial.cached_focuses, params[:focus]), include_blank: true, class: 'form-control'
+              = select_tag :focus, options_for_select(Trial.cached_focuses_for(current_user), params[:focus]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Author
-              = select_tag :author, options_from_collection_for_select(Author.cached_having_papers, :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
+              = select_tag :author, options_from_collection_for_select(Author.cached_having_papers(current_user), :id, :last_name, params[:author]), include_blank: true, class: 'form-control'
 
             .col-md-3.text-center
               %h4.white Peer Reviewed
-              = select_tag :journal, options_for_select(Paper.cached_journals, params[:journal]), include_blank: true, class: 'form-control'
+              = select_tag :journal, options_for_select(Paper.cached_journals_for(current_user), params[:journal]), include_blank: true, class: 'form-control'
 
 .row
   .col-md-12#trials-container{data: {url: trials_path(params.slice(:species, :focus, :author, :journal, :sort, :direction, :page))}}
