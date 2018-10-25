@@ -2,6 +2,7 @@ class PaperSummariesController < ApplicationController
   before_action :set_paper_summary, only: [:edit, :update, :destroy, :download]
 
   def index
+    authorize! PaperSummary
     @paper_summaries = PaperSummary.where(trial: policy_scope(Trial).pluck(:id)).featured.order(:species, :position).all.group_by(&:species)
   end
 

@@ -10,11 +10,11 @@ class SalesAidPolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    !user.guest?
   end
 
   def show?
-    true
+    !user.guest?
   end
 
   def new?

@@ -1,11 +1,11 @@
 class PaperSummaryPolicy < ApplicationPolicy
 
   def index?
-    true
+    !user.guest?
   end
 
   def show?
-    true
+    !user.guest?
   end
 
   def new?
@@ -31,7 +31,7 @@ class PaperSummaryPolicy < ApplicationPolicy
   def manage?
     new?
   end
-  
+
   def download?
     Pundit.policy(user, resource.trial).download?
   end

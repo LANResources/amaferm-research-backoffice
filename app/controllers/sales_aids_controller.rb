@@ -2,6 +2,7 @@ class SalesAidsController < ApplicationController
   before_action :set_sales_aid, only: [:show, :edit, :update, :destroy, :download]
 
   def index
+    authorize! SalesAid
     @sales_aids = (policy_scope SalesAid.order(:category, :position)).all.group_by(&:category)
   end
 

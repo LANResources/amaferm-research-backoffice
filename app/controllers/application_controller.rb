@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  before_action :verify_authenticated, :check_if_referred_from_amaferm_dot_com
+  before_action :check_if_referred_from_amaferm_dot_com
 
   private
 
@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    flash[:error] = "You are not authorized to perform this action."
     deny_access
   end
 
