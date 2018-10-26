@@ -2,7 +2,7 @@ class TrialPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user >= :admin
-        scope
+        scope.all
       else
         scope.where level: TrialPolicy.new(user, nil).accessible_levels.values
       end
