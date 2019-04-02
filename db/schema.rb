@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507195241) do
+ActiveRecord::Schema.define(version: 20190402154335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20180507195241) do
   end
 
   add_index "authors", ["last_name"], name: "index_authors_on_last_name", unique: true, using: :btree
+
+  create_table "countries", id: false, force: :cascade do |t|
+    t.string   "country_code",               null: false
+    t.string   "name"
+    t.text     "calling_codes", default: [],              array: true
+    t.string   "region"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "countries", ["country_code"], name: "index_countries_on_country_code", unique: true, using: :btree
 
   create_table "paper_summaries", force: :cascade do |t|
     t.integer  "trial_id"
@@ -102,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180507195241) do
     t.string   "video_id",              limit: 255
     t.text     "video_data"
     t.string   "link",                  limit: 255
+    t.string   "country_codes",                     default: [], array: true
   end
 
   add_index "sales_aids", ["access_level"], name: "index_sales_aids_on_access_level", using: :btree

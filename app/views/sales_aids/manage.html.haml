@@ -11,9 +11,10 @@
         %tr
           %td.max-half Title
           %td.c Category
+          %td.c Countries
           %td.c Position
           %td.c Access Level
-          %td 
+          %td
 
       %tbody
         - if @sales_aids.any?
@@ -21,6 +22,7 @@
             %tr{data: {update_url: sales_aid_path(sales_aid), group: sales_aid.category, position: sales_aid.position}}
               %td.max-half= sales_aid.title
               %td.c= sales_aid_category sales_aid.category
+              %td.c= sales_aid.country_codes.join ' / '
               %td.c.position= sales_aid.position
               %td.c= sales_aid.access_level.titleize
               %td.c

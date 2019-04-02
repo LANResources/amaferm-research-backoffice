@@ -25,7 +25,7 @@ class SalesAidsController < ApplicationController
     authorize! @sales_aid
 
     if @sales_aid.save
-      redirect_to learn_more_path, notice: 'Sales aid was successfully created.'
+      redirect_to manage_sales_aids_path, notice: 'Sales aid was successfully created.'
     else
       render action: 'new'
     end
@@ -35,7 +35,7 @@ class SalesAidsController < ApplicationController
     respond_to do |format|
       format.html {
         if @sales_aid.update(sales_aid_attributes)
-          redirect_to learn_more_path, notice: 'Sales Aid was successfully updated.'
+          redirect_to manage_sales_aids_path, notice: 'Sales Aid was successfully updated.'
         else
           render action: 'edit'
         end
@@ -53,7 +53,7 @@ class SalesAidsController < ApplicationController
 
   def destroy
     @sales_aid.destroy
-    redirect_to learn_more_url
+    redirect_to manage_sales_aids_path
   end
 
   def manage

@@ -17,6 +17,11 @@
       .col-sm-6
         = f.collection_select :access_level, policy(SalesAid).accessible_levels.keys.map(&:to_s), :to_s, :humanize, {}, class: 'form-control'
 
+    .form-group
+      = f.label :country_codes, 'Countries', class: 'control-label col-sm-2'
+      .col-sm-6
+        = f.select :country_codes, grouped_options_for_select(Country.grouped_options, f.object.country_codes), { include_hidden: true }, multiple: true, size: 10, class: 'form-control'
+
     .form-group.document-type
       = f.label :document, class: 'control-label col-sm-2'
       .col-sm-10

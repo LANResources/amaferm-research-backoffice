@@ -1,5 +1,6 @@
 class SalesAid < ActiveRecord::Base
   belongs_to :user
+  belongs_to :country, foreign_key: 'country_code'
 
   CATEGORIES = {presentation: :document, literature: :document, document: :document, calculator: :link, newsletter: :document, video: :video}
   ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2, _private: 3}
@@ -25,7 +26,19 @@ class SalesAid < ActiveRecord::Base
                             if: lambda { |s| s.external_link? }
                            }
 
-  before_save :set_video_metadata
+  scope :for_country, -> (country) { where("?::text = ANY (country_codes)", country) if country.present? }
+  scope :with_country_names, -> { select("ARRAY(SELECT name FROM countries WHERE countries.country_code = ANY (products.country_codes)) AS country_names") }
+
+  before_save :set_video_metadata, :normalize_country_codes
+  after_commit :flush_cache
+
+  def self.countries
+    Country.where(country_code: pluck(:country_codes).flatten.uniq).order(name: :asc).to_a
+  end
+
+  def self.cached_countries
+    Rails.cache.fetch([name, 'countries']){ countries }
+  end
 
   def type
     CATEGORIES.with_indifferent_access[category]
@@ -45,6 +58,10 @@ class SalesAid < ActiveRecord::Base
     nil
   end
 
+  def countries
+    Rails.cache.fetch([self, 'countries']){ Array(country_codes).any? ? Country.where(country_code: country_codes).to_a : [] }
+  end
+
   private
 
   def set_video_metadata
@@ -54,5 +71,13 @@ class SalesAid < ActiveRecord::Base
       self.thumbnail_url = v.thumbnail_url
       self.large_thumbnail_url = v.thumbnail_url
     end
+  end
+
+  def normalize_country_codes
+    self.country_codes = Array(country_codes).reject(&:blank?).uniq
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, 'countries'])
   end
 end
