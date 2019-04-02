@@ -27,7 +27,7 @@ class SalesAid < ActiveRecord::Base
                            }
 
   scope :for_country, -> (country) { where("?::text = ANY (country_codes)", country) if country.present? }
-  scope :with_country_names, -> { select("ARRAY(SELECT name FROM countries WHERE countries.country_code = ANY (products.country_codes)) AS country_names") }
+  scope :with_country_names, -> { select("ARRAY(SELECT name FROM countries WHERE countries.country_code = ANY (sales_aids.country_codes)) AS country_names") }
 
   before_save :set_video_metadata, :normalize_country_codes
   after_commit :flush_cache
