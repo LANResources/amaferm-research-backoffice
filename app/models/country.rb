@@ -11,7 +11,7 @@ class Country < ActiveRecord::Base
   def self.grouped_options
     [
       ['Common', us_and_canada.to_a.map{|c| [c.name, c.country_code, {data: {region: c.region}}]}],
-      ['------', where.not(country_code: %w[US CA]).map{|c| [c.name, c.country_code, {data: {region: c.region}}]}]
+      ['------', where.not(country_code: %w[US CA]).order(name: :asc).map{|c| [c.name, c.country_code, {data: {region: c.region}}]}]
     ]
   end
 end
