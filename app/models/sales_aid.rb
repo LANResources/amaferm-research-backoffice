@@ -1,6 +1,5 @@
 class SalesAid < ActiveRecord::Base
   belongs_to :user
-  belongs_to :country, foreign_key: 'country_code'
 
   CATEGORIES = {presentation: :document, literature: :document, document: :document, calculator: :link, newsletter: :document, video: :video}
   ACCESS_LEVELS = {guest: 0, public_sales: 1, biozyme: 2, _private: 3}
