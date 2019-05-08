@@ -45,10 +45,11 @@
                   %i.fa.fa-plus-square-o
                   = p_space 'Details'
 
-                .pull-right
-                  = link_to download_paper_path(result.paper), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
-                    %i.fa.fa-cloud-download
-                    = p_space 'Download'
+                - if result.paper.document.present?
+                  .pull-right
+                    = link_to download_paper_path(result.paper), title: "Download", class: 'btn btn-xs btn-success', data: { 'no-turbolink' => true } do
+                      %i.fa.fa-cloud-download
+                      = p_space 'Download'
 
       - if results.total_pages > 1
         .row

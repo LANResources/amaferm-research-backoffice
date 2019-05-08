@@ -62,6 +62,8 @@ class PapersController < ApplicationController
       type: @paper.document.file.content_type,
       filename: @paper.filename,
       disposition: 'attachment'
+  rescue
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   private

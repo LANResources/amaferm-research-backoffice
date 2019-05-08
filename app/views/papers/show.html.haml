@@ -7,9 +7,10 @@
     = yield :breadcrumbs
 
   .col-md-9.btn-row.text-right
-    = link_to download_paper_path(@paper), title: "Download Tech Sheet", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
-      %i.fa.fa-cloud-download
-      = p_space 'Download Tech Sheet'
+    - if @paper.document.present?
+      = link_to download_paper_path(@paper), title: "Download Tech Sheet", class: 'btn btn-sm btn-success', data: { 'no-turbolink' => true } do
+        %i.fa.fa-cloud-download
+        = p_space 'Download Tech Sheet'
     - if policy(Trial).new?
       = link_to new_paper_trial_path(@paper), title: "Add Trial", remote: true, class: "btn btn-sm btn-primary" do
         %i.fa.fa-plus
