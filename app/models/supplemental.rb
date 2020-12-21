@@ -2,7 +2,7 @@ class Supplemental < ActiveRecord::Base
   belongs_to :paper
   belongs_to :author
 
-  LITERATURE_TYPES = Paper::LITERATURE_TYPES + ['Correction', 'Data', 'Internal Review']
+  LITERATURE_TYPES = Paper::LITERATURE_TYPES + ['Correction', 'Data', 'Internal Review', 'Poster Presentation']
 
   LEVELS = {web: 0, shared: 2, biozyme: 1, _private: 3}
   enum level: LEVELS
