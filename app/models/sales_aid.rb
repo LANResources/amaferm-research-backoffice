@@ -70,6 +70,8 @@ class SalesAid < ActiveRecord::Base
       self.thumbnail_url = v.thumbnail_url
       self.large_thumbnail_url = v.thumbnail_url
     end
+  rescue => e
+    ExceptionNotifier.notify_exception e, data: { video_id: id, youtube_id: youtube_id }
   end
 
   def normalize_country_codes
