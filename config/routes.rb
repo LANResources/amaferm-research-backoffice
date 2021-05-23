@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     root to: 'trials#index'
     get 'download', on: :member, as: :download
     collection do
+      get 'lookup', to: 'paper_searches#lookup', as: :lookup
       get 'search', to: 'paper_searches#search', as: :search
     end
     resources :trials

@@ -2,12 +2,24 @@ class PaperSearch
   include ActiveModel::Model
 
   ARRAY_ATTRIBUTES = [:years, :authors, :locations, :species, :focuses, :literature_types, :products, :levels]
-  attr_accessor :page, *ARRAY_ATTRIBUTES
+  attr_accessor :page, :content, *ARRAY_ATTRIBUTES
   attr_reader :results
 
   ARRAY_ATTRIBUTES.each do |attribute|
     define_method("#{attribute}=") do |val|
       instance_variable_set("@#{attribute}", Array(val))
+    end
+  end
+
+  def self.lookup(search)
+    return nil if search.blank?
+
+    if search.to_s =~ /(\d+)-([a-zA-Z]+)/
+      Trial.joins(:paper).merge(Paper.where(source_id: $1.to_i)).where(source_sub_id: $2).take
+    elsif search.to_s =~ /\d+/
+      Paper.find_by(source_id: search.to_i)
+    else
+      nil
     end
   end
 
@@ -35,6 +47,7 @@ class PaperSearch
     match_literature_types
     match_products
     match_levels
+    match_content
     order_results
   end
 
@@ -80,8 +93,16 @@ class PaperSearch
       self
     end
 
+    def match_content
+      if @content.present?
+        search_string = "%#{@content.squeeze(' ').gsub('%', '\%').gsub(' ', '%')}%"
+        @results = @results.where('papers.title ILIKE ? OR trials.summary ILIKE ?', search_string, search_string)
+      end
+      self
+    end
+
     def order_results
-      @results = @results.order('trials.year DESC').uniq
+      @results = @results.select('trials.*, papers.*').order('papers.source_id ASC, trials.source_sub_id ASC').uniq
       self
     end
 end

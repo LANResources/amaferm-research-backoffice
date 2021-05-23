@@ -92,3 +92,8 @@
                   = check_box_tag 'paper_search[levels][]', level, @paper_search.levels.include?(level)
                   = Trial.display_level level
 
+    .form-group
+      = f.label :content, 'Title/Summary Keyword:', class: 'control-label col-sm-2'
+      .col-sm-6
+        .checkbox
+          = f.text_field :content, class: 'form-control'

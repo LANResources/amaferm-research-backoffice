@@ -11,7 +11,6 @@
   %td.c{rowspan: 2}= trial.expanded_species_list.gsub(', ', '<br/>').html_safe
   %td.c{rowspan: 2}= trial.cached_focus_list.join('<br/>').html_safe
   %td.c{rowspan: 2}= trial.dose
-  %td.c= trial.forage
   %td.c{rowspan: 2}
     %a.btn-link.summary-popover{role: 'button', title: 'Summary', data: {content: trial.summary}}
       %i.fa.fa-ellipsis-h.fa-lg.fa-border
@@ -28,4 +27,3 @@
 %tr
   - if trial.journal
     %td.c= trial.journal
-  %td.c= trial.concentrate
