@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.4.6'
 
-gem 'rails', '4.2.11.1'
+gem 'rails', '4.2.11.3'
 
 # Database
 gem 'pg'
